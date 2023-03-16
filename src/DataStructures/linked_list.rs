@@ -17,3 +17,15 @@ impl<T>Node<T>{
         }
     }
 }
+pub struct LinkedList<T>{
+    length:u32,
+    head:Option<NonNull<Node<T>>>,
+    tail:Option<NonNull<Node<T>>>,
+    marker:PhantomData<Box<Node<T>>>
+}
+
+impl<T>Default for LinkedList<T>{
+    fn default()->Self{
+        Self::new()
+    }
+}
