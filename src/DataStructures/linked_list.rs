@@ -8,3 +8,12 @@ struct Node<T>{
     prev:Option<NonNull<Node<T>>>,
 }
 
+impl<T>Node<T>{
+    fn new(t:T)->Node<T>{
+        Node{
+            val:t,
+            prev:None,
+            next:None,
+        }
+    }
+}
