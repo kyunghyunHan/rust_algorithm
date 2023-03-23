@@ -8,6 +8,8 @@
 정복:탐색키가 가운데 원소보다 작으면 왼쪽 부분배열을 대상으로 이진탐색을 순한혼출,크면 오른쪽 부분배열을 대상으로 이진 탐색을 순한 호출
 결합:탐색 결과가 직접 반환되므로 결활 불핗요
  
+
+성능:t(n)= logn
 */
 
 /*순한형태 */
@@ -25,10 +27,30 @@ fn binary_search(arr: &[i32], target: i32, start: usize, end: usize) -> Option<u
     }
 }
 
+/*반복형태 */
+fn binary_search2(a: &[i32], x: i32) -> Option<usize> {
+    let mut left = 0;
+    let mut right = a.len() - 1;
 
+    while left <= right {
+        let mid = (left + right) / 2;
+        if a[mid] == x {
+            return Some(mid);
+        } else{
+             if a[mid] < x {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+    }
+
+    None
+}
 pub fn main(){
 
     let  test = [ 17, 28, 43, 67, 88, 92, 100];
-   
+    
     println!("{:?}",binary_search(&test,43,0 ,6));
+    println!("{:?}",binary_search2(&test,28 ));
 }
