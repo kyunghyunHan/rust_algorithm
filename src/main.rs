@@ -4,9 +4,10 @@ mod Algotithm;
 fn main() {
 
   
-  DataStructures::merge_sort::main();
-  DataStructures::selection_sort::main();
-  Algotithm::fibo::main();
+  // DataStructures::merge_sort::main();
+  // DataStructures::selection_sort::main();
+  // Algotithm::fibo::main();
+  Algotithm::binary_serch::main();
   //   let mut test:[usize;5]= [1,5,5,6,1];
   // let tt=   DataStructures::bead_sort::bead_sort(&mut test);
   //   println!("{:?}",tt);
