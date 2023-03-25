@@ -7,4 +7,6 @@ void merge(){
     int i,j,k,l;
 }
 
-void main(){}
+void main(){
+
+}
