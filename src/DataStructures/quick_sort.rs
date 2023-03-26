@@ -11,7 +11,7 @@ const MAX_SIZE: usize = 5;
 
 
 fn partition(list: &mut [i32])->i32{
-    print!("1");
+    print!("2");
     1
 }
 
