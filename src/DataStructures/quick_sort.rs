@@ -1,20 +1,34 @@
-const MAX_SIZE: usize = 5;
+fn partition(a: &mut [usize], n: usize) -> usize {
+    let mut left = 1;
+    let mut right = n - 1;
 
-/*
-퀵정렬
-- 속도가 빠르다
-- 시간복잡도가 o(nlog2n)을 가지는 다른 정렬 알고리즘과 비교했을떄도 가장 빠르다
-- 추가 메모리 공간들 필요로 하지 않는다.
-
-
- */
-
-
-fn partition(list: &mut [i32])->i32{
-    print!("2");
-    1
+    while left <= right {//피벗 a[0]
+        while left < n && a[left] < a[0] {
+            left += 1;
+        }
+        while right > 0 && a[right] >= a[0] {
+            right -= 1;
+        }
+        if left < right {
+            a.swap(left, right);
+        } else {
+            a.swap(0, right);
+        }
+    }
+    right
 }
 
-//퀵정렬
-fn quick_sort(list: &mut [i32]){}
-pub fn main(){}
+fn quick_sort(a: &mut [usize], n: usize) {
+    if n > 1 {
+        let pivot = partition(a, n);
+        quick_sort(&mut a[0..pivot], pivot);
+        quick_sort(&mut a[pivot + 1..n], n - pivot - 1);
+    }
+}
+
+pub fn main() {
+    let mut a = [1 ,5,8,2,3,4,6,9,7,10];
+    let n = 10;
+    quick_sort(&mut a, n);
+    println!("{:?}", a);
+}
