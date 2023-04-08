@@ -1,7 +1,7 @@
 fn partition(a: &mut [usize], n: usize) -> usize {
     let mut left = 1;
     let mut right = n - 1;
-
+//
     while left <= right {//피벗 a[0]
         while left < n && a[left] < a[0] {
             left += 1;
