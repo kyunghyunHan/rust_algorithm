@@ -1,4 +1,6 @@
 // 원형 연결 리스트의 노드를 정의합니다.
+
+#[derive(Debug,Clone)]
 struct Node<T> {
     data: T,
     next: Option<Box<Node<T>>>,
@@ -12,6 +14,7 @@ impl<T> Node<T> {
 }
 
 // 원형 연결 리스트를 구현한 구조체입니다.
+#[derive(Debug)]
 struct CircularLinkedList<T> {
     head: Option<Box<Node<T>>>,
     tail: Option<Box<Node<T>>>,
