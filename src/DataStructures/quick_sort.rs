@@ -1,20 +1,21 @@
 fn partition(a: &mut [usize], n: usize) -> usize {
     let mut left = 1;
     let mut right = n - 1;
-//
-    while left <= right {//피벗 a[0]
-        while left < n && a[left] < a[0] {
+    let pivot = a[0]; // 피벗을 a[0]로 설정
+
+    while left <= right {
+        while left < n && a[left] <= pivot {
             left += 1;
         }
-        while right > 0 && a[right] >= a[0] {
+        println!("{:?}",a);
+        while right > 0 && a[right] > pivot {
             right -= 1;
         }
         if left < right {
             a.swap(left, right);
-        } else {
-            a.swap(0, right);
         }
     }
+    a.swap(0, right);
     right
 }
 
@@ -27,7 +28,7 @@ fn quick_sort(a: &mut [usize], n: usize) {
 }
 
 pub fn main() {
-    let mut a = [1 ,5,8,2,3,4,6,9,7,10];
+    let mut a = [30, 35, 25, 55, 10, 50, 15, 45, 20 ,40];
     let n = 10;
     quick_sort(&mut a, n);
     println!("{:?}", a);
