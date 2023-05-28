@@ -15,15 +15,16 @@
 /*순한형태 */
 fn binary_search(arr: &[i32], target: i32, start: usize, end: usize) -> Option<usize> {
     if start > end {
-        return None;
+        return None;//탐색실패
     }
-    let mid = (start + end) / 2;
-    if arr[mid] == target {
+    
+    let mid = (start + end) / 2;//floor(소수점 버림)
+    if arr[mid] == target {//탐색성공->인덱스 mid반환
         Some(mid)
-    } else if arr[mid] < target {
+    } else if arr[mid] < target {//왼쪽 부분배열
         binary_search(arr, target, mid + 1, end)
     } else {
-        binary_search(arr, target, start, mid - 1)
+        binary_search(arr, target, start, mid - 1)//오른쪽부분배열
     }
 }
 
@@ -34,18 +35,18 @@ fn binary_search2(a: &[i32], x: i32) -> Option<usize> {
 
     while left <= right {
         let mid = (left + right) / 2;
-        if a[mid] == x {
+        if a[mid] == x {//탐색성공
             return Some(mid);
-        } else{
+        } else{//왼쪽
              if a[mid] < x {
                 left = mid + 1;
-            } else {
+            } else {//오른쪽
                 right = mid - 1;
             }
         }
     }
 
-    None
+    None//탐색실패
 }
 pub fn main(){
 
