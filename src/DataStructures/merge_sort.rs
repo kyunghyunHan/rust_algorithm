@@ -1,5 +1,5 @@
 const MAX_SIZE: usize = 8;
-
+//함병정렬
 fn merge(list: &mut [i32], left: usize, mid: usize, right: usize) {
     let mut i = left;
     let mut j = mid + 1;
@@ -8,7 +8,7 @@ fn merge(list: &mut [i32], left: usize, mid: usize, right: usize) {
 
     while i <= mid && j <= right {
         if list[i] <= list[j] {
-            sorted[k] = list[i];
+            sorted[k] = list[i];//비교해서 작은 값을 a[]로 이동
             i += 1;
         } else {
             sorted[k] = list[j];
@@ -18,7 +18,8 @@ fn merge(list: &mut [i32], left: usize, mid: usize, right: usize) {
     }
 
     while i <= mid {
-        sorted[k] = list[i];
+        sorted[k] = list[i];//남은 b[]의 데이터 
+        //남은 c[]의데이터
         i += 1;
         k += 1;
     }
@@ -37,8 +38,9 @@ fn merge(list: &mut [i32], left: usize, mid: usize, right: usize) {
 fn merge_sort(list: &mut [i32], left: usize, right: usize) {
     if left < right {
         let mid = (left + right) / 2;
-        merge_sort(list, left, mid);
-        merge_sort(list, mid + 1, right);
+        merge_sort(list, left, mid);//왼쪽 부분배열
+        merge_sort(list, mid + 1, right);//오른쪽 부분 배열
+        //합병과정
         merge(list, left, mid, right);
     }
 }
@@ -52,3 +54,4 @@ pub fn main() {
         println!("{}", list[i]);
     }
 }
+//수행시간 O(nlogn)
