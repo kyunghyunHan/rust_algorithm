@@ -1,3 +1,8 @@
+/*퀵정렬 */
+
+
+
+
 fn partition(a: &mut [usize], n: usize) -> usize {
     let mut left = 1;
     let mut right = n - 1;
@@ -37,3 +42,4 @@ pub fn main() {
 }
 
 //최선 T(1)= O(1)
+
