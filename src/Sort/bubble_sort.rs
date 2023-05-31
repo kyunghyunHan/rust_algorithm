@@ -18,7 +18,7 @@ fn bubble_sort(a: &mut [usize]) {
 }
 //개선된 알고리즘
 fn bubble_sort2(a: &mut [usize]) {
-    let n = a.len() as usize;
+    let n: usize = a.len() as usize;
     for i in 0..n-1 {
         let mut exchange= false;
         for j in 0..n-1-i {//왼쪽에서 오른쪽으로 진행
