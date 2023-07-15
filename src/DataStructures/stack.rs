@@ -1,7 +1,5 @@
 /*자료구조 -Stack
-
-
-
+스택구조
  */
 struct Stack<T> {
     data: Vec<T>,
