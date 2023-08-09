@@ -4,6 +4,7 @@
 o(n2)
 
  */
+
 fn bubble_sort(a: &mut [usize]) {
     let n = a.len() as usize;
     for i in 0..n-1 {
@@ -31,9 +32,39 @@ fn bubble_sort2(a: &mut [usize]) {
         }
     }
 }
+//PartialOrd:일반 유형에 대한 비교 기능을 특성
+
+fn bubble_sort3<T: PartialOrd>(arr: &mut [T]) {
+    let len = arr.len();
+    let mut swapped;
+
+    loop {
+        //반복 요소가 교체되었는지 여부를 추적
+        swapped = false;
+   
+   //더이상 스왑이 필요하지 않을떄 까지 루프를 사용하여 배열을 반복
+         for i in 0..len - 1 {
+            // Swap elements if they are out of order.
+            if arr[i] > arr[i + 1] {
+                arr.swap(i, i + 1);
+                swapped = true;
+            }
+        }
+
+        if !swapped {
+            break;
+        }
+    }
+}
+
+
 
 pub fn main(){
     let mut list = [21, 10, 12, 20, 25, 13, 15, 22];
     bubble_sort2(&mut list);
+        let mut nums = vec![5, 3, 1, 4, 2];
+
+    bubble_sort3(&mut nums);
+
    println!("{:?}",list)
 }
