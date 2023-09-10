@@ -5,7 +5,7 @@ mod DesignPatterns;
 fn main() {
 /*========================Design Parrtterns========================== */
 
-// DesignPatterns::use_borrowed_types_for_arguments::main();
+DesignPatterns::use_borrowed_types_for_arguments::main();
 DesignPatterns::concatenating_string_with_format::main();
 
 /*========================Design Parrtterns========================== */ 
