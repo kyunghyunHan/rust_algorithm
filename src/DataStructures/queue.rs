@@ -29,3 +29,16 @@ impl<T>Queue <T> {
         self.items.is_empty()
     }
 }
+
+
+
+
+
+
+/* medium 
+new
+remove
+is_empty
+*/
+
+

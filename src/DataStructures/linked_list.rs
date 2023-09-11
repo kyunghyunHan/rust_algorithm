@@ -1,3 +1,5 @@
+use std::thread::current;
+
 
 /*연결리스트 
 각 노드가 데이터와 포인터를 가지고 한 줄로 연결되어 있는 방식으로 데이터를 저정하는 자료구조
@@ -117,6 +119,7 @@ impl<T: PartialEq> LinkedList<T> {
 }
 
 pub fn main() {
+    //this provides a typical constructor and we can use it to create a new node like so;
     let mut list: LinkedList<i32> = LinkedList::new();
     list.push(3);
     list.push(2);
@@ -128,3 +131,65 @@ pub fn main() {
         println!("{}", value);
     }
 }
+/*medium */
+
+impl <T>Node<T> {
+
+    fn new(value:T)->Node<T>{
+        Node{value,next:None}
+    }
+    fn from(mut v:Vec<T>)-> Node<T> {
+        let mut current= Node::new(v.remove(v.len()-1));
+        while v.len() >0 {
+            let mut node = Node::new(v.remove(v.len()-1));
+            node.next = Some(Box::new(current));
+            current = node;
+        }
+        current
+
+    }
+
+    fn to_vec(self)->Vec<T> {
+        let mut v= vec![];
+        let mut current = Some(Box::new(self));
+        while let Some(node)= current {
+            v.push(node.value);
+            current = node.next;
+        }
+        v
+    }
+
+    fn rev(self)->Node<T>{
+        let mut next_node = None;
+        let mut node= self;
+        let mut old_next_node_option = node.next;
+        node.next = next_node;
+        while let Some(mut old_next_node) = old_next_node_option {
+            old_next_node_option = old_next_node.next;
+            old_next_node.next = Some(Box::new(node));
+            node = *old_next_node;
+        }
+        node
+    }
+
+}
+
+struct NodeIterator<'a, T> {
+    e: Option<&'a Node<T>>,
+  }
+  impl<'a, T> Iterator for NodeIterator<'a, T> {
+    type Item = &'a T;
+    fn next(&mut self) -> Option<Self::Item> {
+      return if let Some(e) = self.e {
+        self.e = if let Some(n) = &e.next {
+          Some(n.as_ref())
+        } else {
+          None
+        };
+        Some(&e.value)
+      } else {
+        None
+      };
+    }
+  }
+  
