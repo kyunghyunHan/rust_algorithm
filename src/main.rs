@@ -2,6 +2,7 @@ mod DataStructures;
 mod Algotithm;
 mod Sort;
 mod DesignPatterns;
+pub mod inflearn;
 fn main() {
 /*========================Design Parrtterns========================== */
 
