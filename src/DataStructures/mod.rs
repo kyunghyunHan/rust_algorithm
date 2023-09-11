@@ -5,3 +5,5 @@ pub mod trie;
 pub mod linked_list;
 pub mod insertion_sort;
 pub mod selection_sort;
+pub mod queue;
+pub mod circular_queue;
