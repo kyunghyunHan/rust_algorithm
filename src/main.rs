@@ -2,12 +2,13 @@ mod DataStructures;
 mod Algotithm;
 mod Sort;
 mod DesignPatterns;
+mod blog;
 pub mod inflearn;
 fn main() {
 /*========================Design Parrtterns========================== */
 
-DesignPatterns::use_borrowed_types_for_arguments::main();
-DesignPatterns::concatenating_string_with_format::main();
+// DesignPatterns::use_borrowed_types_for_arguments::main();
+// DesignPatterns::concatenating_string_with_format::main();
 
 /*========================Design Parrtterns========================== */ 
 
@@ -17,7 +18,8 @@ DesignPatterns::concatenating_string_with_format::main();
 // Sort::quick_sort::main();
 /*========================정렬========================== */  
 
-/*========================자료구조========================== */  
+/*========================자료구조========================== */ 
+
 // DataStructures::insertion_sort::main();
 // DataStructures::selection_sort::main();
 /*========================자료구조========================== */  
@@ -32,6 +34,9 @@ DesignPatterns::concatenating_string_with_format::main();
 
 // Algotithm::dijkstra::main()
 /*========================욕심쟁이========================== */  
+/*========================Blog========================== */
+ blog::array::main();
+/*========================Blog========================== */  
 
 
 }

@@ -19,12 +19,71 @@
 - 배열의 크기를 변경할수 없다(배열내의 데이터 이동 및  재구성이 어렵다)
 - 메모리 낭비가 발생하게 된다.
 */
+struct Array {
+    arr: Vec<i32>, // Vector to store the elements
+}
 
-fn main() {
-    let mut arr: [i32; 3] = [0, 0, 0];
-    arr[1] = 1;
-    arr[2] = 2;
-    for element in arr.iter() {
-        println!("{}", element);
+impl Array {
+    // Constructor to create a new Array
+    fn new(size: usize) -> Self {
+        let arr = vec![0; size]; // Initialize the vector with zeros
+        Array { arr }
+    }
+
+    // Get the element at a specific index
+    fn at(&self, idx: usize) -> Option<i32> {
+        if idx < self.arr.len() {
+            Some(self.arr[idx])
+        } else {
+            None
+        }
+    }
+
+    // Add a value at a specific index
+    fn add(&mut self, idx: usize, value: i32) {
+        if idx <= self.arr.len() {
+            self.arr.insert(idx, value);
+        } else {
+            println!("-1");
+        }
+    }
+
+    // Remove the element at a specific index
+    fn remove(&mut self, idx: usize) {
+        if idx < self.arr.len() {
+            self.arr.remove(idx);
+        }
+    }
+
+    // Set the value of an element at a specific index
+    fn set(&mut self, idx: usize, value: i32) {
+        if idx < self.arr.len() {
+            self.arr[idx] = value;
+        }
+    }
+
+    // Print all elements in the array
+    fn print(&self) {
+        for &element in &self.arr {
+            print!("{} ", element);
+        }
+        println!();
     }
 }
+
+fn main() {
+    let mut ar = Array::new(5);
+    ar.add(1, 10); // 0 10 0 0 0
+    ar.add(1, 20); // 0 20 10 0 0
+    ar.print();    // 0 20 10 0 0
+
+    ar.remove(1);  // 0 
+}
+// fn main() {
+//     let mut arr: [i32; 3] = [0, 0, 0];
+//     arr[1] = 1;
+//     arr[2] = 2;
+//     for element in arr.iter() {
+//         println!("{}", element);
+//     }
+// }
