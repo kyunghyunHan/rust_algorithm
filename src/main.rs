@@ -3,7 +3,7 @@ mod Algotithm;
 mod Sort;
 mod DesignPatterns;
 mod blog;
-pub mod inflearn;
+ mod inflearn;
 fn main() {
 /*========================Design Parrtterns========================== */
 
@@ -35,8 +35,12 @@ fn main() {
 // Algotithm::dijkstra::main()
 /*========================욕심쟁이========================== */  
 /*========================Blog========================== */
- blog::array::main();
+//  blog::array::main();
 /*========================Blog========================== */  
+/*========================Inflearn========================== */
+  // Sort::quick_sort::main();
+  inflearn::all_sum::main();
+/*========================Inflearn========================== */  
 
 
 }
