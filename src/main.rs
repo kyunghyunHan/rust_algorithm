@@ -39,7 +39,8 @@ fn main() {
 /*========================Blog========================== */  
 /*========================Inflearn========================== */
   // Sort::quick_sort::main();
-  inflearn::all_sum::main();
+  // inflearn::all_sum::main();
+  inflearn::baekjoon_17198::main();
 /*========================Inflearn========================== */  
 
 
