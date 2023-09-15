@@ -40,7 +40,8 @@ fn main() {
 /*========================Inflearn========================== */
   // Sort::quick_sort::main();
   // inflearn::all_sum::main();
-  inflearn::baekjoon_17198::main();
+  // inflearn::baekjoon_17198::main();
+  inflearn::baekjoon_11399::main();
 /*========================Inflearn========================== */  
 
 
