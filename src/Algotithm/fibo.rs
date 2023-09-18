@@ -57,8 +57,8 @@ Bottom-Up
  */
 fn fibo3(n: u128) -> u128 {
     let mut dp: Vec<u128> = vec![0; 200];  // 하위 문제 답을 저장할 메모이제이션 벡터
-    dp[0] = 0;
-    dp[1] = 1;
+    dp[0] = 0;//가장작은 문제 이미 아는 값
+    dp[1] = 1;//가장작은 문제 이미 아는 값
     for i in 2..=n {    // 2부터 시작해서 n까지 반복
         dp[i as usize] = dp[(i - 1) as usize] + dp[(i - 2) as usize];
     }

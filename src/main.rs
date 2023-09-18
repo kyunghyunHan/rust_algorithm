@@ -42,7 +42,8 @@ fn main() {
   // inflearn::all_sum::main();
   // inflearn::baekjoon_17198::main();
   // inflearn::baekjoon_11399::main();
-  inflearn::baekjoon_1934::main();
+  // inflearn::baekjoon_1934::main();
+  inflearn::baekjoon_2193::main();
 /*========================Inflearn========================== */  
 
 
