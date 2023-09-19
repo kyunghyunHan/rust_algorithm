@@ -7,3 +7,4 @@ pub mod insertion_sort;
 pub mod selection_sort;
 pub mod queue;
 pub mod circular_queue;
+pub mod stack;
