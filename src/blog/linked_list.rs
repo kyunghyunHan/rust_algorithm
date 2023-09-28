@@ -64,7 +64,7 @@ impl<T: PartialEq> LinkedList<T> {
         })
     }
 
-    /*
+     /*
     The remove function deletes a specific value from the linked list. It searches for the node with the value to be removed and updates the previous node's pointer to bypass the node to be removed.
 
     - Requires the pre node.
