@@ -18,7 +18,7 @@
 struct Stack<T> {
     data: Vec<T>,
 }
-
+//
 impl<T> Stack<T> {
     //스택 생성
     fn new() -> Self {
