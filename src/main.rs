@@ -23,7 +23,8 @@ fn main() {
 // DataStructures::insertion_sort::main();
 // DataStructures::selection_sort::main();
 // DataStructures::stack::main();
-DataStructures::linked_list::main();
+// DataStructures::linked_list::main();
+DataStructures::queue::main();
 /*========================자료구조========================== */  
 /*========================분할정복========================== */  
 /*========================분할정복========================== */  
