@@ -24,7 +24,7 @@ fn main() {
 // DataStructures::selection_sort::main();
 // DataStructures::stack::main();
 // DataStructures::linked_list::main();
-DataStructures::queue::main();
+// DataStructures::queue::main();
 /*========================자료구조========================== */  
 /*========================분할정복========================== */  
 /*========================분할정복========================== */  
@@ -49,6 +49,6 @@ DataStructures::queue::main();
   // inflearn::baekjoon_2193::main();
   // inflearn::baekjoon_2407::main();
 /*========================Inflearn========================== */  
-
-
+let a= 1;
+println!("{}",*&a);
 }
