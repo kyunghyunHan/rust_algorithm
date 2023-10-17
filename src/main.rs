@@ -3,6 +3,7 @@ mod Algotithm;
 mod Sort;
 mod DesignPatterns;
 mod blog;
+mod linear_algebra;
  mod inflearn;
 fn main() {
 /*========================Design Parrtterns========================== */
@@ -25,7 +26,7 @@ fn main() {
 // DataStructures::stack::main();
 // DataStructures::linked_list::main();
 // DataStructures::queue::main();
-DataStructures::trie::main();
+// DataStructures::trie::main();
 /*========================자료구조========================== */  
 /*========================분할정복========================== */  
 /*========================분할정복========================== */  
@@ -50,5 +51,9 @@ DataStructures::trie::main();
   // inflearn::baekjoon_2193::main();
   // inflearn::baekjoon_2407::main();
 /*========================Inflearn========================== */  
+/*========================linear_algebra========================== */
+linear_algebra::ch1::main();
+/*========================linear_algebra========================== */  
+
 
 }
