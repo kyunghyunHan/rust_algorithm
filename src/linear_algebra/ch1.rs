@@ -1,5 +1,5 @@
 use ndarray;
-use ndarray::{Array, Array1, Array2};
+use ndarray::{arr1, Array1, Array2};
 
 pub fn main(){
     
@@ -12,4 +12,14 @@ pub fn main(){
     println!("asArray: {:?}", as_array.shape());
     println!("rowVec:  {:?}", row_vec.shape());
     println!("colVec:  {:?}", col_vec.shape());
+
+        // Define scalar 's' and an array 'a' as in the Python code
+        let s = 2;
+        let a = arr1(&[3, 4, 5]); // Create a 1D ndarray
+    
+        // Multiply 's' by 'a' in Rust
+        let result_a = a * s;
+        
+        // Print the results
+        println!("{:?}", result_a);
 }
