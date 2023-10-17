@@ -1,5 +1,5 @@
 use ndarray;
-use ndarray::{arr1, Array1, Array2};
+use ndarray::{arr1,arr2 ,Array1, Array2};
 
 pub fn main(){
     
@@ -22,4 +22,12 @@ pub fn main(){
         
         // Print the results
         println!("{:?}", result_a);
+    
+        let v = arr2(&[[4.0, 5.0, 6.0]]);
+        let w = arr2(&[[10.0], [20.0], [30.0]]);
+    
+        let result = v + w;
+    
+        println!("{:?}", result);
+
 }
