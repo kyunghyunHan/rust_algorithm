@@ -1,3 +1,19 @@
+/*유한체
+타원 곡선 암호를 파악하기 위해 필요
+타원 곡선 암호:비트코인의 핵심인 전자서명과 서명 검증 알고리즘을 이해하는데 필수
+
+
+유한체는 덧셈 곱셉을 가진 집합이며 그 집합의 원수 수가 유한하다.
+
+
+*/
+
+
+
+
+
+
+
 #[derive(Debug, PartialEq, Clone)]
 struct FieldElement {
     num: i64,
@@ -5,10 +21,12 @@ struct FieldElement {
 }
 
 impl FieldElement {
+    //num과 prime를 인수로 받은 후 num값이 경곗값을 포함하여 0과 prime-1사이 값인지 조사,그렇지 않은 경우 유효하지 않은 FileElement를 얻게 되므로 Error를 발생
     fn new(num: i64, prime: i64) -> Result<FieldElement, String> {
         if num >= prime || num < 0 {
             return Err(format!("Num {} not in field range 0 to {}", num, prime - 1));
         }
+        //조사된 인수값 반환
         Ok(FieldElement { num, prime })
     }
 
