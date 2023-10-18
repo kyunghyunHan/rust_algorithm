@@ -7,3 +7,5 @@ edition = "2021"
 
 [dependencies]
 ndarray = "0.15.6"
+num-bigint = "0.4"
+num-traits = "0.2"
