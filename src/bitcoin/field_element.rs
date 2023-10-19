@@ -14,7 +14,7 @@
 - F_p= {0,1,2..p-1}
 - 중괄호 안에 잇는 것은 집합의 원소
 - F_p= 위수P의 유한체 라고 읽는 특정 유한체,p는 집합의 위수로 잡힌 집합 안의 원소 개수
-- 위수 11의 유한체 = F_11 ={0,1,2,3,4,5,6,7,8,9,10}
+- 위수 11의 유한체 =  Fq (q = 11) ={0,1,2,3,4,5,6,7,8,9,10}
 - 유한체는 위수가 소수,유한체는 반드시 소수이거나 소수의 거듭제곱을 위수로 가져야한다.
 
 */
@@ -55,18 +55,27 @@ impl FieldElement {
     fn ne(&self, other: &FieldElement) -> bool {
         !self.eq(other)
     }
+    //유한체 덧셈
+    //
     fn add(&self, other: &FieldElement) -> Result<FieldElement, String> {
+        //더해지는 수와 더해지는 수의 위수가 동일한지 확인
+        
         if self.prime != other.prime {
             return Err("Cannot add two numbers in different Fields".to_string());
         }
+        //나머지 연산을 통해 유한체 덧셈 정의
         let num = (self.num + other.num) % self.prime;
         Ok(FieldElement::new(num, self.prime)?)
     }
 
     fn sub(&self, other: &FieldElement) -> Result<FieldElement, String> {
+                //더해지는 수와 더해지는 수의 위수가 동일한지 확인
+
         if self.prime != other.prime {
             return Err("Cannot subtract two numbers in different Fields".to_string());
         }
+       //나머지 연산을 통해 유한체 뺼셈 정의
+
         let num = (self.num - other.num + self.prime) % self.prime;
         Ok(FieldElement::new(num, self.prime)?)
     }
@@ -78,7 +87,7 @@ impl FieldElement {
         let num = (self.num * other.num) % self.prime;
         Ok(FieldElement::new(num, self.prime)?)
     }
-
+    
     fn pow(&self, exponent: i64) -> Result<FieldElement, String> {
         let n = exponent.rem_euclid(self.prime - 1);
         let num = i64::pow(self.num, n as u32) % self.prime;
@@ -94,8 +103,8 @@ impl FieldElement {
 }
 
 pub fn main(){
-    let a= FieldElement::new(7, 13).unwrap();
-    let b= FieldElement::new(6, 13).unwrap();
+    let a= FieldElement::new(8, 19).unwrap();
+    let b= FieldElement::new(17, 19).unwrap();
     println!("{}",  FieldElement::eq(&a,  &b));
 
    /*나머지 연산 
@@ -113,21 +122,93 @@ pub fn main(){
 
     /*유한체 덧셈과 뺼셈 
     유한체에서 덧셈을 정의할떄 그결과가 여전히 유한체에 속해있어여 한다.
-    F_19= {0,1,2...18}
+    Fq (q = 19)= {0,1,2...18}
     a+b= F-19
     a+b= (a+b)%19
-    7+8= (7+8)%19= 15
-    11+17= (11+17)%19= 9
-    
+    7+f8= (7+8)%19= 15
+    11+f17= (11+17)%19= 9
+    덧셈에 대한 역원
+    - -fa= (-a) %p
+    - -f9 = (-9) % 19 = 10
+    - -f10 = -10 %19
+    = -9 + f10= 0
+
+    - 10은 9의 덧셈에 대한 역원
+
+
     */
-    /*거듭제곱 */
-    let pow= FieldElement::pow(&a, -3).unwrap();
-    println!("{:?}", pow);
+    let a1: FieldElement= FieldElement::new(8, 19).unwrap();
+    let b1= FieldElement::new(17, 19).unwrap();
+    println!("계산={}",(11-9)% 19);
+    //Rust에서는 음수를 모듈로 연산할때 결과가 음수로 유지
+    println!("Rust={}",(((11-9) % 19 + 19) % 19));
+    println!("계산2={}",(11-9) % 19 );
+    //
+    println!("Rust={}",(((6-13) % 19 + 19) % 19));
+    println!("계산2={}",(6-13) % 19 );
+
+    println!("더하기={:?}",FieldElement::add(&a1, &b1));
+    println!("빼기={:?}",FieldElement::sub(&a1, &b1));
+
     
+    /*유한체 곱셈과 거듭제곱 \
+    정수에서의 곱셈은 여러번 더하기
+    5*3= 5+5+5
+    유한체에서도 비슷하게 가능
+    5*f3= 5+f5+f5 = 15 % 19
+    5*f17= 8+f8+f8...+f8 = (8*17) %19 = 136 %19
+    거듭제곱은 숫자를 여러번 곱하는것
+    7^3= 7*7 * 7= 343
+    7^3= 343 %19 = 1
+    9^12=7
+    */
+    let a2: FieldElement= FieldElement::new(8, 19).unwrap();
+    let b2= FieldElement::new(17, 19).unwrap();
+    println!("곱셉={}",136 % 19 );
+    println!("곱셉={:?}",FieldElement::mul(&a2, &b2));
+   
+
+
+    let a3: FieldElement= FieldElement::new(9, 19).unwrap();
+
+    /*거듭제곱 */
+    let pow= FieldElement::pow(&a3, 12).unwrap();
+    println!("거듭제곱={}", i64::pow(9,12)% 19 );
+    println!("거듭제곱={:?}", pow );
+     
     println!("{}",  FieldElement::eq(&pow,  &b));
-    let g = a.truediv(&b).unwrap();
-    println!("a / b = {:?}", g);
+    // println!("a / b = {:?}", g);
     FieldElement::fmt(&a);
- 
+
+    /*나눗셈
+    
+    - 일반대수에서는 나눗셈은 곱셈의 역연산
+    7*8= 56 은 56/8=  7을 의미
+    유한체에서도 유효
+    3*f_7= 21%19 = 2로부터 2/f_7 = 3이라는 등식이 성립
+    9*f_5= 45%19 = 7로부터 7/f_5 = 9라는 등식이 성립
+
+    - 나눗셈 결과로 보면 일반 수학에서의 나눗셈과 다르다.유한체원소끼리의 나눗셈이기때문에
+    - 의문 ? = 3*f_7 = 2를 모르는 상화에서 어떻게 2/f_7를 계산하는가
+    - p와 0보다 큰 n에 대해 n^(p-1)은 항상 1이다
+    - n^(p-1) %p = 1
+    - 페르마의 소정리
+    - 나눗셈은 곱셈의 역연산이기 떄문에
+    - a/b =a*f_(1/b)  = a*f_b^-1
+    - 여기서 b^-1을 안다면 나눗셈 문제가 곱셈 문제로 바뀐다.
+    - b^-1을 계산하는데 페르마의 소정리 활용
+   - b^p-1= 1이고 p는 소수 이기에 
+b^-1= b^-1*f1=b^-1*fb^(p-1)= b^(p-2)
+= b^-1= b^(p-2)
+- 유한체  Fq (q = 19)에서 0이 아닌 모든 원소 b에 대해 b^18= 1을 의미하므로 b^-1= b ^17을 의미
+- 2/7 = 2 *7^(19-2) = 2*7^17 = 3
+- 7/5= 7 *5^(19-2) =  7*5^17 = 53405761771875 % 19 = 9
+
+- 나눗셈은 가장 시간이 많이 걸리는 연산
+     */
+    let a4: FieldElement= FieldElement::new(2, 19).unwrap();
+    let b4= FieldElement::new(7, 19).unwrap();
+    println!("나눗셈={}",136 % 19 );
+    println!("나눗셈={:?}",FieldElement::truediv(&a4, &b4));
 }
 
