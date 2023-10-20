@@ -65,6 +65,8 @@ impl FieldElement {
     
     fn pow(&self, exponent: i64) -> Result<FieldElement, String> {
         let n = exponent.rem_euclid(self.prime - 1);
+        //pow를 활용하여 효율적 으로 계산
+        //지수를 0과 p-2사이의 값으로 변환
         let num = i64::pow(self.num, n as u32) % self.prime;
         Ok(FieldElement::new(num, self.prime)?)
     }
@@ -138,24 +140,27 @@ pub fn main(){
     = -9 + f10= 0
 
     - 10은 9의 덧셈에 대한 역원
+   비슷하게 유한체 에서의 뺼셈도 정의할수 있다.
+   For example
+
 
 
     */
     //7+f8= (7+8)%19= 15
     let a1: FieldElement= FieldElement::new(11, 19).unwrap();
     let b1= FieldElement::new(17, 19).unwrap();
-    println!("7+f8 = {}",(11 + 17)% 19);
-    println!("7+f8 = {:?}",FieldElement::add(&a1, &b1));
+    println!("11+f17 = {}",(11 + 17)% 19);
+    println!("11+f17 = {:?}",FieldElement::add(&a1, &b1));
     
 
     let a2: FieldElement= FieldElement::new(6, 19).unwrap();
     let b2= FieldElement::new(13, 19).unwrap();
 
 
-    println!("11 - f9 = {}",(((6-13) % 19 + 19) % 19));
-    println!("11 - f9 = {}",(6-13) % 19 );
+    println!("6 - f13 = {}",(((6-13) % 19 + 19) % 19));
+    println!("6 - f13 = {}",(6-13) % 19 );
 
-    println!("11 - f9 = {:?}",FieldElement::sub(&a2, &b2));
+    println!("6 - f13 = {:?}",FieldElement::sub(&a2, &b2));
 
     
     /*유한체 곱셈과 거듭제곱 \
