@@ -1,33 +1,95 @@
 use ndarray;
-use ndarray::{arr1,arr2 ,Array1, Array2};
+use ndarray::{array,arr1,arr2 ,arr3,Array1, Array2,Array};
 
 pub fn main(){
     
-    let as_list = vec![1, 2, 3];
-    let as_array = Array1::from(as_list);
-    let row_vec = Array2::from_shape_vec((1, 3), vec![1, 3, 3]).unwrap();
-    let col_vec = Array2::from_shape_vec((3, 1), vec![1, 2, 3]).unwrap();
 
-    println!("asList:  {:?}", as_array.shape());
+    /*
+    선형대수학에서 벡터는 수를 순서대로 나열한 것이다.
+    벡터는 몇가지 중요한 특징을 가집니다.
+    벡터의 차원은 벡터가 가진 원소의 수이며,벡터의 방향은 열방향 행방향인지를 나타냅니다.
+    차원은 R^N으로 나타내며 R은 실수,N은 차원을 나타냅니다.
+    
+
+    x는 4차원 열벡터,y는 2차원 열벡터 ,z는 4차원 행벡터입니다.
+    또는 x ∈ R^4로 표현할수 잇습니다.
+    
+    벡터 v를 일반적으로 소문자 v로 나타내며 선형대수학에서 벡터에 아무런 표시가 없다면 열방향 이라고 가정합니다.
+    행벡터는 w^로 씁니다.
+    T는 전치연산을 나타내며 전치연산은 열벡터를 행벡터를 변환합니다.
+
+    벡터에 대해 잘 이해하기 위해 파이썬의 Numpy나 Rust의 ndarray를 사용하겟습니다.
+    asArray는 방향이 없는 배열입니다.
+    행이나 열 벡터가 아니라 1차원 리스트입니다.
+
+    방향은 대괄호로 지정하며 가장 바깥족 대괄호는 모든 숫자를
+    하나의 객체로 묶습니다.
+    행벡터(rowVec)는 하나의 행이 모든 숫자를 가지지만  열벡터는 하나의 숫자를 가진 행이 여러개가 있습니다.
+     */
+    let as_list = arr1(&[1, 2, 3]);
+    let as_array = arr1(&[1, 2, 3]);
+    let row_vec = arr2(&[[1, 3, 3]]);
+    let col_vec = arr2(&[[1], [2], [3]]);
+
+    println!("asList:  {:?}", as_list.shape());
     println!("asArray: {:?}", as_array.shape());
     println!("rowVec:  {:?}", row_vec.shape());
     println!("colVec:  {:?}", col_vec.shape());
 
-        // Define scalar 's' and an array 'a' as in the Python code
-        let s = 2;
-        let a = arr1(&[3, 4, 5]); // Create a 1D ndarray
-    
-        // Multiply 's' by 'a' in Rust
-        let result_a = a * s;
-        
-        // Print the results
-        println!("{:?}", result_a);
-    
-        let v = arr2(&[[4.0, 5.0, 6.0]]);
-        let w = arr2(&[[10.0], [20.0], [30.0]]);
-    
-        let result = v + w;
-    
-        println!("{:?}", result);
 
+    /*
+    순서대로 나열된 수 목록은 벡터의 대수학적 해석입니다.
+    기하학적으로 해석하면 벡터는 특정 길이와 방향(또는 각도)를 가진 직선입니다.
+    벡터의 두 점은 꼬리와 머리라고 부릅니다.
+    일반적으로 머리는 꼬리와 명확하게 구분하기 위해 화살표가 달려있습니다.
+    벡터를 기하학적 좌표가 인코딩된 형태로 볼수도 있지만 벡터와 좌표는 실제로 다릅니다.
+    하지만 벡터가 원점에서 시작될때는 일치합니다.이를 기준위치라 부릅니다
+    
+    
+    
+     */
+    
+
+    /*
+    
+    벡터의 연산은 단순하고 직관적이며 에상한 방식대로 정확하게 동작할수 있습니다.
+    두 벡터의 덧셈과 뺼셈은 서로 대응되는 원소끼리 더하고 뺼수 있습니다.
+    벡터는 동일한 차원을 갖는 벡터끼리만 더하고 뺼수 있습니다.
+    R^3의 벡터와 R5의 벡터를 더하고 빼는것은 불가능합니다.
+
+     */
+
+     let v = arr1(&[4, 5, 6]);
+     let w = arr1(&[10, 20, 30]);
+     let u = arr1(&[0, 3, 6, 9]);
+ 
+     let v_plus_w = &v + &w;
+     // Uncomment the following line to see the dimension mismatch error
+     // let u_plus_w = &u + &w;
+     
+     println!("vPlusW: {:?}", v_plus_w);
+     // Uncomment the following line to see the dimension mismatch error
+     // println!("uPlusW: {:?}", u_plus_w);
+     
+
+     let v = arr2(&[[4, 5, 6]]);
+     let binding = arr2(&[[10, 20, 30]]);
+     let w = binding.t();
+
+     // Perform the addition of v and w
+     let result = &v + &w;
+     println!("{:?}", result);
+ 
+     /*    
+     두 벡터를 기하학적으로 더할떄 한 벡터의 꼬리와 다른 벡터의 머리를 연결합니다
+     더한 결과 벡터는 첫번쨰 벡터의 꼬리와 두벤쨰 벡터의 머리를 이은 선 입니다.
+     이 방식으로 원하는 만큼 벡터를 더할수 있습니다.
+     모든 벡터의 꼬리와 머리를 계속 이으면 최종합은 첫번쨰 꼬리에서 마지막 머리까지 이어지는 선이 됩니다.
+
+     뺴는것은 덧셈과 조금다릅니다.
+     두 벡터의 꼬리들을 같은 좌표에 둡니다.뺸결과의 벡터는 두번째 벡터의 머리에서 첫번쨰 벡터의 머리로 가는 선입니다.
+     벡터 뺼셈은 기하학적으로 매우 중요한 개념입니다.
+     직교벡터 분해의 기초이며 이는 곧 선형 최소제곱법의 기초가되고 선형 최고제곱법은  선형대수학의 가장 중요한 응용입니다.
+     
+      */
 }
