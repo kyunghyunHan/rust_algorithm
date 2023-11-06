@@ -53,7 +53,8 @@ fn main() {
   // inflearn::baekjoon_2407::main();
 /*========================Inflearn========================== */  
 /*========================linear_algebra========================== */
-linear_algebra::ch1::main();
+// linear_algebra::ch1::main();
+linear_algebra::ch2::main();
 /*========================linear_algebra========================== */  
 /*========================bitcoin========================== */  
 // bitcoin::field_element::main();
