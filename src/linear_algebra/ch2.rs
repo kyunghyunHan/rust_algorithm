@@ -43,4 +43,45 @@ pub fn main() {
     )
     .unwrap();
 
+
+    // Create a drawing area
+    let root = BitMapBackend::new("ch2.png", (800, 600)).into_drawing_area();
+    root.fill(&WHITE).unwrap();
+    let mut chart = ChartBuilder::on(&root)
+    .x_label_area_size(40)
+    .y_label_area_size(40)
+    .build_cartesian_2d(-4.0..4.0, -4.0..4.0)
+    .unwrap();
+   chart
+        .configure_mesh()
+        .x_desc("Length")
+        .y_desc("Weight")
+        .draw()
+        .unwrap();
+    chart
+    .draw_series(
+        points
+            .iter()
+            .map(|(x, y, _)| Circle::new((*x, *y), 5, Into::<ShapeStyle>::into(&BLACK).filled())
+        )
+    )
+    .unwrap();
+
+    
+    let root = BitMapBackend::new("3d-env.png", (640, 480)).into_drawing_area();
+
+    root.fill(&WHITE).unwrap();
+
+    let mut chart = ChartBuilder::on(&root)
+        .margin(20)
+        .caption("Empty 3D Figure", ("sans-serif", 40))
+        .build_cartesian_3d(0.0..1.0, 0.0..1.0, 0.0..1.0)
+        .unwrap();
+    chart.configure_axes().draw().unwrap();
+    chart.draw_series(SurfaceSeries::xoz(
+        (-25..25).map(|v| v as f64 / 10.0), 
+        (-25..25).map(|v| v as f64 / 10.0), 
+        |x:f64,z:f64|(x * x + z * z).cos()).style(&BLUE.mix(0.2))
+    ).unwrap();
+
 }
