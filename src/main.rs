@@ -28,7 +28,8 @@ fn main() {
 // DataStructures::linked_list::main();
 // DataStructures::queue::main();
 // DataStructures::trie::main();
-DataStructures::heap::main();
+// DataStructures::max_heap::main();
+DataStructures::min_heap::main();
 /*========================자료구조========================== */  
 /*========================분할정복========================== */  
 /*========================분할정복========================== */  

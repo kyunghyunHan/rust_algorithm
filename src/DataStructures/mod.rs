@@ -8,7 +8,8 @@ pub mod circular_queue;//원형큐
 pub mod stack;//스택
 pub mod array;//배열
 pub mod hash_table;//해시테이블
-pub mod heap; //힙
+pub mod max_heap; //힙
+pub mod min_heap;//min heap
 pub mod graph;//그래프
 
 /*자료구조 
