@@ -9,13 +9,13 @@ max heap = 부모가 자식보다 값이 커야 함
 const MAX_SIZE: usize = 100000;
 
 
-struct Heap {
+struct MaxHeap {
     data: Vec<i32>,
     heap_size: usize,
 }
-impl Heap{
+impl MaxHeap{
     fn new()->Self{
-        Heap { data:vec![0;MAX_SIZE], heap_size: 0 }
+        MaxHeap { data:vec![0;MAX_SIZE], heap_size: 0 }
     }
     //힙은 완전 이진트리의 형태로 데이터를 삽입하기에 새로운 데이터는 가장 마지막 인덱스에 저장
     fn add(&mut self ,data:i32){
@@ -78,7 +78,7 @@ impl Heap{
 
 }
 pub fn main(){
-    let mut h = Heap::new();
+    let mut h = MaxHeap::new();
 
     h.add(3);
     h.add(5);
