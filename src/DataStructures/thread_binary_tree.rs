@@ -1,8 +1,6 @@
 use std::rc::Rc;
 use std::cell::RefCell;
 /*스레드 이진트리
-
-
 */
 struct Node {
    data: i32,
