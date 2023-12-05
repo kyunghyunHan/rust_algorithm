@@ -12,6 +12,7 @@ pub mod max_heap; //힙
 pub mod min_heap;//min heap
 pub mod graph;//그래프
 pub mod thread_binary_tree;
+pub mod binary_search_tree;
 /*자료구조 
 배열
 연결리스트
