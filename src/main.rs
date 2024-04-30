@@ -17,7 +17,7 @@ fn main() {
 
 /*========================정렬========================== */ 
 
-
+Sort::selection_sort::main();
 // Sort::quick_sort::main();
 /*========================정렬========================== */  
 
@@ -31,7 +31,7 @@ fn main() {
 // DataStructures::trie::main();
 // DataStructures::max_heap::main();
 // DataStructures::min_heap::main();
-DataStructures::binary_search_tree::main();
+// DataStructures::binary_search_tree::main();
 /*========================자료구조========================== */  
 /*========================분할정복========================== */  
 /*========================분할정복========================== */  
