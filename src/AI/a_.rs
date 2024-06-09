@@ -39,7 +39,7 @@ enum  TileType{
 pub fn main(){
 
 
-    println!("{}","hello a* ")
+    println!("{}","hello a*  algorthm")
 
 
 
