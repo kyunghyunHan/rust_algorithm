@@ -1,4 +1,5 @@
-use algorithm::sort::insertion;
+use algorithm::sort::{insertion,merge};
 fn main() {
-    insertion::example();
+    // insertion::example();
+    merge::example();
 }
