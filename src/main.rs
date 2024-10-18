@@ -1,4 +1,4 @@
-
+use algorithm::sort::insertion;
 fn main() {
-  println!("{}","hello world")
+    insertion::example();
 }
