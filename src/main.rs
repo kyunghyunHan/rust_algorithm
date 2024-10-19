@@ -1,5 +1,10 @@
-use algorithm::sort::{insertion,merge};
+use algorithm::{
+    data_structure,
+    sort::{insertion, merge,bubble},
+};
 fn main() {
+    bubble::example();
     // insertion::example();
-    merge::example();
+    // merge::example();
+
 }
