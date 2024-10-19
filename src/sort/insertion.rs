@@ -1,3 +1,10 @@
+/*
+insetion sort
+- 적절한 위치에 삽입하는 정렬
+*/
+
+
+
 fn sort(arr: &mut Vec<i32>, n: usize) {
     for i in 1..n {
         let key = arr[i];
