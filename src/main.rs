@@ -3,8 +3,8 @@ use algorithm::{
     sort::{insertion, merge,bubble},
 };
 fn main() {
-    bubble::example();
-    // insertion::example();
+    // bubble::example();
+    insertion::example();
     // merge::example();
 
 }
