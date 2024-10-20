@@ -1,3 +1,10 @@
+/*
+
+
+
+*/
+
+
 fn merge(arr: &mut Vec<i32>, p: i32, q: i32, r: i32) {
     let nl = q - p + 1; //A[p:q]의 크기
     let nr = r - q; //A[q +1:r]의 크기
@@ -40,14 +47,15 @@ fn merge(arr: &mut Vec<i32>, p: i32, q: i32, r: i32) {
     }
 }
 fn merge_sort(arr: &mut Vec<i32>, p: i32, r: i32) {
-    if p >= r {
+    if p >= r { //0또는 하나의 원소
         return;
     }
 
-    let q = (p + r) / 2;
-    merge_sort(arr, p, q);
-    merge_sort(arr, q + 1, r);
+    let q = (p + r) / 2;  //[p:r]의 중간점
+    merge_sort(arr, p, q);  //A[p:r]를 재귀적으로 정렬
+    merge_sort(arr, q + 1, r);//A[q+1:r] 을 재귀적으로 정렬
     merge(arr, p, q, r);
+    //A[p:q]와 A[q+1:r]을 A[p:r]로 병합
 }
 pub fn example() {
     let mut arr = vec![3, 41, 52, 26, 38, 57, 9, 49];

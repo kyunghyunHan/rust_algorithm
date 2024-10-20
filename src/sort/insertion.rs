@@ -15,6 +15,7 @@ fn sort(arr: &mut Vec<i32>, n: usize) {
         println!("비교{}",arr[j as usize]);
         println!("key{}",key);
         //비교대상이 음수가 첫번쨰 배열보다 낮으면안대야 하며 비교대상이 키보다 크면 
+        //내림차순으로 변경할려면 >key => <key 로변경
         while j >= 0 && arr[j as usize] > key {
             println!("이거{}",arr[j as usize]);
             println!("{}",j + 1);
@@ -27,7 +28,6 @@ fn sort(arr: &mut Vec<i32>, n: usize) {
         arr[(j + 1) as usize] = key;
     }
 }
-
 pub fn example() {
     let mut arr = vec![5,2,4,6,1,3];
     let n = arr.len();
