@@ -31,6 +31,10 @@
 - 스택
 - 큐
 - 힙
+- 해시테이블
+- 이진검색트리
+- 레드블랙트리
+- B-트리
 ## Sort
 - Key:정렬할 숫자
 - 부속데이터:숫자가 다른 데이터와 연관된 키인 경우 이를 부속데이터(satellite data)
@@ -38,7 +42,7 @@
 #### List 
 - [삽입정렬](https://github.com/kyunghyunHan/algorithm_/blob/main/src/sort/insertion.rs)
 - [병합정렬](https://github.com/kyunghyunHan/algorithm_/blob/main/src/sort/merge.rs)
-
+- [선형시간정렬]()
 ## 분할정복
    #### 단계
    - divide:현재의 문제를 같은 문제를 다루는 다수의 부분 문제로 분할
@@ -46,4 +50,11 @@
    - combine:부분 문제의 해를 결합하여 원래 문제의 해가 되도록 만든다
    - 부분문제가 충분히 작아져 재귀호출없이 풀수 있을떄 bottoms out이라고 한다
 ## 동적프로그래밍
-## 그리드
+## 그리드 알고리즘
+## 분할지불 분석
+## 그래프 알고리즘
+## 병렬알고리즘
+## 온라인알고리즘
+## 머신러닝
+## NP-완비
+## 근사알고리즘
