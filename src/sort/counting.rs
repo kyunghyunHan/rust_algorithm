@@ -1,23 +1,32 @@
-/*계수정렬 */
+/* 계수 정렬 */
+fn sort(arr: &mut Vec<usize>, n: usize, k: usize) -> Vec<usize> {
+    let mut brr: Vec<usize> = vec![0; n + 1];
+    let mut crr: Vec<usize> = vec![0; k + 1];
 
-fn sort(arr: &mut [usize], n: usize, k: usize) ->Vec<usize>{
-    let mut brr: Vec<usize> = Vec::new();
-    let mut crr: Vec<usize> = Vec::new();
-
-    //B[1:n]와 C[0:k]를 새로운 배열로한다.
-    for i in 0..k {}
-    for i in 1..n {}
-    for i in 1..k{
-
+    // 빈도수 카운트
+    for j in 0..=n {
+        crr[arr[j]] += 1;
     }
-    for i in (1..n).rev(){
 
+    // 누적 빈도수 계산
+    for i in 1..=k {
+        crr[i] += crr[i - 1];
     }
+
+    // 배열 정렬
+    for j in (0..=n).rev() {
+        brr[crr[arr[j]] - 1] = arr[j];
+        crr[arr[j]] -= 1;
+    }
+
     brr
 }
 
 pub fn example() {
-    let mut a: [usize; 10] = [16, 14, 10, 8, 7, 9, 3, 2, 4, 1];
-    let n = a.len() - 1;
-    println!("{:?}", a);
+    let mut arr: Vec<usize> = vec![16, 14, 10, 8, 7, 9, 3, 2, 4, 1];
+    let n = arr.len() - 1;
+    let k = *arr.iter().max().unwrap();
+
+    let result = sort(&mut arr, n, k);
+    println!("{:?}", result);
 }
