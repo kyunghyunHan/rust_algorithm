@@ -1,7 +1,7 @@
 use algorithm::{
     data_structure,
     divide_and_conquer::matrix_multiply,
-    sort::{bubble, heap, insertion, merge, select,counting},
+    sort::{bubble, heap, insertion, merge, select,counting,bucket},
     utils::horner
 };
 fn main() {
@@ -12,5 +12,6 @@ fn main() {
     // merge::example();
     // bubble::example();
     // horner::example();
-    counting::example();
+    // counting::example();
+    bucket::example();
 }
