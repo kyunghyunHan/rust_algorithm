@@ -4,3 +4,4 @@ pub mod dynamic_programming;
 pub mod divide_and_conquer;
 pub mod utils;
 pub mod graph_algorithm;
+pub mod lotto;
