@@ -13,5 +13,5 @@ fn main() {
     // bucket::example();
     // breadth_first_search::example();
     // lotto::default::example();
-    lotto::pension_lottery::example();
+    // lotto::pension_lottery::example();
 }
