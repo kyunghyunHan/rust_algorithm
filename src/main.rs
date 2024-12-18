@@ -2,6 +2,8 @@ use algorithm::{
     data_structure, divide_and_conquer::matrix_multiply, graph_algorithm::breadth_first_search, lotto, sort::{bubble, bucket, counting, heap, insertion, merge, select}, utils::horner
 };
 fn main() {
+    /*자료구조 */
+    data_structure::linked_list::example();
     // insertion::example();
 
     // matrix_multiply::example();
