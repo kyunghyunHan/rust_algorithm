@@ -80,4 +80,6 @@ pub fn example() {
     println!("{:?}", s.is_empty());
     println!("{:?}", s.pop());
     println!("{:?}", s.is_empty());
+
+
 }
