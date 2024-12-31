@@ -10,6 +10,7 @@ fn main() {
     /*자료구조 */
     // data_structure::linked_list::example();
     data_structure::stack::example();
+    data_structure::queue::example();
     // insertion::example();
 
     // matrix_multiply::example();

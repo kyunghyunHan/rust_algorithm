@@ -32,7 +32,7 @@ impl<T> Node<T> {
         })
     }
 }
-impl<T> Queue<T> {
+impl<T: Clone> Queue<T> {
     pub fn new() -> Self {
         Queue {
             first: None,
@@ -40,29 +40,52 @@ impl<T> Queue<T> {
         }
     }
     fn add(&mut self, item: T) {
-        let mut t = Node::new(item);
+        let t = Node::new(item);
 
-        match self.last.take() {
-            Some(mut last) => {
-                last.next = Some(t);
-                // self.last = Some(t);
-            }
-            None => {
-                self.first = Some(t);
-                // self.last = self.first
-            }
+        if let Some(mut last_node) = self.last.take() {
+            last_node.next = Some(t);
+            self.last = Some(last_node);
+        } else {
+            self.first = Some(t.clone());
+            self.last = Some(t);
         }
-        // if !self.last.is_none() {
-        //     self.last = Some(t);
-        // }
-        // self.last = Some(t);
-        // if self.first.is_none() {
-        //     self.first = self.last.take()
-        // }
     }
 
-    fn remove() {}
-    fn peek() {}
+    fn remove(&mut self) -> Option<T> {
+        if let Some(first_node) = self.first.take() {
+            self.first = first_node.next;
+
+            // first가 None이면 last도 None으로
+            if self.first.is_none() {
+                self.last = None;
+            }
+
+            Some(first_node.data)
+        } else {
+            None
+        }
+    }
+
+    fn peek(&self) -> Option<T> {
+        match &self.first {
+            Some(node) => Some(node.data.clone()),
+            None => None,
+        }
+    }
 }
 
-pub fn example() {}
+pub fn example() {
+    let mut s: Queue<i32> = Queue::new();
+    s.add(1);
+    s.add(2);
+    s.add(3);
+    s.add(4);
+
+    println!("{:?}", s.remove());
+    println!("{:?}", s.remove());
+    println!("{:?}", s.peek());
+    println!("{:?}", s.remove());
+    // println!("{:?}", s.is_empty());
+    println!("{:?}", s.remove());
+    // println!("{:?}", s.is_empty());
+}
