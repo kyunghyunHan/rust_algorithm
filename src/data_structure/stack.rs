@@ -16,15 +16,12 @@
 - s.top이 원소의개수 S.size를 초과하면 overflow라고한다
 */
 
-struct Stack{
-
-}
-fn stack_empty(s:Stack){
-
-}
-fn push(s:Stack,x:usize){
-
+struct Stack<T> {
+    top: Option<Box<Node<T>>>,
 }
 
-fn pop(){}
-fn example() {}
+struct Node<T> {
+    data: T,
+    next: Option<Box<Node<T>>>,
+}
+fn pop() {}
