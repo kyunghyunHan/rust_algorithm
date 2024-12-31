@@ -12,13 +12,13 @@ Queue
 
 
 */
-#[derive(Clone)]
+#[derive(Clone, Debug)]
 struct Queue<T> {
     // top: Option<Box<Node<T>>>,
     first: Option<Box<Node<T>>>,
     last: Option<Box<Node<T>>>,
 }
-#[derive(Clone)]
+#[derive(Clone, Debug)]
 
 struct Node<T> {
     data: T,
@@ -40,52 +40,62 @@ impl<T: Clone> Queue<T> {
         }
     }
     fn add(&mut self, item: T) {
-        let t = Node::new(item);
+        let new_node = Node::new(item);
 
-        if let Some(mut last_node) = self.last.take() {
-            last_node.next = Some(t);
-            self.last = Some(last_node);
-        } else {
-            self.first = Some(t.clone());
-            self.last = Some(t);
+        if self.first.is_none() {
+            self.first = Some(new_node.clone());
+            self.last = Some(new_node);
+            return;
+        }
+
+        let mut current = &mut self.first;
+        while let Some(node) = current {
+            if node.next.is_none() {
+                node.next = Some(new_node.clone());
+                self.last = Some(new_node);
+                break;
+            }
+            current = &mut node.next;
         }
     }
-
-    fn remove(&mut self) -> Option<T> {
+    pub fn remove(&mut self) -> Option<T> {
         if let Some(first_node) = self.first.take() {
-            self.first = first_node.next;
+            self.first = first_node.next; // 첫 번째 노드를 제거하고 그 다음 노드를 가리킴
 
-            // first가 None이면 last도 None으로
+            // 큐가 비면 last도 None으로 설정
             if self.first.is_none() {
                 self.last = None;
             }
 
-            Some(first_node.data)
+            Some(first_node.data) // 제거된 첫 번째 노드의 데이터를 반환
         } else {
-            None
+            None // 큐가 비어 있으면 None 반환
         }
     }
-
     fn peek(&self) -> Option<T> {
         match &self.first {
             Some(node) => Some(node.data.clone()),
             None => None,
         }
     }
+    fn is_empty(&self) -> bool {
+        self.first.is_none()
+    }
 }
 
 pub fn example() {
-    let mut s: Queue<i32> = Queue::new();
-    s.add(1);
-    s.add(2);
-    s.add(3);
-    s.add(4);
+    let mut q: Queue<i32> = Queue::new();
+    q.add(1);
+    q.add(2);
+    q.add(3);
+    q.add(4);
+    println!("{:?}", q);
 
-    println!("{:?}", s.remove());
-    println!("{:?}", s.remove());
-    println!("{:?}", s.peek());
-    println!("{:?}", s.remove());
-    // println!("{:?}", s.is_empty());
-    println!("{:?}", s.remove());
-    // println!("{:?}", s.is_empty());
+    println!("{:?}", q.remove());
+    println!("{:?}", q.remove());
+    println!("{:?}", q.peek());
+    println!("{:?}", q.remove());
+    println!("{:?}", q.is_empty());
+    println!("{:?}", q.remove());
+    println!("{:?}", q.is_empty());
 }
