@@ -1,101 +1,87 @@
-/*
-Queue
-
-- 스택과 큐는 Delete연산에 의해 집합에서 삭제되는 원소가 미리 정해져있는 동적집합
-- 큐에서는 집합에서 가장 오랜시간동안 존재한 원소가 삭제
-- First-in First out
-
--  Enqueue: Insert
-- Dequeue:Delete
-
-- 큐는 head와 tail인자를 갖는다
-
-
-*/
-#[derive(Clone, Debug)]
+#[derive(Debug)]
 struct Queue<T> {
-    // top: Option<Box<Node<T>>>,
-    first: Option<Box<Node<T>>>,
-    last: Option<Box<Node<T>>>,
+    size: usize,
+    head: Option<Box<Node<T>>>,
+    tail: *mut Node<T>, // 원시 포인터 사용
 }
-#[derive(Clone, Debug)]
 
+#[derive(Debug)]
 struct Node<T> {
-    data: T,
-    next: Option<Box<Node<T>>>,
+    val: T,
+    next: Option<Box<Node<T>>>, // prev 포인터 제거
 }
+
 impl<T> Node<T> {
-    fn new(data: T) -> Box<Node<T>> {
-        Box::new(Node {
-            data: data,
-            next: None,
+    fn new(val: T) -> Box<Node<T>> {
+        Box::new(Node { val, next: None })
+    }
+}
+
+impl<T> Queue<T> {
+    fn new() -> Self {
+        Queue {
+            size: 0,
+            head: None,
+            tail: std::ptr::null_mut(),
+        }
+    }
+
+    fn size(&self) -> usize {
+        self.size
+    }
+
+    fn is_empty(&self) -> bool {
+        self.size == 0
+    }
+
+    fn enqueue(&mut self, x: T) {
+        let mut new_node = Node::new(x);
+        let raw_node = Box::into_raw(new_node);
+
+        unsafe {
+            if !self.tail.is_null() {
+                (*self.tail).next = Some(Box::from_raw(raw_node));
+                self.tail = raw_node;
+            } else {
+                self.head = Some(Box::from_raw(raw_node));
+                self.tail = raw_node;
+            }
+        }
+
+        self.size += 1;
+    }
+
+    fn peek(&self) -> Option<&T> {
+        self.head.as_ref().map(|node| &node.val)
+    }
+
+    fn dequeue(&mut self) -> Option<T> {
+        self.head.take().map(|mut head| {
+            self.size -= 1;
+
+            if let Some(next) = head.next {
+                self.head = Some(next);
+            } else {
+                self.tail = std::ptr::null_mut();
+            }
+
+            head.val
         })
     }
 }
-impl<T: Clone> Queue<T> {
-    pub fn new() -> Self {
-        Queue {
-            first: None,
-            last: None,
-        }
-    }
-    fn add(&mut self, item: T) {
-        let new_node = Node::new(item);
-
-        if self.first.is_none() {
-            self.first = Some(new_node.clone());
-            self.last = Some(new_node);
-            return;
-        }
-
-        let mut current = &mut self.first;
-        while let Some(node) = current {
-            if node.next.is_none() {
-                node.next = Some(new_node.clone());
-                self.last = Some(new_node);
-                break;
-            }
-            current = &mut node.next;
-        }
-    }
-    pub fn remove(&mut self) -> Option<T> {
-        if let Some(first_node) = self.first.take() {
-            self.first = first_node.next; // 첫 번째 노드를 제거하고 그 다음 노드를 가리킴
-
-            // 큐가 비면 last도 None으로 설정
-            if self.first.is_none() {
-                self.last = None;
-            }
-
-            Some(first_node.data) // 제거된 첫 번째 노드의 데이터를 반환
-        } else {
-            None // 큐가 비어 있으면 None 반환
-        }
-    }
-    fn peek(&self) -> Option<T> {
-        match &self.first {
-            Some(node) => Some(node.data.clone()),
-            None => None,
-        }
-    }
-    fn is_empty(&self) -> bool {
-        self.first.is_none()
-    }
-}
-
 pub fn example() {
     let mut q: Queue<i32> = Queue::new();
-    q.add(1);
-    q.add(2);
-    q.add(3);
-    q.add(4);
+    q.enqueue(1);
+    q.enqueue(2);
+    q.enqueue(3);
+    q.enqueue(4);
     println!("{:?}", q);
 
-    println!("{:?}", q.remove());
-    println!("{:?}", q.remove());
-    println!("{:?}", q.peek());
-    println!("{:?}", q.remove());
-    println!("{:?}", q.is_empty());
-    println!("{:?}", q.remove());
-    println!("{:?}", q.is_empty());
+    println!("{:?}", q.dequeue()); // Some(1)
+    println!("{:?}", q.dequeue()); // Some(2)
+    println!("{:?}", q.peek()); // Some(3)
+    println!("{:?}", q.dequeue()); // Some(3)
+    println!("{:?}", q.is_empty()); // false
+    println!("{:?}", q.dequeue()); // Some(4)
+    println!("{:?}", q.is_empty()); // true
 }
