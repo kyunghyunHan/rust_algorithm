@@ -1,5 +1,6 @@
-pub mod stack;
+pub mod binary_search_truee;
+pub mod hash_table;
+pub mod linked_list;
 pub mod queue;
 pub mod red_black_tree;
-pub mod linked_list;
-pub mod binary_search_truee;
+pub mod stack;
