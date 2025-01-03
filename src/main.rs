@@ -3,16 +3,19 @@ use algorithm::{
     divide_and_conquer::matrix_multiply,
     graph_algorithm::breadth_first_search,
     lotto,
-    sort::{bubble, bucket, counting, heap, insertion, merge, select},
+    sort::{self, bubble, bucket, counting, heap, insertion, merge, select},
     utils::horner,
 };
 fn main() {
     /*자료구조 */
     // data_structure::linked_list::example();
     // data_structure::stack::example();
-    data_structure::queue::example();
+    // data_structure::queue::example();
     // insertion::example();
 
+    /*sort */
+
+    sort::bubble::example();
     // matrix_multiply::example();
     // select::example();
     // merge::example();

@@ -7,7 +7,7 @@ struct HashTable<T> {
 }
 struct Node<T> {
     key: T,
-    val: T,s
+    val: T,
 }
 
 impl<T> HashTable<T> {

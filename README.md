@@ -40,6 +40,10 @@
 - Key:정렬할 숫자
 - 부속데이터:숫자가 다른 데이터와 연관된 키인 경우 이를 부속데이터(satellite data)
 - 키와 부속데이터가 함꼐 하나의 record생성
+
+#### 1.Bubble Sort
+- O(n^2)
+  
 #### List 
 - [삽입정렬](https://github.com/kyunghyunHan/algorithm_/blob/main/src/sort/insertion.rs)
 - [병합정렬](https://github.com/kyunghyunHan/algorithm_/blob/main/src/sort/merge.rs)
