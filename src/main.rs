@@ -1,5 +1,5 @@
 use algorithm::{
-    data_structure,
+    conding_test, data_structure,
     divide_and_conquer::matrix_multiply,
     graph_algorithm::breadth_first_search,
     lotto,
@@ -15,7 +15,7 @@ fn main() {
 
     /*sort */
 
-    sort::bubble::example();
+    // sort::bubble::example();
     // matrix_multiply::example();
     // select::example();
     // merge::example();
@@ -26,4 +26,7 @@ fn main() {
     // breadth_first_search::example();
     // lotto::default::example();
     // lotto::pension_lottery::example();
+
+    /* coding test */
+    conding_test::books::example();
 }
