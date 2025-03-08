@@ -1,5 +1,7 @@
 use std::io::{stdin, stdout, BufRead, BufReader, BufWriter, Write};
-
+/*완전탐색
+- 가능한 모든 패턴을 조사
+*/
 pub fn main() {
     let mut reader = BufReader::new(stdin().lock());
     let mut writer = BufWriter::new(stdout().lock());
