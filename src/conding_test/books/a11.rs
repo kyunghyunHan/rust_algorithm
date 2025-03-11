@@ -20,6 +20,7 @@ fn search(x: i32, n: i32, a: Vec<i32>) -> i32 {
     }
     -1
 }
+
 fn main() {
     let mut reader = BufReader::new(stdin().lock());
     let mut writer = BufWriter::new(stdout().lock());
