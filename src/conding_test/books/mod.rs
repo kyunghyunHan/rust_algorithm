@@ -9,6 +9,7 @@ pub mod a11;
 pub mod a16;
 pub mod b02;
 pub mod b03;
+pub mod a08;
 pub fn example() {
     a02::main();
 }
