@@ -1,0 +1,7 @@
+fn example(){
+
+}
+
+fn kmp(){
+    
+}

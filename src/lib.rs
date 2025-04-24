@@ -6,3 +6,4 @@ pub mod utils;
 pub mod graph_algorithm;
 pub mod lotto;
 pub mod conding_test;
+pub mod string;

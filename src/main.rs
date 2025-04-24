@@ -27,6 +27,10 @@ fn main() {
     // lotto::default::example();
     // lotto::pension_lottery::example();
 
+    /*String */
+
+    
+
     /* coding test */
     conding_test::books::example();
 }
