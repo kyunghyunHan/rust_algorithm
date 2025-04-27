@@ -1,5 +1,9 @@
 # Algorithm
-
+<details>
+<summary>
+완전탐색
+</summary>
+</details>
 <details>
 <summary>
 String
