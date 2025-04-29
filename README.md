@@ -10,6 +10,7 @@
 
 ## Algorithm
 - Math
+- - [Factorial](https://github.com/kyunghyunHan/rust_algorithm/blob/main/src/algorithms/math/factorial/factorial.md)
 - Sort
 - - [Bubble Sort](https://github.com/kyunghyunHan/rust_algorithm/blob/main/src/algorithms/sort/bubble/bubble_sort.md)
 - Graph
