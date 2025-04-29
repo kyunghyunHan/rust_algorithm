@@ -9,5 +9,7 @@
 - [Linked List](https://github.com/kyunghyunHan/rust_algorithm/blob/main/src/data_structure/linked_list/linked_list.md)
 
 ## Algorithm
-
-
+- Math
+- Sort
+- - [Bubble Sort]()
+- Graph
