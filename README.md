@@ -11,5 +11,5 @@
 ## Algorithm
 - Math
 - Sort
-- - [Bubble Sort]()
+- - [Bubble Sort](https://github.com/kyunghyunHan/rust_algorithm/blob/main/src/algorithms/sort/bubble/bubble_sort.md)
 - Graph
