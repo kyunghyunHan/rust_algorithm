@@ -1,10 +1,6 @@
 use algorithm::{
-    conding_test, data_structure,
-    divide_and_conquer::matrix_multiply,
-    graph_algorithm::breadth_first_search,
-    lotto,
-    sort::{self, bubble, bucket, counting, heap, insertion, merge, select},
-    utils::horner,
+    conding_test, data_structure, divide_and_conquer::matrix_multiply,
+    graph_algorithm::breadth_first_search, lotto, utils::horner,
 };
 fn main() {
     /*자료구조 */

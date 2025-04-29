@@ -1,9 +1,9 @@
-pub mod sort;
+pub mod algorithms;
+pub mod conding_test;
 pub mod data_structure;
-pub mod dynamic_programming;
 pub mod divide_and_conquer;
-pub mod utils;
+pub mod dynamic_programming;
 pub mod graph_algorithm;
 pub mod lotto;
-pub mod conding_test;
 pub mod string;
+pub mod utils;
