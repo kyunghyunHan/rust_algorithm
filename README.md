@@ -6,7 +6,7 @@
 
 ## Data Structures
 
-- [Linked List]()
+- [Linked List](https://github.com/kyunghyunHan/rust_algorithm/blob/main/src/data_structure/linked_list/linked_list.md)
 
 ## Algorithm
 
