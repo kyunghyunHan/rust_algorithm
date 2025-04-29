@@ -1,16 +1,13 @@
-# Algorithm
-<details>
-<summary>
-완전탐색
-</summary>
-</details>
-<details>
-<summary>
-String
-</summary>
+# Rust Algorithms and Data Structures
 
 
-## KMP Algorithm
-- 패턴 내의 문자들의 관계를 이용하여 매칭시 중복된 비교를 줄이며 패턴을 찾는 방법
+>This repository contains examples of various algorithms and data structures implemented in Rust.
 
-</details>
+
+## Data Structures
+
+- [Linked List]()
+
+## Algorithm
+
+
