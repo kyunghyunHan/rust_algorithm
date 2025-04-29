@@ -5,9 +5,11 @@
 
 
 ## Data Structures
-
+- [Vector]()
 - [Linked List](https://github.com/kyunghyunHan/rust_algorithm/blob/main/src/data_structure/linked_list/linked_list.md)
-
+- [Stack]()
+- [Queue]()
+- [Hash Table]()
 ## Algorithm
 - Math
 - - [Factorial](https://github.com/kyunghyunHan/rust_algorithm/blob/main/src/algorithms/math/factorial/factorial.md)
@@ -19,3 +21,11 @@
 - - [fibonacci]()
 - - [Matrix Chain Multiplication]()
 - - [Longest Common Subsequence]()
+
+- Recursion
+- Design Patterns
+- Cash
+
+
+## Coding Test
+- [LeetCode]()
