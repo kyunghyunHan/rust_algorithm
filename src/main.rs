@@ -1,7 +1,3 @@
-use algorithm::{
-    conding_test, data_structure, divide_and_conquer::matrix_multiply,
-    graph_algorithm::breadth_first_search, lotto, utils::horner,
-};
 fn main() {
     algorithm::algorithms::math::factorial::example();
 
