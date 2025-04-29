@@ -2,7 +2,6 @@ pub mod algorithms;
 pub mod conding_test;
 pub mod data_structure;
 pub mod divide_and_conquer;
-pub mod dynamic_programming;
 pub mod graph_algorithm;
 pub mod lotto;
 pub mod string;

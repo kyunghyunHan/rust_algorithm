@@ -13,3 +13,7 @@
 - Sort
 - - [Bubble Sort](https://github.com/kyunghyunHan/rust_algorithm/blob/main/src/algorithms/sort/bubble/bubble_sort.md)
 - Graph
+
+- Dynamic Programming
+- - [Matrix Chain Multiplication]()
+- - [Longest Common Subsequence]()
