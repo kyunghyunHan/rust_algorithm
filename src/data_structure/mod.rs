@@ -5,4 +5,6 @@ pub mod linked_list;
 pub mod queue;
 pub mod red_black_tree;
 pub mod stack;
+pub mod tree;
+pub mod trie;
 pub mod vector;
