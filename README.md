@@ -20,16 +20,18 @@
 - String
 - Search
 - - [Binary Search]()
-- - [Linear Search](https://github.com/kyunghyunHan/rust_algorithm/blob/main/src/algorithms/search/linear_search/lenear_search.md) and sequential search
+- - [Linear Search](https://g ithub.com/kyunghyunHan/rust_algorithm/blob/main/src/algorithms/search/linear_search/lenear_search.md) and sequential search
 - Sort
 - - [Bubble Sort](https://github.com/kyunghyunHan/rust_algorithm/blob/main/src/algorithms/sort/bubble/bubble_sort.md)
 - Graph
-
+## Algorithm Method
 - Dynamic Programming
 - - [fibonacci]()
 - - [Matrix Chain Multiplication]()
 - - [Longest Common Subsequence]()
-
+- Greedy 
+- - [Coin Change](./src/algorithms/greedy/coin_change/mod.rs)
+- Divide And Conquer
 - Recursion
 - Design Patterns
 - Cash

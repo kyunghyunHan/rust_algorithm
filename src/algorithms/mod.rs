@@ -1,6 +1,7 @@
 pub mod divide_and_conquer;
 pub mod dynamic_programming;
 pub mod graph;
+pub mod greedy;
 pub mod linked_list;
 pub mod math;
 pub mod search;
