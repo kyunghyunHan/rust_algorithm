@@ -5,10 +5,14 @@
 
 
 ## Data Structures
-- [Vector]()
+- [Vector](https://github.com/kyunghyunHan/rust_algorithm/blob/main/src/data_structure/vector/vector.md)
 - [Linked List](https://github.com/kyunghyunHan/rust_algorithm/blob/main/src/data_structure/linked_list/linked_list.md)
-- [Stack]()
-- [Queue]()
+- [Stack](https://github.com/kyunghyunHan/rust_algorithm/blob/main/src/data_structure/stack/stack.md)
+- [Queue](https://github.com/kyunghyunHan/rust_algorithm/blob/main/src/data_structure/queue/queue.md)
+- [Trie](https://github.com/kyunghyunHan/rust_algorithm/blob/main/src/data_structure/trie/trie.md)
+- [Tree](https://github.com/kyunghyunHan/rust_algorithm/blob/main/src/data_structure/tree/tree.md)
+- - [Bineary Search Tree]()
+- - [AVL Tree]()
 - [Hash Table]()
 ## Algorithm
 - Math
@@ -28,4 +32,4 @@
 
 
 ## Coding Test
-- [LeetCode]()
+- [LeetCode](https://leetcode.com/)
