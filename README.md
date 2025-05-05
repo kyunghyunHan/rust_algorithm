@@ -17,6 +17,7 @@
 - [Hash Table]()
 ## Algorithm
 - Math
+- - [Fast Powering]()
 - - [Factorial](https://github.com/kyunghyunHan/rust_algorithm/blob/main/src/algorithms/math/factorial/factorial.md)
 - String
 - Search
@@ -42,4 +43,4 @@
 - [LeetCode](https://leetcode.com/)
 
 ## Interview
-- 
+
