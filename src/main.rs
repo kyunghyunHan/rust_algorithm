@@ -4,5 +4,6 @@ fn main() {
     /*Data structure */
 
     /*Algorithm */
-    algorithms::dynamic_programming::fibonacci::example();
+    // algorithms::dynamic_programming::fibonacci::example();
+    algorithms::math::euclidean::example();
 }

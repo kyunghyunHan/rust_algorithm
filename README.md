@@ -17,6 +17,7 @@
 - [Hash Table]()
 ## Algorithm
 - Math
+- - [Euclidean algorithm]()
 - - [Fast Powering]()
 - - [Factorial](https://github.com/kyunghyunHan/rust_algorithm/blob/main/src/algorithms/math/factorial/factorial.md)
 - String
