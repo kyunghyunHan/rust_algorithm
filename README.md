@@ -5,6 +5,10 @@
 >This repository contains examples of various algorithms and data structures implemented in Rust.
 
 
+## Asymptotic Performance
+
+- O(1) < O(log n) < O(n) < O(n log n) < O(n²) < O(n³) < O(2ⁿ)
+
 ## Data Structures
 - [Vector](https://github.com/kyunghyunHan/rust_algorithm/blob/main/src/data_structure/vector/vector.md)
 - [Linked List](https://github.com/kyunghyunHan/rust_algorithm/blob/main/src/data_structure/linked_list/linked_list.md)
@@ -26,6 +30,7 @@
 - - [Linear Search](https://g ithub.com/kyunghyunHan/rust_algorithm/blob/main/src/algorithms/search/linear_search/lenear_search.md) and sequential search
 - Sort
 - - [Bubble Sort](https://github.com/kyunghyunHan/rust_algorithm/blob/main/src/algorithms/sort/bubble/bubble_sort.md)
+- - [Merge Sort](https://github.com/kyunghyunHan/rust_algorithm/blob/main/src/algorithms/sort/merge/merge_sort.md)
 - Graph
 ## Algorithm Method
 - Dynamic Programming
