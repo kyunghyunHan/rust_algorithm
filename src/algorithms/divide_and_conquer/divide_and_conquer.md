@@ -6,4 +6,9 @@
 - 입력의 크기는 동일
 - 분할된 문제는 서로 독립적
 - 순한적인 분할 및 결과 의 결합이 가능
-- 퀵정렬,합병정렬,이진탐색
+
+# Problems
+
+- [Quick Sort](../sort/quick/quick.md)
+- [Merge Sort](../sort/merge/merge.md)
+- [Binary Search](../search/binary_search/binary_search.md)

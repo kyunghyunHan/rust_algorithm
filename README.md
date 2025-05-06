@@ -44,7 +44,9 @@
 - - [Longest Common Subsequence]()
 - [Greedy](./src/algorithms/greedy/greedy.md) 
 - - [Coin Change](./src/algorithms/greedy/coin_change/mod.rs)
-- - [Knapsack](./src/algorithms/greedy/knapsack/knapsack.md)
+- - [Knapsack](./src/algorithms/greedy/knapsack/knapsack.md) not 0/1 problem
+- [NP-C]() NP-complete problem
+- - [Knapsack](./src/algorithms/greedy/knapsack/knapsack.md) For the 0/1 dividend problem
 - Recursion
 - Design Patterns
 - Cash

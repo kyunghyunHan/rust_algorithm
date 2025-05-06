@@ -5,5 +5,6 @@ fn main() {
 
     /*Algorithm */
     // algorithms::dynamic_programming::fibonacci::example();
-    algorithms::math::euclidean::example();
+    // algorithms::math::euclidean::example();
+    algorithms::greedy::knapsack::example();
 }
