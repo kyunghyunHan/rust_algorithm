@@ -33,13 +33,13 @@
 - - [Merge Sort](https://github.com/kyunghyunHan/rust_algorithm/blob/main/src/algorithms/sort/merge/merge_sort.md)
 - Graph
 ## Algorithm Method
-- Dynamic Programming
+- [Divide And Conquer](./src/algorithms/divide_and_conquer/divide_and_conquer.md)
+- [Dynamic Programming](./src/algorithms/dynamic_programming/dynamic_programming.md)
 - - [fibonacci]()
 - - [Matrix Chain Multiplication]()
 - - [Longest Common Subsequence]()
-- Greedy 
+- [Greedy](./src/algorithms/greedy/greedy.md) 
 - - [Coin Change](./src/algorithms/greedy/coin_change/mod.rs)
-- Divide And Conquer
 - Recursion
 - Design Patterns
 - Cash
