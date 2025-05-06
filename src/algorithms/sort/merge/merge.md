@@ -1,9 +1,8 @@
 ## Merge Sort
 
-## Recurrence Relation
-
-- T(n) = 2T(n/2) + Θ(n), n ≥ 2
-- T(1) = Θ(1)
+#### )Recurrence Equation
+- T(n) = ⎰ Θ(1),                  n = 1 ⎱
+         ⎱ T(n) = 2T(n/2) + Θ(n), n ≥ 2 ⎰
+#### )Closed Type
 
 - T(n) = Θ(n log n)
-
