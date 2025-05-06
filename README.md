@@ -26,20 +26,25 @@
 - - [Factorial](https://github.com/kyunghyunHan/rust_algorithm/blob/main/src/algorithms/math/factorial/factorial.md)
 - String
 - Search
-- - [Binary Search]()
-- - [Linear Search](https://g ithub.com/kyunghyunHan/rust_algorithm/blob/main/src/algorithms/search/linear_search/lenear_search.md) and sequential search
+- - [Binary Search](./src/algorithms/search/binary_search/binary_search.md)
+- - [Linear Search](https://github.com/kyunghyunHan/rust_algorithm/blob/main/src/algorithms/search/linear_search/lenear_search.md) and sequential search
 - Sort
+- - [Selection Sort](./src/algorithms/sort/select/select.md)
 - - [Bubble Sort](https://github.com/kyunghyunHan/rust_algorithm/blob/main/src/algorithms/sort/bubble/bubble_sort.md)
+- - [Insertion Sort](./src/algorithms/sort/insertion/insertion.md)
 - - [Merge Sort](https://github.com/kyunghyunHan/rust_algorithm/blob/main/src/algorithms/sort/merge/merge_sort.md)
+- - [Quick Sort](./src/algorithms/sort/quick/quick.md)
+
 - Graph
 ## Algorithm Method
 - [Divide And Conquer](./src/algorithms/divide_and_conquer/divide_and_conquer.md)
 - [Dynamic Programming](./src/algorithms/dynamic_programming/dynamic_programming.md)
-- - [fibonacci]()
+- - [fibonacci](./src/algorithms/math/factorial/factorial.md)
 - - [Matrix Chain Multiplication]()
 - - [Longest Common Subsequence]()
 - [Greedy](./src/algorithms/greedy/greedy.md) 
 - - [Coin Change](./src/algorithms/greedy/coin_change/mod.rs)
+- - [Knapsack](./src/algorithms/greedy/knapsack/knapsack.md)
 - Recursion
 - Design Patterns
 - Cash

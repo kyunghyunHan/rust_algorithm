@@ -5,4 +5,4 @@ pub mod heap;
 pub mod insertion;
 pub mod merge;
 pub mod quick;
-pub mod select;
+pub mod selection;
