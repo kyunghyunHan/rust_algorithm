@@ -8,4 +8,6 @@ fn main() {
     // algorithms::math::euclidean::example();
     // algorithms::greedy::knapsack::example();
     algorithms::sort::quick::example();
+
+    algorithms::backtracking::knights_tour::example();
 }
