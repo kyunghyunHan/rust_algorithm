@@ -1,6 +1,6 @@
 pub fn example() {
     // 8x8 체스판 크기
-    let n = 8;
+    let n = 5;
 
     // 체스판을 -1로 초기화 (방문하지 않은 상태)
     let mut board = vec![vec![-1; n]; n];
