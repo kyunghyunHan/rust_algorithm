@@ -1,5 +1,10 @@
+pub mod augmenting_path;
+pub mod bellman_ford;
 pub mod dijkstra;
 pub mod eulerian;
 pub mod floyd;
+pub mod ford_fulkerson;
 pub mod kruskal;
+pub mod minimum_spanning_tree;
 pub mod prim;
+pub mod shortest_path;

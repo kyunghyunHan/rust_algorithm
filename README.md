@@ -3,6 +3,12 @@
 <img src="./assets/kka.jpeg" style="width: 200px;" />
 
 >This repository contains examples of various algorithms and data structures implemented in Rust.
+## Complexity Analysis
+
+## Space complexity
+- Memory usage = static space + dynamic space
+## Time complexity
+-  time taken from algorithm start to completion
 
 
 ## Asymptotic Performance
@@ -24,11 +30,11 @@
 - - [Euclidean algorithm]()
 - - [Fast Powering]()
 - - [Factorial](https://github.com/kyunghyunHan/rust_algorithm/blob/main/src/algorithms/math/factorial/factorial.md)
-- String
-- Search
+- [String](./src/algorithms/string/string.md)
+- [Search](./src/algorithms/search/search.md)
 - - [Binary Search](./src/algorithms/search/binary_search/binary_search.md)
 - - [Linear Search](https://github.com/kyunghyunHan/rust_algorithm/blob/main/src/algorithms/search/linear_search/lenear_search.md) and sequential search
-- Sort
+- [Sort](./src/algorithms/sort/sort.md)
 - - [Selection Sort](./src/algorithms/sort/select/select.md)
 - - [Bubble Sort](https://github.com/kyunghyunHan/rust_algorithm/blob/main/src/algorithms/sort/bubble/bubble_sort.md)
 - - [Insertion Sort](./src/algorithms/sort/insertion/insertion.md)
@@ -36,6 +42,7 @@
 - - [Quick Sort](./src/algorithms/sort/quick/quick.md)
 
 - [Graph](./src/algorithms/graph/graph.md)
+- - [Eulerian](./src/algorithms/graph/eulerian/eulerian.md)
 - - [Knight's Tour](./src/algorithms/backtracking/knights_tour/knights_tour.md)
 ## Algorithm Method
 - [Divide And Conquer](./src/algorithms/divide_and_conquer/divide_and_conquer.md)
@@ -46,7 +53,7 @@
 - [Greedy](./src/algorithms/greedy/greedy.md) 
 - - [Coin Change](./src/algorithms/greedy/coin_change/mod.rs)
 - - [Knapsack](./src/algorithms/greedy/knapsack/knapsack.md) not 0/1 problem
-- [NP-C]() NP-complete problem
+- [NP-C](./src/algorithms/np_complete/np_complete.md) NP-complete problem
 - - [Knapsack](./src/algorithms/greedy/knapsack/knapsack.md) For the 0/1 dividend problem
 - Recursion
 - Design Patterns

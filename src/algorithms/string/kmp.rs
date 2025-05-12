@@ -1,7 +1,0 @@
-fn example(){
-
-}
-
-fn kmp(){
-    
-}
