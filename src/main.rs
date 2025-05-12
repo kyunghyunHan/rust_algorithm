@@ -11,5 +11,7 @@ fn main() {
 
     // algorithms::backtracking::knights_tour::example();
 
-    algorithms::backtracking::traveling_salesman_problem::example();
+    // algorithms::backtracking::traveling_salesman_problem::example();
+
+    algorithms::graph::eulerian::path::example();
 }
