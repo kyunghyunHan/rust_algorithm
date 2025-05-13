@@ -13,5 +13,5 @@ fn main() {
 
     // algorithms::backtracking::traveling_salesman_problem::example();
 
-    algorithms::graph::eulerian::path::example();
+    algorithms::math::sieve_of_eratosthenes::example();
 }

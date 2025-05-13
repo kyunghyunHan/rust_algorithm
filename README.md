@@ -27,6 +27,7 @@
 - [Hash Table]()
 ## Algorithm
 - Math
+- - [Sieve Of Eratosthenes]()
 - - [Euclidean algorithm]()
 - - [Fast Powering]()
 - - [Factorial](https://github.com/kyunghyunHan/rust_algorithm/blob/main/src/algorithms/math/factorial/factorial.md)
@@ -59,10 +60,12 @@
 - Design Patterns
 - Cash
 - [Reinforcement Learning](https://github.com/kyunghyunHan/reinforcement_learning)
-
+- AI
 
 ## Coding Test
 - [LeetCode](https://leetcode.com/)
 
 ## Interview
+
+## [Nasa Power of 10]()
 
