@@ -23,6 +23,7 @@
 - [Trie](https://github.com/kyunghyunHan/rust_algorithm/blob/main/src/data_structure/trie/trie.md)
 - [Tree](https://github.com/kyunghyunHan/rust_algorithm/blob/main/src/data_structure/tree/tree.md)
 - - [Bineary Search Tree]()
+- - [Binary Tree](./src/data_structure/tree/binary_tree/binary_tree.md)
 - - [AVL Tree]()
 - [Hash Table]()
 ## Algorithm
