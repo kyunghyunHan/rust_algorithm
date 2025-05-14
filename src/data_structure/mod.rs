@@ -1,3 +1,4 @@
+pub mod array;
 pub mod binary_search_truee;
 pub mod graph;
 pub mod hash_table;
