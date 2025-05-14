@@ -66,6 +66,10 @@
 - - 
 - - 
 
+## Coders's Cup
+
+- [Maxinum Score From Removing Stones](./src/conding_test/coders_cup/maxinum_score_from_removing_stones/maxinum_score_from_removing_stones.md)
+
 ## Coding Test
 - [LeetCode](https://leetcode.com/)
 
