@@ -45,4 +45,4 @@ Returns a string representation of the list (for debugging purposes).
 
 
 
-## [code](https://github.com/kyunghyunHan/rust_algorithm/blob/main/src/data_structure/linked_list/mod.rs)
+## [code](./mod.rs)

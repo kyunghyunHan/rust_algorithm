@@ -19,6 +19,13 @@ impl<T> Stack<T> {
     pub fn new() -> Self {
         Stack { top: None }
     }
+    /*Push:adds key to collection */
+    fn push(&mut self, item: T) {
+        let mut t = Node::new(item);
+        t.next = self.top.take(); //소유권 가져옴
+        self.top = Some(t);
+    }
+    fn top() {}
     fn pop(&mut self) -> Option<T> {
         match self.top.take() {
             Some(node) => {
@@ -28,12 +35,6 @@ impl<T> Stack<T> {
             }
             None => None,
         }
-    }
-
-    fn push(&mut self, item: T) {
-        let mut t = Node::new(item);
-        t.next = self.top.take(); //소유권 가져옴
-        self.top = Some(t);
     }
 
     fn peek(&self) -> Option<&T> {
@@ -62,6 +63,4 @@ pub fn example() {
     println!("{:?}", s.is_empty());
     println!("{:?}", s.pop());
     println!("{:?}", s.is_empty());
-
-
 }

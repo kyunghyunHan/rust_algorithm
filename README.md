@@ -16,6 +16,7 @@
 - O(1) < O(log n) < O(n) < O(n log n) < O(n²) < O(n³) < O(2ⁿ)
 
 ## Data Structures
+- [Array]()
 - [Vector](https://github.com/kyunghyunHan/rust_algorithm/blob/main/src/data_structure/vector/vector.md)
 - [Linked List](https://github.com/kyunghyunHan/rust_algorithm/blob/main/src/data_structure/linked_list/linked_list.md)
 - [Stack](https://github.com/kyunghyunHan/rust_algorithm/blob/main/src/data_structure/stack/stack.md)

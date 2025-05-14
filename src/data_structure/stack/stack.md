@@ -1,5 +1,10 @@
 # Stack
 
+
+
+- Push : adds key to collection
+- top : returns most recently - added key
+- pop() : removes and returns most recently-added key
 스택
 
 - 스택과 큐는 Delete연산에 의해 집합에서 삭제되는 원소가 미리 정해져있는 동적집합
