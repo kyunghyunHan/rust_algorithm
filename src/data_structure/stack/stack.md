@@ -2,10 +2,10 @@
 
 
 
-- Push : adds key to collection
-- top : returns most recently - added key
+- Push() : adds key to collection
+- top() : returns most recently - added key
 - pop() : removes and returns most recently-added key
-스택
+- empty() : removes and returns most recently-added key
 
 - 스택과 큐는 Delete연산에 의해 집합에서 삭제되는 원소가 미리 정해져있는 동적집합
 - 스택에서는 가장 최근에 삽입된 원소가 먼저 삭제
@@ -20,3 +20,7 @@
 - S.top=0일떄 스택은 원소를 포함하지 않고 비었디(empty)라고한다
 - 빈 스택에서 원소를 추출하려는 경우 스택부족(underflow)라고한다
 - s.top이 원소의개수 S.size를 초과하면 overflow라고한다
+
+## Study
+
+- [3minute](https://www.youtube.com/watch?v=KcT3aVgrrpU)

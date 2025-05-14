@@ -16,6 +16,7 @@ impl<T: Display> LinkedListNode<T> {
 pub struct LinkedList<T> {
     head: Option<Box<LinkedListNode<T>>>,
     tail: Option<*mut LinkedListNode<T>>,
+    length: usize,
 }
 
 impl<T: PartialEq + Display + Clone> LinkedList<T> {
@@ -24,9 +25,18 @@ impl<T: PartialEq + Display + Clone> LinkedList<T> {
         LinkedList {
             head: None,
             tail: None,
+            length: 0,
         }
     }
-    //리스트 앞에 값을 추가
+
+    pub fn size(&self) -> usize {
+        self.length
+    }
+
+    pub fn empty(&self) -> bool {
+        self.head.is_none()
+    }
+    //can use insert above at index0
     pub fn prepend(&mut self, value: T) {
         let mut new_node = Box::new(LinkedListNode {
             value,
@@ -39,6 +49,7 @@ impl<T: PartialEq + Display + Clone> LinkedList<T> {
         }
         self.head = Some(new_node)
     }
+
     //리스트 끝에 값을 추가
     pub fn append(&mut self, value: T) {
         let mut new_node = Box::new(LinkedListNode { value, next: None });
