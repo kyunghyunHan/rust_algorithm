@@ -1,4 +1,4 @@
-use algorithm::{algorithms, data_structure};
+use algorithm::{algorithms, conding_test, data_structure};
 
 fn main() {
     /*Data structure */
@@ -13,5 +13,7 @@ fn main() {
 
     // algorithms::backtracking::traveling_salesman_problem::example();
 
-    algorithms::math::sieve_of_eratosthenes::example();
+    // algorithms::math::sieve_of_eratosthenes::example();
+
+    conding_test::coders_cup::combining_lists::example();
 }
