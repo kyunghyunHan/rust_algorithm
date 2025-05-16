@@ -69,7 +69,7 @@
 ## 🏆Coders's Cup
 
 - [Maxinum Score From Removing Stones](./src/conding_test/coders_cup/maxinum_score_from_removing_stones/maxinum_score_from_removing_stones.md)
-
+- [Palindrome Checking](./src/conding_test/coders_cup/palindrome_checking/palindrome_checking.md)
 ## Coding Test
 - [LeetCode](https://leetcode.com/)
 

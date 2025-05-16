@@ -15,5 +15,5 @@ fn main() {
 
     // algorithms::math::sieve_of_eratosthenes::example();
 
-    conding_test::coders_cup::combining_lists::example();
+    conding_test::coders_cup::palindrome_checking::example();
 }
