@@ -10,4 +10,4 @@
 - An Eulerian cycle is a path in a graph that visits every edge exactly once and starts and ends at the same vertex
 - conditions (for an undirected graph):
 - All vertices must have even degree.
-- in other words, there must be np vertices with ad odd degree
+- in other words, there must be np vertices with an odd degree

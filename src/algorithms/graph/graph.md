@@ -31,3 +31,7 @@
 강연결 성분(strongly connected component)
 - 주어진 방향 그래프에서 임의의 두 정점 사이에 양방향의 경로가 존재하는 최대 부분 그래프
 
+
+### Degree
+- The gegree of a vertex is the number of edges connected to that vertex.
+- In other words, it represents how many edges are incident to a given vertex in the graph.
