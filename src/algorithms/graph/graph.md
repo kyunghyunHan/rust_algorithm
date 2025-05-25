@@ -35,3 +35,4 @@
 ### Degree
 - The gegree of a vertex is the number of edges connected to that vertex.
 - In other words, it represents how many edges are incident to a given vertex in the graph.
+
