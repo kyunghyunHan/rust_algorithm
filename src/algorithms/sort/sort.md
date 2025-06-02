@@ -1,8 +1,12 @@
 # Sort
 
+- 중진 데이터를 값의 크기 순서에 따라 재배치 하는것
 
 ## Internal Sorting
 ✓ Method where all data can be stored in main memory and then sorted
+## stable sort
+## in-place sort
+## comparison based sort
 
 #### 1)Comparison-Based Algorithms
 
