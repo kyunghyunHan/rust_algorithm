@@ -8,6 +8,20 @@
 ## Space complexity
 - Memory usage = static space + dynamic space
 ## Time complexity
+- 
+```rust
+// T (n)  = 3n + 5 => O(n)
+fn sum_average(a : Vec<i32> ,n:i32){
+    let mut sum = 0;//1
+    let mut i = 0;//1
+    while i < n {//n+1
+        sum  = sum + a[i];//n
+        i = i + 1;//n
+    }
+    let average = sum / n ;//1
+    println!("{} {}",sum,average); //1
+}
+```
 -  time taken from algorithm start to completion
 
 
