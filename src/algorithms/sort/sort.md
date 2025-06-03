@@ -30,7 +30,7 @@ All data is stored in auxiliary memory first,
 Then only some portions of data are selectively brought into main memory for sorting
 
 ## Selection sort
-
+- 입력 배열에서 가장 작은 값 부터 순서대로 선택해서 나열하는 방식
 ## Bubble Sort
 
 ## Insertion Sort
