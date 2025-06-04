@@ -15,5 +15,11 @@ fn main() {
 
     // algorithms::math::sieve_of_eratosthenes::example();
 
-    conding_test::coders_cup::sorting::example();
+    // conding_test::coders_cup::sorting::example();
+
+    // algorithms::sort::shell::example();
+    // algorithms::sort::bubble::example();
+    /* Search */
+
+    algorithms::search::linear_search::example();
 }
