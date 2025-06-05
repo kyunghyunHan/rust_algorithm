@@ -2,13 +2,20 @@
 
 ## 연결할 객체를 나타내는 정점(vertex)의 집합과 정점을 연결하는 간선(edge)의 집합으로 구성된 비선형 자료구조
 
-그래프(graph)
-- 연결할 객체를 나타내는 정점(vertex)의 집합과 정점을 연결하는 간선(edge)의 집합으로 구성된 비선형 자료구조
+## G=(V,E)
+- V:Vertex의 집합
+- E:edge의 집합
 
-인접 행렬(adjacency matrix)
+## Tree
+
+- 1. 무방향
+- 2. 모든 vertex connected
+- 3. 사이클 x
+
+## 인접 행렬(adjacency matrix)
 - 정점의 집합 V={1,2,…,n}인 그래프 G에 대해서 2차원 배열 A=(n×n)으로 표현하는 방법
 
-인접 리스트(adjacency list)
+## 인접 리스트(adjacency list)
 - 정점의 집합 V={1,2,…,n}인 그래프 G에 대해서 n개의 연결 리스트로 표현하는 방법으로, 각 연결 리스트는 임의의 정점 u에 대해서 인접한 모든 정점을 표현함
 
 그래프 순회(graph traversal)
