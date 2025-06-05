@@ -40,3 +40,7 @@ Then only some portions of data are selectively brought into main memory for sor
 ## [Insertion Sort](./insertion/insertion.md)
 
 ## [Shell Sort](./shell/shell.md)
+
+## [Quick Sort](./quick/quick.md)
+
+## [Merge Sort](./merge/merge.md)
