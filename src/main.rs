@@ -19,7 +19,13 @@ fn main() {
 
     // algorithms::sort::shell::example();
     // algorithms::sort::bubble::example();
+
+    /*Sort */
+    // algorithms::sort::bubble::example();
+    // algorithms::sort::insertion::example();
+    algorithms::sort::shell::example();
+
     /* Search */
 
-    algorithms::search::linear_search::example();
+    // algorithms::search::linear_search::example();
 }

@@ -1,33 +1,13 @@
-// fn bubble_sort(arr: &mut Vec<usize>, n: usize) {
-//     for i in 1..n {
-//         for j in (i..n).rev() {
-//             if arr[j] < arr[j - 1] {
-//                 arr.swap(j, j - 1);
-//             }
-//         }
-//     }
-// }
-
-// pub fn example() {
-//     let mut arr = vec![3, 5, 4, 2, 1];
-//     let n = arr.len();
-//     bubble_sort(&mut arr, n);
-//     println!("{:?}", arr);
-// }
-
-fn bubble_sort(arr: &mut Vec<i32>) {
-    let len = arr.len();
-    advanced_bubble_sort(arr, (len as i32) - 1);
-}
-
-fn bubble_sort_recursive(arr: &mut [i32], last: i32) {
-    if last > 0 {
-        for i in 1..=last {
-            if arr[i as usize - 1] > arr[i as usize] {
-                arr.swap(i as usize - 1, i as usize);
+fn bubble_sort(arr: &mut [i32], n: usize) {
+    for i in 0..n - 1 {
+        //(N-1)번 반복
+        for j in 0..n - 1 {
+            //왼쪾에서 오른쪽으로 진행하는 경우
+            if arr[j] > arr[j + 1] {
+                //왼쪾 데이터 >오른쪽 데이터 이면
+                arr.swap(j, j + 1);
             }
         }
-        bubble_sort_recursive(arr, last - 1);
     }
 }
 fn advanced_bubble_sort(arr: &mut [i32], n: i32) {
@@ -50,9 +30,11 @@ fn advanced_bubble_sort(arr: &mut [i32], n: i32) {
 pub fn example() {
     // 예시 사용법
     let mut numbers = vec![50, 40, 30, 20, 10];
-    bubble_sort(&mut numbers);
-    println!("정렬된 배열: {:?}", numbers);
     let len = numbers.len();
+
+    bubble_sort(&mut numbers, len);
+    println!("정렬된 배열: {:?}", numbers);
+
     advanced_bubble_sort(&mut numbers, len as i32);
     println!("정렬된 배열: {:?}", numbers);
 }

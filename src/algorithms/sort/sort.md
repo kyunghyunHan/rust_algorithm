@@ -39,4 +39,4 @@ Then only some portions of data are selectively brought into main memory for sor
 
 ## [Insertion Sort](./insertion/insertion.md)
 
-## [Shell Sort]()
+## [Shell Sort](./shell/shell.md)

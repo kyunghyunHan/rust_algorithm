@@ -4,7 +4,7 @@ insetion sort
 - 두번쨰 자료부터 시작하여 그앞의 자료들과 비교하여 삽입할 위치를 찾아 삽입
 */
 
-fn sort(arr: &mut Vec<i32>, n: usize) {
+fn insertion_sort(arr: &mut [i32], n: usize) {
     for i in 1..n {
         //n
 
@@ -19,7 +19,6 @@ fn sort(arr: &mut Vec<i32>, n: usize) {
         //비교대상이 음수가 첫번쨰 배열보다 낮으면안대야 하며 비교대상이 키보다 크면
         //내림차순으로 변경할려면 >key => <key 로변경
         while j >= 0 && arr[j as usize] > key {
-
             arr[(j + 1) as usize] = arr[j as usize];
             j -= 1; //왼쪽으로 이동하면서 비교
         }
@@ -30,8 +29,6 @@ fn sort(arr: &mut Vec<i32>, n: usize) {
 pub fn example() {
     let mut arr = vec![5, 2, 9, 1, 5, 6];
     let n = arr.len();
-    sort(&mut arr, n);
+    insertion_sort(&mut arr, n);
     println!("{:?}", arr);
 }
-
-
