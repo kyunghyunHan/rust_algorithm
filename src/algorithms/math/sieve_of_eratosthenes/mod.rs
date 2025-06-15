@@ -1,6 +1,7 @@
 pub fn example() {
     prime_number_sieve()
 }
+fn test () {}
 
 fn prime_number_sieve() {
     let number = 1000000;
