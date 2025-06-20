@@ -39,7 +39,7 @@ fn sum_average(a : Vec<i32> ,n:i32){
 - [Tree](./src/data_structure/tree/tree.md)
 - - [Bineary Search Tree]()
 - - [Binary Tree](./src/data_structure/tree/binary_tree/binary_tree.md)
-- - [AVL Tree]()
+- - [AVL Tree](./src)
 - [Hash Table]()
 ## Algorithm
 - Math
