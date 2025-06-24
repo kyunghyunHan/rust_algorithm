@@ -42,12 +42,13 @@ fn sum_average(a : Vec<i32> ,n:i32){
 - - [AVL Tree](./src)
 - [Hash Table]()
 ## Algorithm
-- Math
+- [Math]()
 - - [Sieve Of Eratosthenes]()
 - - [Euclidean algorithm]()
 - - [Fast Powering]()
 - - [Factorial](./src/algorithms/math/factorial/factorial.md)
 - - [Prime Facotrs](./src/algorithms/math/prime_factors/prime_factors.md)
+- - [Fast Powering]()
 - [String](./src/algorithms/string/string.md)
 - [Search](./src/algorithms/search/search.md)
 - - [Binary Search](./src/algorithms/search/binary_search/binary_search.md)
