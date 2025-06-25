@@ -1,4 +1,4 @@
-# Rust Algorithms and Data Structures
+# 🦀Rust Algorithms and Data Structures
 ## 
 <img src="./assets/kka.jpeg" style="width: 200px;" />
 
