@@ -12,4 +12,7 @@ fn is_power_of_two(num: i32) -> bool {
     }
     return true;
 }
-pub fn example() {}
+pub fn example() {
+    let num = 11;
+    println!("{}",is_power_of_two(num))
+}
