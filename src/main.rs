@@ -1,4 +1,4 @@
-use algorithm::{algorithms::math, conding_test, data_structure};
+use algorithm::{algorithms::math, conding_test, data_structure,algorithms::graph};
 
 fn main() {
     /* Math */
