@@ -45,6 +45,7 @@ A data structure is a particular way of organizing and storing data in a compute
 - - [Binary Tree](./src/data_structure/tree/binary_tree/binary_tree.md)
 - - [AVL Tree](./src)
 - [Hash Table]()
+
 ## Algorithm
 - [Math]()
 - - [Sieve Of Eratosthenes]()

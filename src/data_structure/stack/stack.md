@@ -1,5 +1,14 @@
 # Stack
 
+A stack is a linear data structure that followrs the Last in,Fist Out(LIFO) principle
+
+This means the last item added to the stack is the first one to be removed
+
+Think of a stack of plates:
+
+You add plates to the top, and you also remove plates from the top.
+
+You can't take a plate from the bottom without removing the ones above it.
 
 
 - Push() : adds key to collection
