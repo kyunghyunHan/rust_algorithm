@@ -30,6 +30,10 @@ fn sum_average(a : Vec<i32> ,n:i32){
 - O(1) < O(log n) < O(n) < O(n log n) < O(n²) < O(n³) < O(2ⁿ)
 
 ## Data Structures
+
+A data structure is a particular way of organizing and storing data in a computer so that it can be accessed and modified efficiently.
+
+
 - [Array](./src/data_structure/array/array.md)
 - [Vector](./src/data_structure/vector/vector.md)
 - [Linked List](./src/data_structure/linked_list/linked_list.md)
