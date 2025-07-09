@@ -7,3 +7,4 @@ pub mod matrix_chain_multiplication;
 pub mod prime_factors;
 pub mod sieve_of_eratosthenes;
 pub mod square_root;
+pub mod least_common_multiple;
