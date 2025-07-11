@@ -1,5 +1,3 @@
-pub mod get_bits;
-
-pub fn example(){
-    
-}
+pub mod get_bit;
+pub mod set_bit;
+pub fn example() {}
