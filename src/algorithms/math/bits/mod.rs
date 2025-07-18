@@ -8,4 +8,5 @@ pub mod multiply_two_signed_numbers;
 pub mod set_bit;
 pub mod switch_sign;
 pub mod update_bit;
+pub mod count_set_bits;
 pub fn example() {}
