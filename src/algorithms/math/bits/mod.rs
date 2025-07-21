@@ -6,6 +6,7 @@ pub mod divide_by_two;
 pub mod get_bit;
 pub mod is_even;
 pub mod is_positive;
+pub mod is_power_of_two;
 pub mod multiply_by_two;
 pub mod multiply_two_signed_numbers;
 pub mod set_bit;
