@@ -16,4 +16,18 @@ impl TreeNode {
             right: None,
         }
     }
+    pub fn inorder_traversal(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<i32> {
+        fn helper(node: Option<Rc<RefCell<TreeNode>>>, result: &mut Vec<i32>) {
+            if let Some(n) = node {
+                let n = n.borrow(); // Ref<TreeNode>
+                helper(n.left.clone(), result);
+                result.push(n.val);
+                helper(n.right.clone(), result);
+            }
+        }
+
+        let mut result = vec![];
+        helper(root, &mut result);
+        result
+    }
 }
