@@ -1,19 +1,16 @@
-pub fn is_strobogrammatic(num: String) -> bool {
-    let mut rotated = String::with_capacity(num.len());
-
-    for c in num.chars().rev() {
-        match c {
-            '0' | '1' | '8' => rotated.push(c),
-            '6' => rotated.push('9'),
-            '9' => rotated.push('6'),
-            _ => return false,
+fn solution(mut a: Vec<i32>) -> Vec<i32> {
+    let n = a.len();
+    for i in 1..n {
+        let mut index = i;
+        while index > 0 && a[index] < a[index - 1] {
+            a.swap(index, index - 1);
+            index -= 1;
         }
     }
-
-    rotated == num
+    a
 }
 
-pub fn example() {
-    let input = "69".to_string();
-    println!("{:?}", is_strobogrammatic(input));
+fn example() {
+    let a = vec![9, 2, 3, 1];
+    println!("{:?}", solution(a));
 }

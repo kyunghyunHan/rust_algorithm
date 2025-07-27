@@ -89,9 +89,11 @@ A data structure is a particular way of organizing and storing data in a compute
 - - 
 
 ## 🏆Coders's Cup
-
+- [combining_lists](./src/conding_test/coders_cup/combining_lists/combining_lists.md)
 - [Maxinum Score From Removing Stones](./src/conding_test/coders_cup/maxinum_score_from_removing_stones/maxinum_score_from_removing_stones.md)
 - [Palindrome Checking](./src/conding_test/coders_cup/palindrome_checking/palindrome_checking.md)
+- [Higher or Lower](./src/conding_test/coders_cup/higher_or_lower/higher_or_lower.md)
+- [Sorting]()
 ## Coding Test
 - [LeetCode](https://leetcode.com/)
 
