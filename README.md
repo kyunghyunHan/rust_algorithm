@@ -48,6 +48,7 @@ A data structure is a particular way of organizing and storing data in a compute
 
 ## Algorithm
 - [Math]()
+-  - [Number Base Conversion](./src/algorithms/math/number_base_conversion/README.md)
 - - [Bits]() 
 - - [Sieve Of Eratosthenes]()
 - - [Euclidean algorithm]()

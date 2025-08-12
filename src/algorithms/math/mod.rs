@@ -10,3 +10,4 @@ pub mod pascal_triangle;
 pub mod prime_factors;
 pub mod sieve_of_eratosthenes;
 pub mod square_root;
+pub mod number_base_conversion;
