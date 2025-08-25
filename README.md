@@ -37,6 +37,7 @@ A data structure is a particular way of organizing and storing data in a compute
 - [Array](./src/data_structure/array/array.md)
 - [Vector](./src/data_structure/vector/vector.md)
 - [Linked List](./src/data_structure/linked_list/linked_list.md)
+- [DoublyLinkedList](./src/algorithms/linked_list/)
 - [Stack](./src/data_structure/stack/stack.md)
 - [Queue](./src/data_structure/queue/queue.md)
 - [Trie](./src/data_structure/trie/trie.md)
