@@ -1,40 +1,31 @@
-#  NASA Power of 10 Coding Rules (요약 및 해설)
-1. 코드의 모든 제어 흐름은 명확히 보여야 한다.
+# NASA Power of 10 Coding Rules (Summary & Explanation)
 
-예: goto를 사용하지 말고, 루프와 조건문을 명확하게 사용해야 함.
+1. **All control flow must be explicit and visible.**  
+   Example: Do not use `goto`. Use clear loops and conditionals.  
 
-2. 모든 루프는 유한해야 한다.
+2. **All loops must be finite.**  
+   Infinite loops are forbidden. Every loop must have a clear termination condition.  
 
-무한 루프는 금지. 루프는 반드시 종료 조건이 있어야 함.
+3. **All assignments must be explicit.**  
+   No implicit type conversions or hidden pointer arithmetic. Assign values directly and clearly.  
 
-3. 모든 할당은 명시적으로 해야 한다.
+4. **All data must be explicitly initialized.**  
+   Every declared variable must be given an initial value.  
 
-암시적 형변환이나 포인터 연산 없이, 변수에 명확히 값을 할당할 것.
+5. **Pointers must be used in a restricted way.**  
+   Avoid pointer arithmetic and multiple levels of indirection. If pointers are necessary, use them with extreme caution.  
 
-4. 모든 데이터는 명시적으로 초기화해야 한다.
+6. **Functions must be short and simple.**  
+   Typically, functions should not exceed one page (about 50 lines) and should perform only a single task.  
 
-변수를 선언하면 초기값을 반드시 지정할 것.
+7. **Header files must contain declarations only.**  
+   Do not define variables in headers. Only include function and type declarations.  
 
-5. 포인터는 제한적으로만 사용한다.
+8. **Code must remain within the limits of human understanding.**  
+   Avoid overly complex expressions or excessive abstraction. Code should be understandable by human reviewers.  
 
-포인터 연산, 다중 간접 참조는 금지. 포인터를 써야 할 경우에는 신중하게 사용할 것.
+9. **Source code must be verifiable by static analysis tools.**  
+   Tools like Lint or Coverity should be able to check the code without producing errors or warnings.  
 
-6. 함수는 짧고 단순하게 유지한다.
-
-일반적으로 1페이지(50줄 이내)를 넘지 않아야 하며, 한 가지 일만 하도록 설계.
-
-7. 헤더 파일에는 선언만 넣고, 정의는 넣지 않는다.
-
-헤더 파일에서 변수 정의를 하지 말고, 오직 함수 및 타입 선언만 할 것.
-
-8. 프로그래머가 이해할 수 있는 범위 내에서만 작업하도록 한다.
-
-복잡한 표현식, 지나치게 추상화된 구조 금지. 사람이 이해할 수 있는 수준의 코드 작성.
-
-9. 소스코드는 정적 분석 도구로 검증할 수 있어야 한다.
-
-정적 분석(예: Lint, Coverity)을 통해 에러나 경고 없이 통과 가능해야 함.
-
-10. 컴파일러의 모든 경고는 0으로 유지해야 한다.
-
-모든 컴파일 경고는 수정해야 하며, 무시하지 말 것.
+10. **Compiler warnings must be reduced to zero.**  
+   All compiler warnings must be fixed; none should be ignored.  
