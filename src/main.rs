@@ -2,6 +2,7 @@ use algorithm::{
     algorithms::{graph, math, np_complete, sort},
     conding_test,
     cryptography::caesar_cipher,
+    cryptography::vigenere_cipher,
     data_structure,
 };
 
@@ -25,5 +26,6 @@ fn main() {
     // data_structure::array::example();
 
     /* */
-    caesar_cipher::example();
+    // caesar_cipher::example();
+    vigenere_cipher::example();
 }
