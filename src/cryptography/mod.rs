@@ -1,3 +1,4 @@
 pub mod caesar_cipher;
 pub mod transposition_cipher;
 pub mod vigenere_cipher;
+pub mod modular;
