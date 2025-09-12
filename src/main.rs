@@ -3,6 +3,7 @@ use algorithm::{
     conding_test,
     cryptography::caesar_cipher,
     cryptography::modular,
+    cryptography::roter,
     cryptography::transposition_cipher,
     cryptography::vigenere_cipher,
     data_structure,
@@ -31,5 +32,5 @@ fn main() {
     // caesar_cipher::example();
     // vigenere_cipher::example();
     // transposition_cipher::example()
-    modular::example();
+    roter::example();
 }
