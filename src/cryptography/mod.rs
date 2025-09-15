@@ -1,3 +1,4 @@
+pub mod aes;
 pub mod caesar_cipher;
 pub mod modular;
 pub mod roter;
