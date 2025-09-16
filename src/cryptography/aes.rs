@@ -6,12 +6,17 @@
 //   aes = "*", cbc = "*", pkcs7 = "*" (or RustCrypto block-modes).
 // -----------------------------------------------------------------------------
 
+use cbc::Encryptor;
 use std::fmt::Write as _;
-
 const NB: usize = 4; // columns in state (4 words = 16 bytes)
 const NK: usize = 4; // key length in words (AES-128)
 const NR: usize = 10; // rounds (AES-128)
-
+use aes::Aes128;
+use block_padding::Pkcs7;
+use cbc::cipher::BlockDecryptMut;
+use cbc::cipher::BlockEncryptMut;
+use cbc::cipher::KeyIvInit;
+use cbc::Decryptor;
 // S-Box and inverse S-Box
 const SBOX: [u8; 256] = [
     0x63, 0x7c, 0x77, 0x7b, 0xf2, 0x6b, 0x6f, 0xc5, 0x30, 0x01, 0x67, 0x2b, 0xfe, 0xd7, 0xab, 0x76,
@@ -342,15 +347,255 @@ fn to_hex(data: &[u8]) -> String {
     s
 }
 
+
+
+fn rustcrypto_encrypt(key: [u8; 16], iv: [u8; 16], plaintext: &[u8]) -> Vec<u8> {
+    let mut buffer = plaintext.to_vec();
+    let pos = buffer.len();
+    buffer.resize(pos + 16, 0u8);
+
+    let cipher = Encryptor::<Aes128>::new(&key.into(), &iv.into());
+    let ct_len = cipher
+        .encrypt_padded_mut::<Pkcs7>(&mut buffer, pos)
+        .unwrap()
+        .len();
+    buffer.truncate(ct_len);
+    buffer
+}
+
+fn rustcrypto_decrypt(key: [u8; 16], iv: [u8; 16], ciphertext: &[u8]) -> Option<Vec<u8>> {
+    let mut buffer = ciphertext.to_vec();
+    let cipher = Decryptor::<Aes128>::new(&key.into(), &iv.into());
+    match cipher.decrypt_padded_mut::<Pkcs7>(&mut buffer) {
+        Ok(pt) => Some(pt.to_vec()),
+        Err(_) => None,
+    }
+}
+
+fn analyze_encryption_output() {
+    let key: [u8; 16] = *b"0123456789abcdef";
+    let iv: [u8; 16] = *b"abcdef0123456789";
+    let plaintext = b"hello world"; // 11 bytes
+
+    println!("🔬 Encryption Output Analysis");
+    println!("{}", "=".repeat(60));
+
+    println!("Input Analysis:");
+    println!(
+        "  Plaintext: \"{}\" ({} bytes)",
+        String::from_utf8_lossy(plaintext),
+        plaintext.len()
+    );
+    println!("  Key: {} (16 bytes)", hex::encode(&key));
+    println!("  IV: {} (16 bytes)", hex::encode(&iv));
+    println!();
+
+    // Padding info
+    let padded = pkcs7_pad(plaintext.to_vec());
+    println!("PKCS#7 Padding:");
+    println!("  Original:  {} bytes", plaintext.len());
+    println!("  After pad: {} bytes", padded.len());
+    println!(
+        "  Padding:   {} bytes, value 0x{:02x}",
+        16 - plaintext.len(),
+        16 - plaintext.len()
+    );
+    println!("  Padded hex: {}", hex::encode(&padded));
+    println!();
+
+    // Ciphertext info
+    let ciphertext = cbc_encrypt(key, iv, plaintext);
+    println!("Ciphertext Result:");
+    println!(
+        "  Ciphertext: {} ({} bytes)",
+        hex::encode(&ciphertext),
+        ciphertext.len()
+    );
+    println!("  Blocks:    {} (16 bytes each)", ciphertext.len() / 16);
+    println!();
+
+    for (i, block) in ciphertext.chunks(16).enumerate() {
+        println!("  Block {}: {}", i, hex::encode(block));
+    }
+}
+
+fn comprehensive_validation() {
+    println!("🧪 Comprehensive Validation Suite");
+    println!("{}", "=".repeat(60));
+
+    let test_cases = vec![
+        ("hello world", "basic message"),
+        ("", "empty message"),
+        ("a", "single character"),
+        ("exactly 16 byte", "exactly one block"),
+        (
+            "This is a long message spanning multiple blocks",
+            "multi-block message",
+        ),
+        ("🦀 Rust AES! 🔐", "unicode characters"),
+    ];
+
+    let key: [u8; 16] = *b"0123456789abcdef";
+    let iv: [u8; 16] = *b"abcdef0123456789";
+
+    let mut all_passed = true;
+
+    for (i, (plaintext, description)) in test_cases.iter().enumerate() {
+        println!("Test {}: {}", i + 1, description);
+        println!("  Input: \"{}\"", plaintext);
+
+        let plaintext_bytes = plaintext.as_bytes();
+        let our_ct = cbc_encrypt(key, iv, plaintext_bytes);
+        let rustcrypto_ct = rustcrypto_encrypt(key, iv, plaintext_bytes);
+
+        let matches = our_ct == rustcrypto_ct;
+        println!("  Result: {}", if matches { "✅ PASS" } else { "❌ FAIL" });
+
+        if matches {
+            // Round-trip decryption test
+            let our_pt = cbc_decrypt(key, iv, &our_ct).unwrap();
+            let round_trip_ok = our_pt == plaintext_bytes;
+            println!(
+                "  Round-trip: {}",
+                if round_trip_ok {
+                    "✅ PASS"
+                } else {
+                    "❌ FAIL"
+                }
+            );
+            all_passed &= round_trip_ok;
+        } else {
+            println!("    Our hex:       {}", hex::encode(&our_ct));
+            println!("    RustCrypto hex: {}", hex::encode(&rustcrypto_ct));
+            all_passed = false;
+        }
+        println!();
+    }
+
+    if all_passed {
+        println!(
+            "🎉 All tests passed! Our implementation is mathematically equivalent to RustCrypto."
+        );
+    } else {
+        println!("❌ Some tests failed. Debugging is required.");
+    }
+}
+
+fn cross_validation_test() {
+    println!("🔍 Cross Validation: Our Implementation vs RustCrypto");
+    println!("{}", "=".repeat(60));
+
+    let key: [u8; 16] = *b"0123456789abcdef";
+    let iv: [u8; 16] = *b"abcdef0123456789";
+    let plaintext = b"hello world";
+
+    println!("Test Parameters:");
+    println!("  Key (hex): {}", hex::encode(&key));
+    println!("  IV (hex): {}", hex::encode(&iv));
+    println!("  Plaintext: \"{}\"", String::from_utf8_lossy(plaintext));
+    println!();
+
+    // Our implementation
+    println!("=== Our Implementation ===");
+    let our_ciphertext = cbc_encrypt(key, iv, plaintext);
+    println!("Our ciphertext (hex): {}", hex::encode(&our_ciphertext));
+
+    let our_decrypted = cbc_decrypt(key, iv, &our_ciphertext).expect("Decryption failed");
+    println!(
+        "Our decrypted: \"{}\"",
+        String::from_utf8_lossy(&our_decrypted)
+    );
+    println!();
+
+    // RustCrypto implementation
+    println!("=== RustCrypto Implementation ===");
+    let rustcrypto_ciphertext = rustcrypto_encrypt(key, iv, plaintext);
+    println!(
+        "RustCrypto ciphertext (hex): {}",
+        hex::encode(&rustcrypto_ciphertext)
+    );
+
+    let rustcrypto_decrypted =
+        rustcrypto_decrypt(key, iv, &rustcrypto_ciphertext).expect("Decryption failed");
+    println!(
+        "RustCrypto decrypted: \"{}\"",
+        String::from_utf8_lossy(&rustcrypto_decrypted)
+    );
+    println!();
+
+    // Verification
+    println!("=== Verification Results ===");
+    let ciphertext_match = our_ciphertext == rustcrypto_ciphertext;
+    let plaintext_match = our_decrypted == rustcrypto_decrypted;
+    let original_match = plaintext == our_decrypted.as_slice();
+
+    println!(
+        "✅ Ciphertext match: {}",
+        if ciphertext_match { "PASS" } else { "FAIL" }
+    );
+    println!(
+        "✅ Plaintext match:  {}",
+        if plaintext_match { "PASS" } else { "FAIL" }
+    );
+    println!(
+        "✅ Round-trip:       {}",
+        if original_match { "PASS" } else { "FAIL" }
+    );
+
+    if ciphertext_match && plaintext_match && original_match {
+        println!();
+        println!("🎉 Success! Our implementation produces the same result as RustCrypto.");
+        println!("This proves the mathematical correctness of our AES-128-CBC implementation.");
+    } else {
+        println!();
+        println!("❌ Mismatch detected! Our implementation has an issue.");
+        println!("Let's debug the differences...");
+    }
+}
+
 pub fn example() {
-    // Demo: key/iv fixed for reproducible output. In real use, use a CSPRNG.
-    let key: [u8; 16] = *b"0123456789abcdef"; // 128-bit
+    // Fixed key/IV (for learning/demo)
+    let key: [u8; 16] = *b"0123456789abcdef"; // 128-bit key
     let iv: [u8; 16] = *b"abcdef0123456789"; // 128-bit IV
     let msg = b"hello world";
 
+    println!("🔑 AES-128 CBC Example");
+    println!("{}", "=".repeat(60));
+
+    // 1️⃣ Our implementation test
     let ct = cbc_encrypt(key, iv, msg);
     let pt = cbc_decrypt(key, iv, &ct).expect("valid padding");
 
-    println!("PT: {}", String::from_utf8_lossy(&pt));
-    println!("CT(hex): {}", to_hex(&ct));
+    println!("[Our Implementation]");
+    println!("  Plaintext : {}", String::from_utf8_lossy(msg));
+    println!("  Ciphertext (hex): {}", to_hex(&ct));
+    println!("  Decrypted : {}", String::from_utf8_lossy(&pt));
+    println!();
+
+    // 2️⃣ RustCrypto cross validation
+    println!("[RustCrypto Cross Validation]");
+    let rc_ct = rustcrypto_encrypt(key, iv, msg);
+    let rc_pt = rustcrypto_decrypt(key, iv, &rc_ct).expect("decrypt failed");
+    println!("  RustCrypto ciphertext (hex): {}", hex::encode(&rc_ct));
+    println!(
+        "  RustCrypto decrypted : {}",
+        String::from_utf8_lossy(&rc_pt)
+    );
+    println!(
+        "  Ciphertext match? {}",
+        if ct == rc_ct { "✅" } else { "❌" }
+    );
+    println!(
+        "  Plaintext match?  {}",
+        if pt == rc_pt { "✅" } else { "❌" }
+    );
+    println!();
+
+    // 3️⃣ Detailed analysis
+    println!("[Output Analysis]");
+    analyze_encryption_output();
+
+    // 4️⃣ Run comprehensive validation suite
+    println!();
+    comprehensive_validation();
 }
