@@ -1,13 +1,8 @@
 use algorithm::{
     algorithms::{graph, math, np_complete, sort},
     conding_test,
-    cryptography::aes,
-    cryptography::caesar_cipher,
-    cryptography::modular,
-    cryptography::roter,
-    cryptography::transposition_cipher,
-    cryptography::vigenere_cipher,
-    data_structure,
+    cryptography::{aes, caesar_cipher, modular, roter, transposition_cipher, vigenere_cipher},
+    data_structure::{self, queue},
 };
 
 fn main() {
@@ -35,5 +30,7 @@ fn main() {
     // transposition_cipher::example()
     // roter::example();
     // Aes::example();
-    aes::example();
+    // aes::example();
+
+    queue::example();
 }

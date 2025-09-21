@@ -1,19 +1,22 @@
+use std::cell::RefCell;
+use std::rc::Rc;
+
 #[derive(Debug)]
 struct Queue<T> {
     size: usize,
-    head: Option<Box<Node<T>>>,
-    tail: *mut Node<T>, // 원시 포인터 사용
+    head: Option<Rc<RefCell<Node<T>>>>,
+    tail: Option<Rc<RefCell<Node<T>>>>,
 }
 
 #[derive(Debug)]
 struct Node<T> {
     val: T,
-    next: Option<Box<Node<T>>>, // prev 포인터 제거
+    next: Option<Rc<RefCell<Node<T>>>>,
 }
 
 impl<T> Node<T> {
-    fn new(val: T) -> Box<Node<T>> {
-        Box::new(Node { val, next: None })
+    fn new(val: T) -> Rc<RefCell<Node<T>>> {
+        Rc::new(RefCell::new(Node { val, next: None }))
     }
 }
 
@@ -22,66 +25,98 @@ impl<T> Queue<T> {
         Queue {
             size: 0,
             head: None,
-            tail: std::ptr::null_mut(),
+            tail: None,
         }
     }
 
-    fn size(&self) -> usize {
-        self.size
+    fn enqueue(&mut self, x: T) {
+        let new_node = Node::new(x);
+        if let Some(ref tail) = self.tail {
+            // Link the new node to the current tail
+            tail.borrow_mut().next = Some(new_node.clone());
+        } else {
+            // If the queue is empty, set head as well
+            self.head = Some(new_node.clone());
+        }
+        self.tail = Some(new_node);
+        self.size += 1;
+    }
+
+    fn dequeue(&mut self) -> Option<T> {
+        self.head.take().map(|old_head| {
+            self.size -= 1;
+
+            // Take the next node while dropping the borrow immediately
+            let next_opt = {
+                let mut head_ref = old_head.borrow_mut();
+                head_ref.next.take()
+            };
+
+            // Update head/tail pointers
+            if let Some(next) = next_opt {
+                self.head = Some(next);
+            } else {
+                self.tail = None;
+            }
+
+            // Now we can safely unwrap and move the value out
+            Rc::try_unwrap(old_head).ok().unwrap().into_inner().val
+        })
+    }
+
+    fn peek(&self) -> Option<T>
+    where
+        T: Clone,
+    {
+        self.head.as_ref().map(|node| node.borrow().val.clone())
     }
 
     fn is_empty(&self) -> bool {
         self.size == 0
     }
 
-    fn enqueue(&mut self, x: T) {
-        let mut new_node = Node::new(x);
-        let raw_node = Box::into_raw(new_node);
-
-        unsafe {
-            if !self.tail.is_null() {
-                (*self.tail).next = Some(Box::from_raw(raw_node));
-                self.tail = raw_node;
-            } else {
-                self.head = Some(Box::from_raw(raw_node));
-                self.tail = raw_node;
-            }
-        }
-
-        self.size += 1;
-    }
-
-    fn peek(&self) -> Option<&T> {
-        self.head.as_ref().map(|node| &node.val)
-    }
-
-    fn dequeue(&mut self) -> Option<T> {
-        self.head.take().map(|mut head| {
-            self.size -= 1;
-
-            if let Some(next) = head.next {
-                self.head = Some(next);
-            } else {
-                self.tail = std::ptr::null_mut();
-            }
-
-            head.val
-        })
+    fn size(&self) -> usize {
+        self.size
     }
 }
+
 pub fn example() {
     let mut q: Queue<i32> = Queue::new();
+
+    println!("--- Enqueue 4 numbers ---");
     q.enqueue(1);
     q.enqueue(2);
     q.enqueue(3);
     q.enqueue(4);
-    println!("{:?}", q);
+    println!("After enqueue: size={}, peek={:?}", q.size(), q.peek());
 
-    println!("{:?}", q.dequeue()); // Some(1)
-    println!("{:?}", q.dequeue()); // Some(2)
-    println!("{:?}", q.peek()); // Some(3)
-    println!("{:?}", q.dequeue()); // Some(3)
-    println!("{:?}", q.is_empty()); // false
-    println!("{:?}", q.dequeue()); // Some(4)
-    println!("{:?}", q.is_empty()); // true
+    println!("\n--- Dequeue two elements ---");
+    println!("dequeue -> {:?}", q.dequeue()); // 1
+    println!("dequeue -> {:?}", q.dequeue()); // 2
+    println!("size now = {}, peek = {:?}", q.size(), q.peek()); // size=2, peek=3
+
+    println!("\n--- Enqueue more elements ---");
+    q.enqueue(5);
+    q.enqueue(6);
+    println!("After enqueue: size={}, peek={:?}", q.size(), q.peek());
+
+    println!("\n--- Dequeue until empty ---");
+    while let Some(v) = q.dequeue() {
+        println!("dequeue -> {}", v);
+    }
+    println!("Queue empty? {}", q.is_empty());
+
+    println!("\n--- Test dequeue/peek on empty queue ---");
+    println!("dequeue -> {:?}", q.dequeue());
+    println!("peek -> {:?}", q.peek());
+
+    println!("\n--- Reuse the queue ---");
+    q.enqueue(42);
+    q.enqueue(99);
+    println!("After enqueue: size={}, peek={:?}", q.size(), q.peek());
+    println!("dequeue -> {:?}", q.dequeue());
+    println!("dequeue -> {:?}", q.dequeue());
+    println!("Queue empty? {}", q.is_empty());
 }
+
+
