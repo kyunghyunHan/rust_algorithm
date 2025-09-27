@@ -1,7 +1,10 @@
 use algorithm::{
     algorithms::{graph, math, np_complete, sort},
     conding_test,
-    cryptography::{aes, caesar_cipher, modular, roter, transposition_cipher, vigenere_cipher},
+    cryptography::{
+        aes, caesar_cipher, merkle_tree, modular, roter, sha2, transposition_cipher,
+        vigenere_cipher,
+    },
     data_structure::{self, queue},
 };
 
@@ -32,5 +35,8 @@ fn main() {
     // Aes::example();
     // aes::example();
 
-    queue::example();
+    roter::example();
+    sha2::example();
+    sha2::cross_validation_test();
+    merkle_tree::example();
 }
