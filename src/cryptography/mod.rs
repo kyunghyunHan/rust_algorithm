@@ -1,5 +1,6 @@
 pub mod aes;
 pub mod caesar_cipher;
+pub mod md5;
 pub mod merkle_tree;
 pub mod modular;
 pub mod roter;

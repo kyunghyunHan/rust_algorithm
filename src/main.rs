@@ -2,7 +2,7 @@ use algorithm::{
     algorithms::{graph, math, np_complete, sort},
     conding_test,
     cryptography::{
-        aes, caesar_cipher, merkle_tree, modular, roter, sha2, transposition_cipher,
+        aes, caesar_cipher, md5, merkle_tree, modular, roter, sha2, transposition_cipher,
         vigenere_cipher,
     },
     data_structure::{self, queue},
@@ -35,8 +35,9 @@ fn main() {
     // Aes::example();
     // aes::example();
 
-    roter::example();
-    sha2::example();
-    sha2::cross_validation_test();
-    merkle_tree::example();
+    // roter::example();
+    // sha2::example();
+    // sha2::cross_validation_test();
+    // merkle_tree::example();
+    md5::example();
 }
