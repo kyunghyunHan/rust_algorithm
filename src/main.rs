@@ -6,6 +6,7 @@ use algorithm::{
         vigenere_cipher,
     },
     data_structure::{self, queue},
+    finance,
 };
 
 fn main() {
@@ -39,5 +40,6 @@ fn main() {
     // sha2::example();
     // sha2::cross_validation_test();
     // merkle_tree::example();
-    md5::example();
+    // md5::example();
+    finance::example();
 }
