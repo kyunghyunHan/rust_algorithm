@@ -6,7 +6,7 @@ use algorithm::{
         vigenere_cipher,
     },
     data_structure::{self, queue},
-    finance::{finance1_1, zero},
+    finance::{derivative, finance1_1, zero},
 };
 
 fn main() {
@@ -42,4 +42,5 @@ fn main() {
     // merkle_tree::example();
     // md5::example();
     zero::example();
+    derivative::example();
 }
