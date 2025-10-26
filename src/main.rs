@@ -17,7 +17,7 @@ fn main() {
 
     /*Sort */
     // algorithms::sort::bubble::example();
-    // algorithms::sort::insertion::example();
+    sort::insertion::example();
     // algorithms::sort::shell::example();
     // sort::bubble::example();
 

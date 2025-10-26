@@ -28,7 +28,11 @@ fn insertion_sort(arr: &mut [i32], n: usize) {
 }
 pub fn example() {
     let mut arr = vec![5, 2, 9, 1, 5, 6];
+
+    println!("Before: {:?}", arr);
+
     let n = arr.len();
     insertion_sort(&mut arr, n);
-    println!("{:?}", arr);
+    println!("After:  {:?}", arr);
+
 }
