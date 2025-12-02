@@ -16,6 +16,12 @@ where
 {
     (f(x + h) - f(x)) / h
 }
+fn diff_backward<F>(f: F, x: real, h: real) -> real
+where
+    F: Fn(real) -> real,
+{
+    (f(x) - f(x - h)) / h
+}
 
 pub fn diff_second<F>(f: F, x: real, h: real) -> real
 where
@@ -26,4 +32,10 @@ where
 
 fn example() {
     let f = |x: real| x * x * x;
+    let h = 1e-5;
+
+    let d1 = diff_forward(f, 2., h);
+
+    println!("forward = {}", d1);
 }
+fn test() {}
