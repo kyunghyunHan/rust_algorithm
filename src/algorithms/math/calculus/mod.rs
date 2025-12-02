@@ -6,6 +6,17 @@ fn ln() {
 }
 pub type real = f64;
 
+fn f_example(x: real) -> real {
+    x * x * x
+}
+
+fn diff_forward<F>(f: F, x: real, h: real) -> real
+where
+    F: Fn(real) -> real,
+{
+    (f(x + h) - f(x)) / h
+}
+
 pub fn diff_second<F>(f: F, x: real, h: real) -> real
 where
     F: Fn(real) -> real,
