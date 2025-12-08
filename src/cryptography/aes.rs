@@ -11,11 +11,11 @@ use std::fmt::Write as _;
 const NB: usize = 4; // columns in state (4 words = 16 bytes)
 const NK: usize = 4; // key length in words (AES-128)
 const NR: usize = 10; // rounds (AES-128)
-use aes::Aes128;
-use block_padding::Pkcs7;
 use cbc::cipher::BlockDecryptMut;
 use cbc::cipher::BlockEncryptMut;
 use cbc::cipher::KeyIvInit;
+use cbc::cipher::block_padding::Pkcs7;
+use aes::Aes128;
 use cbc::Decryptor;
 // S-Box and inverse S-Box
 const SBOX: [u8; 256] = [
