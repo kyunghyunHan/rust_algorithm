@@ -109,7 +109,7 @@ A data structure is a particular way of organizing and storing data in a compute
  - [Probability](./src/finance/mod.rs)
  - 
 ## GPU
-
+- 
 ## Interview
 
 ## [Nasa Power of 10](./nasa10.md)
