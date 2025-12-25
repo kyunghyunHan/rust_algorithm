@@ -17,7 +17,8 @@ fn main() {
 
     /*Sort */
     // algorithms::sort::bubble::example();
-    sort::insertion::example();
+    // sort::insertion::example();
+    sort::stalin::example();
     // algorithms::sort::shell::example();
     // sort::bubble::example();
 
@@ -41,6 +42,6 @@ fn main() {
     // sha2::cross_validation_test();
     // merkle_tree::example();
     // md5::example();
-    zero::example();
-    derivative::example();
+    // zero::example();
+    // derivative::example();
 }

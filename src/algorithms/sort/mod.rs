@@ -8,3 +8,4 @@ pub mod quick;
 pub mod radix;
 pub mod selection;
 pub mod shell;
+pub mod stalin;
