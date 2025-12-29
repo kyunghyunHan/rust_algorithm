@@ -67,7 +67,7 @@ A data structure is a particular way of organizing and storing data in a compute
 - - [Insertion Sort](./src/algorithms/sort/insertion/insertion.md)
 - - [Merge Sort](./src/algorithms/sort/merge/merge.md)
 - - [Quick Sort](./src/algorithms/sort/quick/quick.md)
-
+- 
 - [Graph](./src/algorithms/graph/graph.md)
 - - [Eulerian](./src/algorithms/graph/eulerian/eulerian.md)
 - - [Knight's Tour](./src/algorithms/backtracking/knights_tour/knights_tour.md)
