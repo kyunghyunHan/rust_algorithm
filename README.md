@@ -108,6 +108,7 @@ A data structure is a particular way of organizing and storing data in a compute
 ## Finance
  - [Probability](./src/finance/mod.rs)
  - 
+ - [Finance](https://github.com/paperswithbacktest/awesome-systematic-trading/?tab=readme-ov-file#strategies)
 ## GPU
 - 
 - 
