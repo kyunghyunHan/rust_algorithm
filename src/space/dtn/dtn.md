@@ -28,3 +28,40 @@ Bundle은 크게 세 가지 영역으로 구성된다.
 | - Security Block (암호/서명) |
 +------------------------------------------------+
 ```
+
+
+---
+
+## ✔ 1. Primary Block (필수 헤더)
+
+**필수 정보 포함**
+- 버전
+- Source EID (보낸 주소)
+- Destination EID (받는 주소)
+- Creation time (생성 시각)
+- Lifetime / TTL (유효기간)
+- 처리 플래그 (전송 옵션)
+
+---
+
+## ✔ 2. Canonical Blocks (확장 기능)
+
+필요에 따라 여러 개가 포함될 수 있음
+
+| 블록 이름 | 역할 |
+|----------|------|
+| Payload Block | 실제 데이터(예: 이미지, 메시지 등) |
+| Hop Count Block | 번들이 몇 노드를 거쳤는지 |
+| Previous Node Block | 마지막으로 경유한 노드 |
+| Metadata Block | 우선순위, 라우팅 힌트 등 |
+| Security Block | 암호화, 인증 서명 |
+
+**확장형 구조 → 필요한 기능만 선택해 사용 가능**
+
+---
+
+## 🛰️ Bundle 전달 예시 흐름
+
+상황: **화성 로버 → 궤도 위성 → 지구**
+
+1. 로버가 Bundle을 생성
