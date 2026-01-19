@@ -1,6 +1,6 @@
 use algorithm::{
     algorithms::{graph, math, np_complete, sort},
-    conding_test,
+    assembly, conding_test,
     cryptography::{
         aes, caesar_cipher, md5, merkle_tree, modular, roter, sha2, transposition_cipher,
         vigenere_cipher,
@@ -18,7 +18,7 @@ fn main() {
     /*Sort */
     // algorithms::sort::bubble::example();
     // sort::insertion::example();
-    sort::stalin::example();
+    // sort::stalin::example();
     // algorithms::sort::shell::example();
     // sort::bubble::example();
 
@@ -44,4 +44,6 @@ fn main() {
     // md5::example();
     // zero::example();
     // derivative::example();
+
+    assembly::example();
 }
