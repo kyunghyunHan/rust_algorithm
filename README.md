@@ -33,7 +33,7 @@ fn sum_average(a : Vec<i32> ,n:i32){
 
 A data structure is a particular way of organizing and storing data in a computer so that it can be accessed and modified efficiently.
 
-
+- 
 - [Array](./src/data_structure/array/array.md)
 - [Vector](./src/data_structure/vector/vector.md)
 - [Linked List](./src/data_structure/linked_list/linked_list.md)
