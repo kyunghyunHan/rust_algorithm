@@ -45,5 +45,7 @@ fn main() {
     // zero::example();
     // derivative::example();
 
-    assembly::example();
+    // assembly::example();
+
+    println!("{}",!1);
 }
