@@ -7,6 +7,7 @@ use algorithm::{
     },
     data_structure::{self, queue},
     finance::{derivative, finance1_1, zero},
+    c
 };
 
 fn main() {
@@ -47,5 +48,6 @@ fn main() {
 
     // assembly::example();
 
-    println!("{}",!1);
+    println!("{}",!1); 
+    c::pointer::example();
 }
