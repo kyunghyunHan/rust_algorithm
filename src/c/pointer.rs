@@ -2,9 +2,19 @@ pub fn example() {
  
 
   
-    p1();
+    // p1();
+    let mut a = 10;
+    let mut b = 20;
+    swap(&mut a, &mut b);
+    println!("{} {}",a,b);
 
-    
+}
+fn swap(a:&mut i32 , b:&mut i32){
+
+   let temp = *a;
+   *a = *b;
+   *b = temp;
+
 }
 static mut res: i32 = 0;
 #[cfg(flase)]
@@ -23,7 +33,7 @@ fn p1(){
         println!("{}",*d);
     }
 }
-#[cfg(true)]
+#[cfg(false)]
 fn p1(){
     let mut pa: &str = "success";
     let mut pb: &str = "failure";
@@ -34,15 +44,15 @@ fn p1(){
 
 
 }
-fn swap_ptr<'a>(ppa: &mut &'a str, ppb: &mut &'a str) {
-    let temp = *ppa;
-    *ppa = *ppb;
-    *ppb = temp;
-}
-fn sum(a: i32, b: i32) -> *mut i32 {
-    static mut res: i32 = 0;
-    unsafe{
-        res = a+b;
-    }
-    &raw mut res
-}
+// fn swap_ptr<'a>(ppa: &mut &'a str, ppb: &mut &'a str) {
+//     let temp = *ppa;
+//     *ppa = *ppb;
+//     *ppb = temp;
+// }
+// fn sum(a: i32, b: i32) -> *mut i32 {
+//     static mut res: i32 = 0;
+//     unsafe{
+//         res = a+b;
+//     }
+//     &raw mut res
+// }
