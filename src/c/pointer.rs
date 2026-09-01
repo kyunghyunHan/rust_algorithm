@@ -1,23 +1,55 @@
 pub fn example() {
  
- 
-//  { 
-    
-//     let mut to = [0u8; 100].as_mut_ptr();
-//     let from: *const u8 = b"aa\0".as_ptr();
-//     unsafe {
-//         my_str_cpy(to, from);
-//     }
-// }
+   let n = 5;
+   unsafe{
+     println!("{}",factorial(n));
+   }
 
-  let mut to :String = "".to_string();
-  let from = "abc";
-  my_str_cpy2(&mut to, from);
-  println!("{}",to);
+    
+    let mut to = [0u8; 100].as_mut_ptr();
+    let from: *const u8 = b"aa\0".as_ptr();
+    unsafe {
+        my_str_cpy(to, from);
+       let s1 =b"abc\0".as_ptr();
+       let s2 = b"abc\0".as_ptr();
+
+        println!("{}",strcmp1(s1,s2));
+    }
+
+fn intcmp2(a:i32 , b:i32)->i32{
+
+    return ((a >b) as i32 - (a < b) as i32);
+}
+unsafe fn intcmp(a:*const i32,b:*const i32)->i32{
+    unsafe {
+        *a - *b
+    }
+    
+}
+unsafe fn factorial(n:i32)->i32{
+    //캐싱을 위한 정적 지역 배열
+    static mut memo:[i32;100]  = [0;100];
+    if n==0||n==1{
+        return 1;
+    }
+    unsafe {
+       
+        if memo[n as usize]!=0{
+            return memo[n as usize];
+        }
+        memo[n as usize] = n*factorial(n-1);
+        memo[n as usize]
+    }
+}
+//   let mut to :String = "".to_string();
+//   let from = "abc";
+//   my_str_cpy2(&mut to, from);
+//   println!("{}",to);
 
 
 
 }
+
 fn my_str_cpy2(to: &mut String, from: &str) {
     to.clear();
 
@@ -25,7 +57,30 @@ fn my_str_cpy2(to: &mut String, from: &str) {
         to.push(ch);
     }
 }
+unsafe fn strcmp1(mut s1:*const u8,mut s2:*const u8)->i32{
 
+    while (*s1 ==*s2){
+        if *s1 ==0{
+            return 0;
+        }
+    
+    s1 = s1.add(1);
+    s1 =  s2.add(1);
+    }
+    *s1 as i32 - *s2 as i32
+    
+}
+fn strcmp2(s1: &[u8], s2: &[u8]) -> i32 {
+    let len = s1.len().min(s2.len());
+
+    for i in 0..len {
+        if s1[i] != s2[i] {
+            return s1[i] as i32 - s2[i] as i32;
+        }
+    }
+
+    s1.len() as i32 - s2.len() as i32
+}
 unsafe fn my_str_cpy(to: *mut u8, from: *const u8) -> *mut u8 {
 
     let mut dest = to;
