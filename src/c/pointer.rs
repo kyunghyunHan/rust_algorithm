@@ -1,147 +1,225 @@
+use std::cmp::Ordering;
+
 pub fn example() {
- 
-   let n = 5;
-   unsafe{
-     println!("{}",factorial(n));
-   }
+    pointer_practice();
+}
+fn pointer_practice() {
+    /*2차원배열 */
+    /*
+    a 는 표현식에서 대부분 &a[0] 으로 변형
+    &a[0]의 타입은 int (*)[8];
 
-    
-    let mut to = [0u8; 100].as_mut_ptr();
-    let from: *const u8 = b"aa\0".as_ptr();
+
+
+    */
+    let a = [[0i32; 8]; 3];
+
+    let ap: *const [i32; 8] = a.as_ptr();
+
+    println!(
+        "{:p} {:p} {:p} {:p} {:p}",
+        &a,            // C의 &a int (*)[3][8] : 전체 배열 a의 주소
+        a.as_ptr(),    // C의 a [0]의 주소
+        &a[0],         // C의 &a[0] a[0]의주소
+        a[0].as_ptr(), // C의 a[0] a[0][0]의주소
+        &a[0][0],      // C의 &a[0][0] a[0][0]의 주소
+    );
+
     unsafe {
-        my_str_cpy(to, from);
-       let s1 =b"abc\0".as_ptr();
-       let s2 = b"abc\0".as_ptr();
-
-        println!("{}",strcmp1(s1,s2));
+        println!(
+            "{:p} {:p} {:p} {:p} {:p}",
+            (&a as *const [[i32; 8]; 3]).add(1),
+            // C: &a + 1
+            // 전체 [[i32;8];3] 배열 크기만큼 이동
+            // 3 * 8 * sizeof(i32)
+            a.as_ptr().add(1),
+            // C: a + 1
+            // a.as_ptr() 타입: *const [i32;8]
+            // [i32;8] 한 줄만큼 이동
+            // 결과: &a[1]
+            (&a[0] as *const [i32; 8]).add(1),
+            // C: &a[0] + 1
+            // [i32;8] 한 줄만큼 이동
+            // 결과: &a[1]
+            a[0].as_ptr().add(1),
+            // C: a[0] + 1
+            // *const i32
+            // i32 1개만큼 이동
+            // 결과: &a[0][1]
+            (&a[0][0] as *const i32).add(1),
+            // C: &a[0][0] + 1
+            // i32 1개만큼 이동
+            // 결과: &a[0][1]
+        );
     }
+    println!(
+        "{} {} {} {} {}",
+        size_of_val(&&a),       // C: sizeof(&a)       → 참조 크기
+        size_of_val(&a),        // C: sizeof(a)        → 96
+        size_of_val(&&a[0]),    // C: sizeof(&a[0])    → 참조 크기
+        size_of_val(&a[0]),     // C: sizeof(a[0])     → 32
+        size_of_val(&&a[0][0]), // C: sizeof(&a[0][0]) → 참조 크기
+    );
 
-fn intcmp2(a:i32 , b:i32)->i32{
-
-    return ((a >b) as i32 - (a < b) as i32);
+    unsafe{
+        println!("{:p} {:p}",ap,ap.add(1));
+    }
 }
-unsafe fn intcmp(a:*const i32,b:*const i32)->i32{
+/// 2차원 배열을 참조와 원시 포인터로 순회하는 간단한 예제입니다.
+pub fn matrix_pointer_example() {
+    let mut matrix = [[0; 8]; 3];
+
+    // 안전한 참조를 사용한 접근
+    matrix[1][1] = 10;
+    let second_row = &matrix[1];
+    println!("reference: matrix[1][1] = {}", second_row[1]);
+
+    // 같은 위치를 원시 포인터 연산으로 접근
+    let matrix_ptr = matrix.as_ptr();
     unsafe {
-        *a - *b
-    }
-    
-}
-unsafe fn factorial(n:i32)->i32{
-    //캐싱을 위한 정적 지역 배열
-    static mut memo:[i32;100]  = [0;100];
-    if n==0||n==1{
-        return 1;
-    }
-    unsafe {
-       
-        if memo[n as usize]!=0{
-            return memo[n as usize];
-        }
-        memo[n as usize] = n*factorial(n-1);
-        memo[n as usize]
+        let second_row_ptr = matrix_ptr.add(1);
+        let element_ptr = (*second_row_ptr).as_ptr().add(1);
+
+        println!("raw pointer: matrix[1][1] = {}", *element_ptr);
     }
 }
-//   let mut to :String = "".to_string();
-//   let from = "abc";
-//   my_str_cpy2(&mut to, from);
-//   println!("{}",to);
 
-
-
+fn compare_i32(a: i32, b: i32) -> i32 {
+    ordering_to_i32(a.cmp(&b))
 }
 
-fn my_str_cpy2(to: &mut String, from: &str) {
+/// 두 유효한 `i32` 포인터가 가리키는 값을 비교합니다.
+///
+/// # Safety
+///
+/// `a`와 `b`는 읽을 수 있고 올바르게 정렬된 `i32`를 가리켜야 합니다.
+unsafe fn compare_i32_ptrs(a: *const i32, b: *const i32) -> i32 {
+    unsafe { compare_i32(*a, *b) }
+}
+
+fn ordering_to_i32(ordering: Ordering) -> i32 {
+    match ordering {
+        Ordering::Less => -1,
+        Ordering::Equal => 0,
+        Ordering::Greater => 1,
+    }
+}
+
+fn factorial(n: usize) -> u64 {
+    assert!(n <= 20, "u64로 표현할 수 있는 범위는 20!까지입니다");
+
+    (1..=n as u64).product()
+}
+
+fn copy_string(to: &mut String, from: &str) {
     to.clear();
-
-    for ch in from.chars() {
-        to.push(ch);
-    }
+    to.push_str(from);
 }
-unsafe fn strcmp1(mut s1:*const u8,mut s2:*const u8)->i32{
 
-    while (*s1 ==*s2){
-        if *s1 ==0{
-            return 0;
-        }
-    
-    s1 = s1.add(1);
-    s1 =  s2.add(1);
-    }
-    *s1 as i32 - *s2 as i32
-    
-}
-fn strcmp2(s1: &[u8], s2: &[u8]) -> i32 {
-    let len = s1.len().min(s2.len());
-
-    for i in 0..len {
-        if s1[i] != s2[i] {
-            return s1[i] as i32 - s2[i] as i32;
+fn compare_bytes(left: &[u8], right: &[u8]) -> i32 {
+    for (&left_byte, &right_byte) in left.iter().zip(right) {
+        match left_byte.cmp(&right_byte) {
+            Ordering::Equal => continue,
+            ordering => return ordering_to_i32(ordering),
         }
     }
 
-    s1.len() as i32 - s2.len() as i32
+    ordering_to_i32(left.len().cmp(&right.len()))
 }
-unsafe fn my_str_cpy(to: *mut u8, from: *const u8) -> *mut u8 {
 
-    let mut dest = to;
-    let mut src = from;
+/// 널 종료 문자열 `from`을 `to`로 복사하고 `to`를 반환합니다.
+///
+/// # Safety
+///
+/// - `from`은 읽을 수 있는 널 종료 문자열을 가리켜야 합니다.
+/// - `to`에는 문자열과 널 문자를 담을 공간이 충분해야 합니다.
+/// - 복사가 끝날 때까지 두 메모리 영역이 겹치면 안 됩니다.
+unsafe fn copy_c_string(to: *mut u8, from: *const u8) -> *mut u8 {
+    let mut destination = to;
+    let mut source = from;
 
-    // 널 문자('\0', 즉 0)를 만날 때까지 복사
-    while *src != 0 {
-        *dest = *src;
-        dest = dest.add(1);
-        src = src.add(1);
+    unsafe {
+        while *source != 0 {
+            *destination = *source;
+            destination = destination.add(1);
+            source = source.add(1);
+        }
+
+        *destination = 0;
     }
-    *dest = 0; // 마지막에 널 문자 추가
 
     to
-
-
 }
-fn swap(a:&mut i32 , b:&mut i32){
 
-   let temp = *a;
-   *a = *b;
-   *b = temp;
-
-}
-static mut res: i32 = 0;
-#[cfg(flase)]
-fn p1(){
-    let mut a = 10;
-    let mut pi = &mut a;
-    let mut ppi = &mut pi;
-     **ppi = 20;
-    println!("{}",a);
-
-    let mut c = 10;
-    let mut d :*mut i32 = &mut c;
-    let mut e: *mut *mut i32  =&mut d;
+/// 두 널 종료 바이트 문자열을 사전순으로 비교합니다.
+///
+/// # Safety
+///
+/// `left`와 `right`는 각각 읽을 수 있는 널 종료 문자열을 가리켜야 합니다.
+unsafe fn compare_c_strings(mut left: *const u8, mut right: *const u8) -> i32 {
     unsafe {
-        **e = 100;
-        println!("{}",*d);
+        while *left == *right {
+            if *left == 0 {
+                return 0;
+            }
+
+            left = left.add(1);
+            right = right.add(1);
+        }
+
+        ordering_to_i32((*left).cmp(&*right))
     }
 }
-#[cfg(false)]
-fn p1(){
-    let mut pa: &str = "success";
-    let mut pb: &str = "failure";
 
-    println!("pa -> {}, pb ->{}",pa,pb);
-    swap_ptr(&mut pa, &mut pb);
-    println!("pa -> {}, pb ->{}",pa,pb);
+#[cfg(test)]
+mod tests {
+    use super::*;
 
+    #[test]
+    fn compares_integers() {
+        assert_eq!(compare_i32(1, 2), -1);
+        assert_eq!(compare_i32(2, 2), 0);
+        assert_eq!(compare_i32(3, 2), 1);
 
+        let left = 10;
+        let right = 20;
+        assert_eq!(unsafe { compare_i32_ptrs(&left, &right) }, -1);
+    }
+
+    #[test]
+    fn calculates_factorial() {
+        assert_eq!(factorial(0), 1);
+        assert_eq!(factorial(5), 120);
+        assert_eq!(factorial(20), 2_432_902_008_176_640_000);
+    }
+
+    #[test]
+    fn copies_strings() {
+        let mut safe_destination = String::from("old value");
+        copy_string(&mut safe_destination, "abc");
+        assert_eq!(safe_destination, "abc");
+
+        let source = b"hello\0";
+        let mut destination = [0_u8; 6];
+        unsafe {
+            copy_c_string(destination.as_mut_ptr(), source.as_ptr());
+        }
+        assert_eq!(&destination, source);
+    }
+
+    #[test]
+    fn compares_strings() {
+        assert_eq!(compare_bytes(b"abc", b"abc"), 0);
+        assert_eq!(compare_bytes(b"abc", b"abd"), -1);
+        assert_eq!(compare_bytes(b"abcd", b"abc"), 1);
+
+        assert_eq!(
+            unsafe { compare_c_strings(c"abc".as_ptr().cast(), c"abc".as_ptr().cast()) },
+            0
+        );
+        assert_eq!(
+            unsafe { compare_c_strings(c"abc".as_ptr().cast(), c"abd".as_ptr().cast()) },
+            -1
+        );
+    }
 }
-// fn swap_ptr<'a>(ppa: &mut &'a str, ppb: &mut &'a str) {
-//     let temp = *ppa;
-//     *ppa = *ppb;
-//     *ppb = temp;
-// }
-// fn sum(a: i32, b: i32) -> *mut i32 {
-//     static mut res: i32 = 0;
-//     unsafe{
-//         res = a+b;
-//     }
-//     &raw mut res
-// }
