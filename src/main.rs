@@ -48,6 +48,6 @@ fn main() {
 
     // assembly::example();
 
-    println!("{}",!1); 
+    // println!("{}",!1); 
     c::pointer::example();
 }

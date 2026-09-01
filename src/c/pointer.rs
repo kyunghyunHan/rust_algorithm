@@ -1,12 +1,46 @@
 pub fn example() {
  
+ 
+//  { 
+    
+//     let mut to = [0u8; 100].as_mut_ptr();
+//     let from: *const u8 = b"aa\0".as_ptr();
+//     unsafe {
+//         my_str_cpy(to, from);
+//     }
+// }
 
-  
-    // p1();
-    let mut a = 10;
-    let mut b = 20;
-    swap(&mut a, &mut b);
-    println!("{} {}",a,b);
+  let mut to :String = "".to_string();
+  let from = "abc";
+  my_str_cpy2(&mut to, from);
+  println!("{}",to);
+
+
+
+}
+fn my_str_cpy2(to: &mut String, from: &str) {
+    to.clear();
+
+    for ch in from.chars() {
+        to.push(ch);
+    }
+}
+
+unsafe fn my_str_cpy(to: *mut u8, from: *const u8) -> *mut u8 {
+
+    let mut dest = to;
+    let mut src = from;
+
+    // 널 문자('\0', 즉 0)를 만날 때까지 복사
+    while *src != 0 {
+        *dest = *src;
+        dest = dest.add(1);
+        src = src.add(1);
+    }
+    *dest = 0; // 마지막에 널 문자 추가
+
+    to
+
 
 }
 fn swap(a:&mut i32 , b:&mut i32){
