@@ -1,56 +1,101 @@
-use std::cmp::Ordering;
+use std::{
+    cmp::Ordering,
+    fs::File,
+    io::{BufRead, BufReader},
+    ptr,
+};
+
+const MATRIX_ROWS: usize = 3;
+const MATRIX_COLS: usize = 4;
+const ANIMAL_COUNT: usize = 5;
+const ANIMAL_NAME_SIZE: usize = 10;
 
 pub fn example() {
-    let mut arr = [[0; 4]; 3];
+    let mut matrix = [[0; MATRIX_COLS]; MATRIX_ROWS];
+    let matrix_ptr: *mut [[i32; MATRIX_COLS]; MATRIX_ROWS] = &mut matrix;
 
-    let p1: *mut [[i32; 4]; 3] = &mut arr;
+    input_2d_array(matrix_ptr, MATRIX_ROWS, MATRIX_COLS);
+    println!("{matrix:?}");
 
-    input_2d_array(p1, 3, 4);
+    let mut animals = [[0_u8; ANIMAL_NAME_SIZE]; ANIMAL_COUNT];
 
-    println!("{arr:?}");
+    let file = File::open("animal.txt").unwrap();
+    let mut reader = BufReader::new(file);
+
+    input_strings(animals.as_mut_ptr(), animals.len(), &mut reader);
+    print_strings(&animals);
 }
-fn pointer_array(){
-    //as_prr = 배열/슬라이스의 첫 번째 원소를 가리키는 raw pointer를 얻는 것
-    let a1: [i32; 4] = [0; 4];
 
-    // int* 4개짜리 배열
+fn print_strings<const ROWS: usize, const COLS: usize>(strings: &[[u8; COLS]; ROWS]) {
+    for row in strings {
+        for &ch in row {
+            if ch == 0 {
+                break;
+            }
+
+            print!("{}", ch as char);
+        }
+        println!();
+    }
+}
+
+fn pointer_array() {
+    // as_ptr = 배열/슬라이스의 첫 번째 원소를 가리키는 raw pointer를 얻는 것
+    let a1: [i32; 4] = [0; 4];
     let a2: [*const i32; 4] = [std::ptr::null(); 4];
-    
     let a3: [[i32; 4]; 3] = [[0; 4]; 3];
-    
     let a4: [[[i32; 4]; 3]; 2] = [[[0; 4]; 3]; 2];
-    
-    // int[4]를 가리키는 포인터 3개짜리 배열
     let a5: [*const [i32; 4]; 3] = [std::ptr::null(); 3];
 
-    let p1:*const i32 = a1.as_ptr();
-    let p2:*const *const i32 = a2.as_ptr();
-    let p3  = a3.as_ptr();
-    let p4 = a4.as_ptr();
-    let p5 = a5.as_ptr();
+    let _p1: *const i32 = a1.as_ptr();
+    let _p2: *const *const i32 = a2.as_ptr();
+    let _p3: *const [i32; 4] = a3.as_ptr();
+    let _p4: *const [[i32; 4]; 3] = a4.as_ptr();
+    let _p5: *const *const [i32; 4] = a5.as_ptr();
 
-    let a = [[[0;4];3];2];
-    
+    let array3d = [[[0; 4]; 3]; 2];
+    let row_pointers: [*const [i32; 4]; 3] = [ptr::null(); 3];
+    let callbacks: [Option<fn(*mut i32) -> *mut i32>; 2] = [None; 2];
+    let element_pointers: [[*const i32; 4]; 3] = [[ptr::null(); 4]; 3];
+    let array_callbacks: [Option<fn() -> *const [i32; 4]>; 5] = [None; 5];
 
-    let pa = a.as_ptr();
+    let _array3d_ptr = array3d.as_ptr();
+    let _row_pointers_ptr = row_pointers.as_ptr();
+    let _callbacks_ptr = callbacks.as_ptr();
+    let _element_pointers_ptr = element_pointers.as_ptr();
+    let _array_callbacks_ptr = array_callbacks.as_ptr();
+    let _null_pointer: *mut i32 = ptr::null_mut();
+    let _identity_callbacks = [identity_pointer; 2];
+    let _same_callbacks_ptr = callbacks.as_ptr();
 }
-fn input_2d_array(
-    array: *mut [[i32; 4]; 3],
-    row: usize,
-    col: usize,
-) {
-    for i in 0..row {
-        for j in 0..col {
+
+fn identity_pointer(pointer: *mut i32) -> *mut i32 {
+    pointer
+}
+
+fn input_strings(animals: *mut [u8; ANIMAL_NAME_SIZE], count: usize, reader: &mut BufReader<File>) {
+    for i in 0..count {
+        let mut input = String::new();
+        reader.read_line(&mut input).unwrap();
+        let input = input.trim().as_bytes();
+
+        unsafe {
+            let row = &mut *animals.add(i);
+            for (j, &ch) in input.iter().take(ANIMAL_NAME_SIZE - 1).enumerate() {
+                row[j] = ch;
+            }
+        }
+    }
+}
+
+fn input_2d_array(array: *mut [[i32; MATRIX_COLS]; MATRIX_ROWS], rows: usize, columns: usize) {
+    for i in 0..rows {
+        for j in 0..columns {
             let mut input = String::new();
 
-            std::io::stdin()
-                .read_line(&mut input)
-                .unwrap();
+            std::io::stdin().read_line(&mut input).unwrap();
 
-            let value: i32 = input
-                .trim()
-                .parse()
-                .unwrap();
+            let value: i32 = input.trim().parse().unwrap();
 
             unsafe {
                 (*array)[i][j] = value;
@@ -123,12 +168,12 @@ fn pointer_practice() {
     unsafe {
         println!(
             "{} {} {}",
-            size_of_val(&ap),   // C: sizeof(ap)
-            size_of_val(&*ap),  // C: sizeof(*ap)
+            size_of_val(&ap),       // C: sizeof(ap)
+            size_of_val(&*ap),      // C: sizeof(*ap)
             size_of_val(&(*ap)[0]), // C: sizeof(**ap)
         );
     }
-     /* ---------------------------------------------------------
+    /* ---------------------------------------------------------
        a + 1을 따라가 보기
        ---------------------------------------------------------
 
@@ -154,7 +199,6 @@ fn pointer_practice() {
        ↓
        a[1][2]
     */
-
 }
 /// 2차원 배열을 참조와 원시 포인터로 순회하는 간단한 예제입니다.
 pub fn matrix_pointer_example() {
