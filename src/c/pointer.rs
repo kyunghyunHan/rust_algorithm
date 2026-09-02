@@ -1,7 +1,62 @@
 use std::cmp::Ordering;
 
 pub fn example() {
-    pointer_practice();
+    let mut arr = [[0; 4]; 3];
+
+    let p1: *mut [[i32; 4]; 3] = &mut arr;
+
+    input_2d_array(p1, 3, 4);
+
+    println!("{arr:?}");
+}
+fn pointer_array(){
+    //as_prr = 배열/슬라이스의 첫 번째 원소를 가리키는 raw pointer를 얻는 것
+    let a1: [i32; 4] = [0; 4];
+
+    // int* 4개짜리 배열
+    let a2: [*const i32; 4] = [std::ptr::null(); 4];
+    
+    let a3: [[i32; 4]; 3] = [[0; 4]; 3];
+    
+    let a4: [[[i32; 4]; 3]; 2] = [[[0; 4]; 3]; 2];
+    
+    // int[4]를 가리키는 포인터 3개짜리 배열
+    let a5: [*const [i32; 4]; 3] = [std::ptr::null(); 3];
+
+    let p1:*const i32 = a1.as_ptr();
+    let p2:*const *const i32 = a2.as_ptr();
+    let p3  = a3.as_ptr();
+    let p4 = a4.as_ptr();
+    let p5 = a5.as_ptr();
+
+    let a = [[[0;4];3];2];
+    
+
+    let pa = a.as_ptr();
+}
+fn input_2d_array(
+    array: *mut [[i32; 4]; 3],
+    row: usize,
+    col: usize,
+) {
+    for i in 0..row {
+        for j in 0..col {
+            let mut input = String::new();
+
+            std::io::stdin()
+                .read_line(&mut input)
+                .unwrap();
+
+            let value: i32 = input
+                .trim()
+                .parse()
+                .unwrap();
+
+            unsafe {
+                (*array)[i][j] = value;
+            }
+        }
+    }
 }
 fn pointer_practice() {
     /*2차원배열 */
@@ -61,9 +116,45 @@ fn pointer_practice() {
         size_of_val(&&a[0][0]), // C: sizeof(&a[0][0]) → 참조 크기
     );
 
-    unsafe{
-        println!("{:p} {:p}",ap,ap.add(1));
+    unsafe {
+        println!("{:p} {:p}", ap, ap.add(1));
     }
+
+    unsafe {
+        println!(
+            "{} {} {}",
+            size_of_val(&ap),   // C: sizeof(ap)
+            size_of_val(&*ap),  // C: sizeof(*ap)
+            size_of_val(&(*ap)[0]), // C: sizeof(**ap)
+        );
+    }
+     /* ---------------------------------------------------------
+       a + 1을 따라가 보기
+       ---------------------------------------------------------
+
+       a
+       ↓
+       &a[0]
+
+       a + 1
+       ↓
+       &a[1]
+
+       *(a + 1)
+       ↓
+       a[1]
+       ↓ 배열이 표현식에서 int *로 변환
+       &a[1][0]
+
+       *(a + 1) + 2
+       ↓
+       &a[1][2]
+
+       *(*(a + 1) + 2)
+       ↓
+       a[1][2]
+    */
+
 }
 /// 2차원 배열을 참조와 원시 포인터로 순회하는 간단한 예제입니다.
 pub fn matrix_pointer_example() {
