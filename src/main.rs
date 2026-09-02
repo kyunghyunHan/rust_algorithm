@@ -50,4 +50,5 @@ fn main() {
 
     // println!("{}",!1); 
     c::pointer::example();
+    c::project::contact_manager::example();
 }
