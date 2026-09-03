@@ -1,6 +1,7 @@
 use super::super::utils;
 use std::io::{stdin, BufRead, BufReader};
-use std::ptr;
+use std::ptr::null;
+use std::{cmp, ptr};
 #[derive(Debug, Clone, Copy)]
 struct Contact {
     name: [u8; 20],
@@ -39,6 +40,7 @@ fn add_contract(contacts: *mut Contact, count: *mut i32) {
 
     println!("{:?}", name_str);
     println!("{:?}", phone_str);
+    println!("연락처 추가 완료");
 }
 
 fn printf(contract: *mut Contact, count: i32) {
@@ -62,6 +64,35 @@ fn printf(contract: *mut Contact, count: i32) {
         }
     }
 }
+
+fn find_contract(
+    contacts: *const Contact,
+    count: i32,
+    name: *const u8,
+) -> *const Contact {
+    unsafe {
+        for i in 0..count {
+            let contact = contacts.add(i as usize);
+
+            for j in 0..20 {
+                let contact_name = (*contact).name[j];
+                let search_name = *name.add(j);
+
+                // 둘 다 문자열 끝까지 같으면 찾은 것
+                if contact_name == 0 && search_name == 0 {
+                    return contact;
+                }
+
+                // 중간에 하나라도 다르면 다음 연락처
+                if contact_name != search_name {
+                    break;
+                }
+            }
+        }
+
+        std::ptr::null()
+    }
+}
 pub fn example() {
     let mut count: i32 = 0;
     let mut menu;
@@ -73,6 +104,7 @@ pub fn example() {
         "연락처 삭제",
         "이름순 정렬",
     ]);
+    let mut name = [0u8; 20];
     let mut contacts: [Contact; MAX_CONTACTS] = [Contact {
         name: [0; 20],
         phone: [0; 20],
@@ -89,19 +121,40 @@ pub fn example() {
 
         reader.read_line(&mut input).unwrap();
         menu = input.as_str();
+        println!("{}", menu);
         println!("선택: ");
 
+        drop(reader); // ← 여기서 lock 해제
+
         match menu {
-            "0" => {
+            "0\n" => {
                 println!("종료합니다.");
+                return;
             }
-            "1" => {
-                add_contract(contacts.as_mut_ptr(), count as *mut i32);
-                break;
+            "1\n" => {
+                add_contract(contacts.as_mut_ptr(), &mut count);
             }
-            "2" => {
+            "2\n" => {
                 printf(contacts.as_mut_ptr(), count);
-                break;
+            }
+            "3\n" => {
+                println!("검색할 이름 : ");
+                input.clear();
+                let mut reader = BufReader::new(stdin().lock());
+                reader.read_line(&mut input).unwrap();
+                let name_bytes = input.trim().as_bytes();
+                name[..name_bytes.len()].copy_from_slice(name_bytes);
+                let result: *const Contact = find_contract(contacts.as_ptr(), count, name.as_ptr());
+                println!("this");
+
+                unsafe {
+                    if result != null() {
+                        println!("이름 : {:?}", *result)
+                    }else{
+                        println!("검색대지 않았스빈다.");
+
+                    }
+                }
             }
             _ => {}
         }

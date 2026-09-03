@@ -1,3 +1,5 @@
+use crate::c::utils::{exchange, sum_1d};
+
 use super::utils::sum_2d;
 use std::{
     cmp::Ordering,
@@ -12,10 +14,21 @@ const ANIMAL_COUNT: usize = 5;
 const ANIMAL_NAME_SIZE: usize = 10;
 
 pub fn example() {
-    let mut a = [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]];
-    let sum = sum_2d(a.as_mut_ptr(), a.len(), a[0].len());
+    let mut a = 10;
+    let mut b = 20;
 
-    println!("{}", sum);
+    let mut ap: *mut i32 = &mut a;
+    let mut bp: *mut i32 = &mut b;
+    let mut app: *mut *mut i32 = &mut ap;
+    let mut bpp: *mut *mut i32 = &mut bp;
+    exchange(&mut ap, &mut bp);
+    println!("{} {} {:?} {:?} ", a, b, ap, bp);
+    exchange(&mut ap, &mut bp);
+    unsafe{
+        println!("{} {} {:?} {:?} ", a, b, *ap, *bp);
+    }
+
+
 }
 
 fn file() {

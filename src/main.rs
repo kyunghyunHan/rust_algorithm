@@ -49,6 +49,6 @@ fn main() {
     // assembly::example();
 
     // println!("{}",!1); 
-    c::pointer::example();
-    // c::project::contact_manager::example();
+    // c::pointer::example();
+    c::project::contact_manager::example();
 }
