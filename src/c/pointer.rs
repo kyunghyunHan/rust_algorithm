@@ -1,3 +1,4 @@
+use super::utils::sum_2d;
 use std::{
     cmp::Ordering,
     fs::File,
@@ -11,6 +12,13 @@ const ANIMAL_COUNT: usize = 5;
 const ANIMAL_NAME_SIZE: usize = 10;
 
 pub fn example() {
+    let mut a = [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]];
+    let sum = sum_2d(a.as_mut_ptr(), a.len(), a[0].len());
+
+    println!("{}", sum);
+}
+
+fn file() {
     let mut matrix = [[0; MATRIX_COLS]; MATRIX_ROWS];
     let matrix_ptr: *mut [[i32; MATRIX_COLS]; MATRIX_ROWS] = &mut matrix;
 
@@ -24,8 +32,10 @@ pub fn example() {
 
     input_strings(animals.as_mut_ptr(), animals.len(), &mut reader);
     print_strings(&animals);
-}
 
+    let a = "rabbit";
+    let p = &"rabbir".as_ptr();
+}
 fn print_strings<const ROWS: usize, const COLS: usize>(strings: &[[u8; COLS]; ROWS]) {
     for row in strings {
         for &ch in row {
