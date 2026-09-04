@@ -43,8 +43,6 @@ pub fn print_var_array(pary: *const *const i32, n: i32) {
     for i in 0..n {
         unsafe {
             print_1d_array(*pary.add(i as usize), **(pary.add(i as usize)));
-
         }
     }
-
 }

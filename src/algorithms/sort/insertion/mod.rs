@@ -34,5 +34,4 @@ pub fn example() {
     let n = arr.len();
     insertion_sort(&mut arr, n);
     println!("After:  {:?}", arr);
-
 }

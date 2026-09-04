@@ -15,10 +15,10 @@ fn present_value(payoff: f64, rate: f64, t: f64) -> f64 {
 }
 
 pub fn example() {
-    let threshold = 50.0;  // 50인치 기준
-    let payout = 1.0;      // 지급금액 $1
-    let rate = 0.05;       // 할인율 5%
-    let t = 1.0;           // 1년
+    let threshold = 50.0; // 50인치 기준
+    let payout = 1.0; // 지급금액 $1
+    let rate = 0.05; // 할인율 5%
+    let t = 1.0; // 1년
 
     let mut rng = rand::thread_rng();
     let mut total_value = 0.0;
@@ -33,5 +33,8 @@ pub fn example() {
     }
 
     let expected_value = total_value / simulations as f64;
-    println!("Expected present value of derivative ≈ ${:.4}", expected_value);
+    println!(
+        "Expected present value of derivative ≈ ${:.4}",
+        expected_value
+    );
 }

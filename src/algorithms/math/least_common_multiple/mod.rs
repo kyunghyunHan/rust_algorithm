@@ -7,7 +7,4 @@ fn least_common_multiple(a: i64, b: i64) -> i64 {
     }
 }
 
-pub fn example() {
-
-    
-}
+pub fn example() {}

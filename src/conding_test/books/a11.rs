@@ -43,8 +43,7 @@ fn main() {
                 .map(|x| x.parse().unwrap())
                 .collect::<Vec<i32>>();
             let answer = search(x, n, a);
-            writeln!(writer,"{}",answer+1).unwrap();
+            writeln!(writer, "{}", answer + 1).unwrap();
         }
     }
-    
 }

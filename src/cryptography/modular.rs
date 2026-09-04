@@ -43,7 +43,15 @@ fn modular_arithmetic_properties() {
     println!("  ({} + {}) mod {} = {}", a, b, m, add_direct);
     println!(
         "  (({} mod {}) + ({} mod {})) mod {} = ({} + {}) mod {} = {}",
-        a, m, b, m, m, modular_remainder(a, m), modular_remainder(b, m), m, add_modular
+        a,
+        m,
+        b,
+        m,
+        m,
+        modular_remainder(a, m),
+        modular_remainder(b, m),
+        m,
+        add_modular
     );
     println!("  Results equal? {}", add_direct == add_modular);
     println!();
@@ -54,11 +62,24 @@ fn modular_arithmetic_properties() {
     println!("Multiplication Property:");
     println!(
         "  ({} × {}) mod {} = {} mod {} = {}",
-        a, b, m, a * b, m, mul_direct
+        a,
+        b,
+        m,
+        a * b,
+        m,
+        mul_direct
     );
     println!(
         "  (({} mod {}) × ({} mod {})) mod {} = ({} × {}) mod {} = {}",
-        a, m, b, m, m, modular_remainder(a, m), modular_remainder(b, m), m, mul_modular
+        a,
+        m,
+        b,
+        m,
+        m,
+        modular_remainder(a, m),
+        modular_remainder(b, m),
+        m,
+        mul_modular
     );
     println!("  Results equal? {}", mul_direct == mul_modular);
     println!();
@@ -70,7 +91,12 @@ fn modular_arithmetic_properties() {
     println!("Exponentiation Property:");
     println!(
         "  {}^{} mod {} = {} mod {} = {}",
-        a, exp, m, a.pow(exp), m, pow_direct
+        a,
+        exp,
+        m,
+        a.pow(exp),
+        m,
+        pow_direct
     );
     println!("  Using modular exponentiation: {}", pow_modular);
     println!();
@@ -92,15 +118,27 @@ fn modular_exponentiation(base: i64, exp: i64, modulus: i64) -> i64 {
         if exp % 2 == 1 {
             let old_result = result;
             result = (result * base) % modulus;
-            println!("    exp is odd -> result = {} × {} = {} ≡ {} (mod {})", 
-                     old_result, base, old_result * base, result, modulus);
+            println!(
+                "    exp is odd -> result = {} × {} = {} ≡ {} (mod {})",
+                old_result,
+                base,
+                old_result * base,
+                result,
+                modulus
+            );
         }
         exp >>= 1;
         if exp > 0 {
             let old_base = base;
             base = (base * base) % modulus;
-            println!("    base = {}² = {} ≡ {} (mod {}), remaining exp: {}", 
-                     old_base, old_base * old_base, base, modulus, exp);
+            println!(
+                "    base = {}² = {} ≡ {} (mod {}), remaining exp: {}",
+                old_base,
+                old_base * old_base,
+                base,
+                modulus,
+                exp
+            );
         }
     }
 
@@ -160,7 +198,10 @@ fn modular_inverse_example() {
         let product = a * x;
         let result = modular_remainder(product, m);
         let is_inverse = if result == 1 { " ← Inverse!" } else { "" };
-        println!("{} |   {:2}   |    {}    {}", x, product, result, is_inverse);
+        println!(
+            "{} |   {:2}   |    {}    {}",
+            x, product, result, is_inverse
+        );
     }
 
     match extended_gcd(a, m) {
@@ -215,18 +256,41 @@ fn chinese_remainder_theorem() {
 
     println!("Step-by-step solution:");
     let product: i32 = moduli.iter().product();
-    println!("1. M = {} × {} × {} = {}", moduli[0], moduli[1], moduli[2], product);
+    println!(
+        "1. M = {} × {} × {} = {}",
+        moduli[0], moduli[1], moduli[2], product
+    );
 
     let mut solution = 0;
     for i in 0..remainders.len() {
         let mi = product / moduli[i];
-        println!("2-{}. M{} = {} / {} = {}", i+1, i+1, product, moduli[i], mi);
-        
+        println!(
+            "2-{}. M{} = {} / {} = {}",
+            i + 1,
+            i + 1,
+            product,
+            moduli[i],
+            mi
+        );
+
         match extended_gcd(mi, moduli[i]) {
             Some(yi) => {
-                println!("     y{} = {} mod {} inverse = {}", i+1, mi, moduli[i], yi);
+                println!(
+                    "     y{} = {} mod {} inverse = {}",
+                    i + 1,
+                    mi,
+                    moduli[i],
+                    yi
+                );
                 let term = remainders[i] * mi * yi;
-                println!("     term{} = {} × {} × {} = {}", i+1, remainders[i], mi, yi, term);
+                println!(
+                    "     term{} = {} × {} × {} = {}",
+                    i + 1,
+                    remainders[i],
+                    mi,
+                    yi,
+                    term
+                );
                 solution += term;
             }
             None => {
@@ -239,13 +303,16 @@ fn chinese_remainder_theorem() {
     solution = modular_remainder(solution, product);
     println!();
     println!("3. Solution: x ≡ {} (mod {})", solution, product);
-    
+
     // Verification
     println!();
     println!("Verification:");
     for i in 0..remainders.len() {
         let check = solution % moduli[i];
-        println!("  {} mod {} = {} (original: {})", solution, moduli[i], check, remainders[i]);
+        println!(
+            "  {} mod {} = {} (original: {})",
+            solution, moduli[i], check, remainders[i]
+        );
     }
 }
 
@@ -256,18 +323,27 @@ fn real_world_applications() {
     println!("1. ISBN-10 Checksum (using mod 11):");
     let isbn = "020161622"; // excluding last digit
     println!("   ISBN: {}-?", isbn);
-    
+
     let mut sum = 0;
     for (i, digit) in isbn.chars().enumerate() {
         let d = digit.to_digit(10).unwrap() as i32;
         let weight = 10 - i as i32;
         sum += d * weight;
-        println!("   Position {}: {} × {} = {}", i+1, d, weight, d * weight);
+        println!("   Position {}: {} × {} = {}", i + 1, d, weight, d * weight);
     }
-    
+
     let checksum = modular_remainder(11 - (sum % 11), 11);
-    let check_digit = if checksum == 10 { 'X' } else { char::from_digit(checksum as u32, 10).unwrap() };
-    println!("   Sum: {}, Checksum: {} mod 11 = {}", sum, 11 - (sum % 11), checksum);
+    let check_digit = if checksum == 10 {
+        'X'
+    } else {
+        char::from_digit(checksum as u32, 10).unwrap()
+    };
+    println!(
+        "   Sum: {}, Checksum: {} mod 11 = {}",
+        sum,
+        11 - (sum % 11),
+        checksum
+    );
     println!("   Complete ISBN: {}-{}", isbn, check_digit);
     println!();
 
@@ -277,15 +353,22 @@ fn real_world_applications() {
     println!("   Table size: 7");
     println!("   Key | Hash (key mod 7) | Position | Collision?");
     println!("   ----|------------------|----------|----------");
-    
+
     let mut used_positions = vec![false; 7];
     for key in keys {
         let hash = modular_remainder(key, 7);
-        let collision = if used_positions[hash as usize] { "Collision!" } else { "" };
+        let collision = if used_positions[hash as usize] {
+            "Collision!"
+        } else {
+            ""
+        };
         used_positions[hash as usize] = true;
-        println!("   {:2}  |        {:2}        |    {}     | {}", key, hash, hash, collision);
+        println!(
+            "   {:2}  |        {:2}        |    {}     | {}",
+            key, hash, hash, collision
+        );
     }
-    
+
     println!();
     println!("   Collision resolution methods:");
     println!("   • Chaining: Store in linked list at same position");
@@ -296,7 +379,7 @@ fn real_world_applications() {
     println!("3. RSA Encryption Basics:");
     println!("   Public key: (n=33, e=3)");
     println!("   Private key: (n=33, d=7)");
-    
+
     let message = 4;
     let n = 33;
     let e = 3;
@@ -305,7 +388,10 @@ fn real_world_applications() {
     let decrypted = modular_exponentiation(encrypted, d, n);
     println!("   Message: {}", message);
     println!("   Encryption: {}^{} mod {} = {}", message, e, n, encrypted);
-    println!("   Decryption: {}^{} mod {} = {}", encrypted, d, n, decrypted);
+    println!(
+        "   Decryption: {}^{} mod {} = {}",
+        encrypted, d, n, decrypted
+    );
     println!();
 }
 
@@ -327,9 +413,11 @@ pub fn example() {
     println!("3. What is the modular inverse of 5 mod 12?");
     println!("4. Find x where x ≡ 1 (mod 4) and x ≡ 2 (mod 9)");
     println!();
-    println!("Answers: 1) {}, 2) {}, 3) {}, 4) {}", 
-             modular_remainder(47, 13), 
-             modular_remainder(-23, 8),
-             extended_gcd(5, 12).unwrap_or(0),
-             29);
+    println!(
+        "Answers: 1) {}, 2) {}, 3) {}, 4) {}",
+        modular_remainder(47, 13),
+        modular_remainder(-23, 8),
+        extended_gcd(5, 12).unwrap_or(0),
+        29
+    );
 }

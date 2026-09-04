@@ -3,8 +3,8 @@ use std::f64::consts::E;
 /// 복리 주기 정의
 #[derive(Clone, Copy, Debug)]
 enum Compounding {
-    PerYear(u32),   // 1년에 m번
-    Continuous,     // 연속복리
+    PerYear(u32), // 1년에 m번
+    Continuous,   // 연속복리
 }
 
 /// 미래가치 계산
@@ -31,9 +31,9 @@ fn continuous_rate_from_discrete(r_m: f64, m: u32) -> f64 {
 }
 
 pub fn example() {
-    let N = 100.0;   // 원금
-    let r = 0.05;    // 연 5%
-    let T = 2.0;     // 2년 투자
+    let N = 100.0; // 원금
+    let r = 0.05; // 연 5%
+    let T = 2.0; // 2년 투자
 
     let cases = [
         (Compounding::PerYear(1), "Annual (m=1)"),
@@ -43,7 +43,10 @@ pub fn example() {
         (Compounding::Continuous, "Continuous"),
     ];
 
-    println!("=== Future Value Comparison (N={N}, r={:.2}%, T={T}y) ===", r * 100.0);
+    println!(
+        "=== Future Value Comparison (N={N}, r={:.2}%, T={T}y) ===",
+        r * 100.0
+    );
     for (c, label) in cases {
         let fv = future_value(N, r, T, c);
         println!("{:<15} -> {:.4}", label, fv);
@@ -56,12 +59,21 @@ pub fn example() {
     let r_cont_back = continuous_rate_from_discrete(r_m, m);
 
     println!("\n=== Rate Conversion Example ===");
-    println!("Continuous r = {:.4}% → Discrete (m=12) r_m = {:.4}%", r_cont * 100.0, r_m * 100.0);
+    println!(
+        "Continuous r = {:.4}% → Discrete (m=12) r_m = {:.4}%",
+        r_cont * 100.0,
+        r_m * 100.0
+    );
     println!("Back to continuous: {:.4}%", r_cont_back * 100.0);
 
     // 실제 금액 비교
     let fv_cont = future_value(N, r_cont, T, Compounding::Continuous);
     let fv_m = future_value(N, r_m, T, Compounding::PerYear(m));
     println!("\nCheck equality at T={T} years:");
-    println!(" FV_cont = {:.4}\n FV_m    = {:.4}\n diff    = {:.8}", fv_cont, fv_m, (fv_cont - fv_m).abs());
+    println!(
+        " FV_cont = {:.4}\n FV_m    = {:.4}\n diff    = {:.8}",
+        fv_cont,
+        fv_m,
+        (fv_cont - fv_m).abs()
+    );
 }

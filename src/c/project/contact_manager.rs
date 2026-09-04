@@ -65,11 +65,7 @@ fn printf(contract: *mut Contact, count: i32) {
     }
 }
 
-fn find_contract(
-    contacts: *const Contact,
-    count: i32,
-    name: *const u8,
-) -> *const Contact {
+fn find_contract(contacts: *const Contact, count: i32, name: *const u8) -> *const Contact {
     unsafe {
         for i in 0..count {
             let contact = contacts.add(i as usize);
@@ -150,9 +146,8 @@ pub fn example() {
                 unsafe {
                     if result != null() {
                         println!("이름 : {:?}", *result)
-                    }else{
+                    } else {
                         println!("검색대지 않았스빈다.");
-
                     }
                 }
             }

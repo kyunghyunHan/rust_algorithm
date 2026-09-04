@@ -100,7 +100,8 @@ fn pad_matrix(matrix: &Vec<Vec<usize>>, new_size: usize) -> Vec<Vec<usize>> {
 }
 
 fn unpad_matrix(matrix: Vec<Vec<usize>>, original_size: usize) -> Vec<Vec<usize>> {
-    matrix.into_iter()
+    matrix
+        .into_iter()
         .take(original_size)
         .map(|row| row.into_iter().take(original_size).collect())
         .collect()
@@ -131,11 +132,11 @@ fn matrix_multiply_recursive(
 }
 pub fn example() {
     let n = 3;
-    
+
     let mut a = vec![vec![1, 2, 3], vec![4, 5, 6], vec![7, 8, 9]];
     let mut b = vec![vec![9, 8, 7], vec![6, 5, 4], vec![3, 2, 1]];
     let mut c = vec![vec![0; n]; n];
-    
+
     matrix_multiply_recursive(&mut a, &mut b, &mut c, n);
     // matrix_multiply(&mut a, &mut b, &mut c, n);
 

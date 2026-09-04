@@ -1,7 +1,3 @@
-pub fn example(){
+pub fn example() {}
 
-}
-
-fn floyd(){
-    
-}
+fn floyd() {}

@@ -13,7 +13,6 @@
 
 */
 
-
 fn parent(i: usize) -> usize {
     i / 2
 }
@@ -52,7 +51,7 @@ fn build_max_heap(arr: &mut [usize], n: usize) {
 fn heapsort(arr: &mut [usize]) {
     let mut n = arr.len();
     build_max_heap(arr, n);
-    
+
     for i in (1..n).rev() {
         arr.swap(0, i);
         n -= 1;
@@ -60,7 +59,7 @@ fn heapsort(arr: &mut [usize]) {
     }
 }
 pub fn example() {
-    let mut a:[usize;10] =[16,14,10,8,7,9,3,2,4,1];
+    let mut a: [usize; 10] = [16, 14, 10, 8, 7, 9, 3, 2, 4, 1];
     heapsort(&mut a);
-    println!("{:?}",a);
+    println!("{:?}", a);
 }

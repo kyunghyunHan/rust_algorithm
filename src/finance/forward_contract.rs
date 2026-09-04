@@ -39,8 +39,8 @@ pub fn value_short_forward_no_div(s_t: f64, k: f64, r: f64, tau: f64) -> f64 {
 /// === 본문 예시 검증 ===
 /// 금리 0, 주가 항상 100, 배당 없음 → F = 100, V = 100 - K (모든 t)
 pub fn example_value_with_zero_rate_and_constant_price(k: f64) -> (f64, f64) {
-    let f = 100.0;              // F(t,T)
-    let v = 100.0 - k;          // V_K(t,T)
+    let f = 100.0; // F(t,T)
+    let v = 100.0 - k; // V_K(t,T)
     (f, v)
 }
 

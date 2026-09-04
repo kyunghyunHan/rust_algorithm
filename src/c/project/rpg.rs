@@ -66,7 +66,8 @@ fn print_player(player: *const Player) {
             println!("장착 아이템 : 없음");
         } else {
             println!("장착 아이템 : {:?}", (*(*player).weapon).name);
-        }    }
+        }
+    }
 }
 pub fn example() {
     let mut player: *mut Player = &mut Player::default();
@@ -108,13 +109,10 @@ pub fn example() {
                 println!("게임종료");
                 return;
             }
-            1=> {
+            1 => {
                 print_player(player);
-      
             }
-            _=>{
-
-            }
+            _ => {}
         }
     }
 }

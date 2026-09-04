@@ -41,7 +41,7 @@ fn main() {
             }
             sarr[0] = 0;
             for i in 1..=n {
-                sarr[i] = sarr[i - 1] + a[i-1]
+                sarr[i] = sarr[i - 1] + a[i - 1]
             }
 
             for j in 1..=q {

@@ -12,7 +12,6 @@
 - 정렬된 두개의 하위 배열 A[p:q]와 A[q+1:r]을 A[p:r]로 병합하여 정렬된 해를 구한다.
 */
 
-
 fn merge(arr: &mut Vec<i32>, p: i32, q: i32, r: i32) {
     let nl = q - p + 1; //A[p:q]의 크기
     let nr = r - q; //A[q +1:r]의 크기
@@ -27,10 +26,10 @@ fn merge(arr: &mut Vec<i32>, p: i32, q: i32, r: i32) {
         //[q+1:r]를 R[0:nr-1]로복사
         r_arr[j as usize] = arr[(q + j + 1) as usize]
     }
-    let mut i = 0;//i는 L에 남아있는 가장 작은 원소를 인덱싱
-    let mut j = 0;//j는 R에 남아있는 가장 작은 원소를 인덱싱
-    let mut k = p;//k는 채울 A의 위치를 인덱싱
-    //각 배열 L과 R에 병합되지 않은 원소가 포함되어 있으면 병합되지 않은 원소중 가장 작은 원소를 A[p:r]로 다시복사
+    let mut i = 0; //i는 L에 남아있는 가장 작은 원소를 인덱싱
+    let mut j = 0; //j는 R에 남아있는 가장 작은 원소를 인덱싱
+    let mut k = p; //k는 채울 A의 위치를 인덱싱
+                   //각 배열 L과 R에 병합되지 않은 원소가 포함되어 있으면 병합되지 않은 원소중 가장 작은 원소를 A[p:r]로 다시복사
     while i < nl && j < nr {
         if l_arr[i as usize] <= r_arr[j as usize] {
             arr[k as usize] = l_arr[i as usize];
@@ -55,13 +54,14 @@ fn merge(arr: &mut Vec<i32>, p: i32, q: i32, r: i32) {
     }
 }
 fn merge_sort(arr: &mut Vec<i32>, p: i32, r: i32) {
-    if p >= r { //0또는 하나의 원소
+    if p >= r {
+        //0또는 하나의 원소
         return;
     }
 
-    let q = (p + r) / 2;  //[p:r]의 중간점
-    merge_sort(arr, p, q);  //A[p:r]를 재귀적으로 정렬
-    merge_sort(arr, q + 1, r);//A[q+1:r] 을 재귀적으로 정렬
+    let q = (p + r) / 2; //[p:r]의 중간점
+    merge_sort(arr, p, q); //A[p:r]를 재귀적으로 정렬
+    merge_sort(arr, q + 1, r); //A[q+1:r] 을 재귀적으로 정렬
     merge(arr, p, q, r);
     //A[p:q]와 A[q+1:r]을 A[p:r]로 병합
 }

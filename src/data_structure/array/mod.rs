@@ -134,7 +134,6 @@ pub fn example() {
     println!("Front: {:?}", arr.front()); // Some(0)
     println!("Back: {:?}", arr.back()); // Some(3)
 
-   
     arr.insert(2, 99).unwrap();
     println!("After insert: {:?}", arr.to_vec()); // [0, 1, 99, 2, 3]
 
@@ -151,6 +150,4 @@ pub fn example() {
 
     arr.clear();
     println!("After clear: {:?}", arr.to_vec()); // []
-
-
 }

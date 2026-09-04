@@ -118,5 +118,3 @@ pub fn example() {
     println!("dequeue -> {:?}", q.dequeue());
     println!("Queue empty? {}", q.is_empty());
 }
-
-

@@ -1,6 +1,6 @@
 use std::process::Command;
-use std::thread;
 use std::sync::{Arc, Mutex};
+use std::thread;
 
 fn example() {
     let output = Command::new("echo")
@@ -35,6 +35,4 @@ fn example() {
         h.join().unwrap();
     }
     println!("Result = {}", *data.lock().unwrap());
-
-
 }

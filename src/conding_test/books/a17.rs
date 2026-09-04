@@ -44,6 +44,4 @@ pub fn main() {
         .split_whitespace()
         .map(|x| x.parse().unwrap())
         .collect::<Vec<usize>>();
-
-
 }

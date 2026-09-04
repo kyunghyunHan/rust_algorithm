@@ -1,13 +1,12 @@
 use algorithm::{
     algorithms::{graph, math, np_complete, sort},
-    assembly, conding_test,
+    assembly, c, conding_test,
     cryptography::{
         aes, caesar_cipher, md5, merkle_tree, modular, roter, sha2, transposition_cipher,
         vigenere_cipher,
     },
     data_structure::{self, queue},
     finance::{derivative, finance1_1, zero},
-    c
 };
 
 fn main() {
@@ -48,7 +47,8 @@ fn main() {
 
     // assembly::example();
 
-    // println!("{}",!1); 
+    // println!("{}",!1);
     // c::pointer::example();
-    c::project::rpg::example();
+    // c::project::rpg::example();
+    c::project::op::example();
 }

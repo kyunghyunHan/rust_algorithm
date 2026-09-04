@@ -13,11 +13,11 @@ fn solution(movie: Vec<String>) -> Vec<String> {
     answer.sort_by(|a, b| {
         let freq_a = frequency.get(a).unwrap();
         let freq_b = frequency.get(b).unwrap();
-        
+
         if freq_a != freq_b {
-            freq_b.cmp(freq_a)  // 빈도수 내림차순
+            freq_b.cmp(freq_a) // 빈도수 내림차순
         } else {
-            a.cmp(b)  // 같은 빈도수일 때 문자열 사전순
+            a.cmp(b) // 같은 빈도수일 때 문자열 사전순
         }
     });
 

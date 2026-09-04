@@ -16,5 +16,5 @@ pub fn example() {
     let b = stalin_sort(a);
 
     println!("{:?}", b);
-    println!("{:?}",b);
+    println!("{:?}", b);
 }

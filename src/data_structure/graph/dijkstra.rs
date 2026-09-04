@@ -3,6 +3,4 @@ dijkstra
 
 */
 
-pub fn example(){
-    
-}
+pub fn example() {}

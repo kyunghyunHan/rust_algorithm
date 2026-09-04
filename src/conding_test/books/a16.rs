@@ -33,15 +33,15 @@ pub fn main() {
     reader.read_line(&mut input).unwrap();
     let n = input.trim().parse::<usize>().unwrap();
 
-    let mut a = vec![0;100009];
-    for i in 2..=n{
+    let mut a = vec![0; 100009];
+    for i in 2..=n {
         input.clear();
         reader.read_line(&mut input).unwrap();
         a[i] = input.trim().parse::<i32>().unwrap();
     }
     input.clear();
-    let mut b = vec![0;100009];
-    for i in 3..=n{
+    let mut b = vec![0; 100009];
+    for i in 3..=n {
         reader.read_line(&mut input).unwrap();
         b[i] = input.trim().parse::<i32>().unwrap();
     }

@@ -4,7 +4,6 @@ pub fn example() {
     let b = 2;
     println!("{}", add(a, b));
     println!("{}", add_asm(a, b));
-
 }
 
 #[inline(never)]

@@ -1,5 +1,5 @@
-use std::collections::HashSet;
 use rand::Rng;
+use std::collections::HashSet;
 
 // 사건(Event)을 HashSet으로 설정
 type Event = HashSet<i32>;
@@ -49,8 +49,8 @@ fn main() {
 
     // 사건 정의
     let event_a: Event = [1, 2, 3].into_iter().collect(); // 1,2,3 나오기
-    let event_b: Event = [3, 4].into_iter().collect();    // 3,4 나오기
-    let event_c: Event = [7].into_iter().collect();       // 공사건 예시
+    let event_b: Event = [3, 4].into_iter().collect(); // 3,4 나오기
+    let event_c: Event = [7].into_iter().collect(); // 공사건 예시
 
     // 합사건
     let a_union_b = union(&event_a, &event_b);
@@ -68,8 +68,14 @@ fn main() {
     println!("C는 공사건인가? {}", is_empty(&event_c));
 
     // 상호배타 여부
-    println!("A와 C는 상호배타인가? {}", is_mutually_exclusive(&event_a, &event_c));
-    println!("A와 B는 상호배타인가? {}", is_mutually_exclusive(&event_a, &event_b));
+    println!(
+        "A와 C는 상호배타인가? {}",
+        is_mutually_exclusive(&event_a, &event_c)
+    );
+    println!(
+        "A와 B는 상호배타인가? {}",
+        is_mutually_exclusive(&event_a, &event_b)
+    );
 
     // 시뮬레이션: 주사위에서 짝수가 나올 확률 추정
     let p = sample_space_dice(1_000_000);

@@ -12,21 +12,42 @@ const MATRIX_ROWS: usize = 3;
 const MATRIX_COLS: usize = 4;
 const ANIMAL_COUNT: usize = 5;
 const ANIMAL_NAME_SIZE: usize = 10;
-fn test() {
-    println!("q");
+unsafe fn swap02(ap: *mut std::ffi::c_void, bp: *mut std::ffi::c_void, size: usize) {
+    let mut temp = [0u8; 100];
+
+    assert!(size <= temp.len());
+
+    unsafe {
+        // temp <- ap
+        std::ptr::copy(ap as *const u8, temp.as_mut_ptr(), size);
+
+        // ap <- bp
+        std::ptr::copy(bp as *const u8, ap as *mut u8, size);
+
+        // bp <- temp
+        std::ptr::copy(temp.as_ptr(), bp as *mut u8, size);
+    }
 }
-fn test1() {
-    println!("w");
+fn sort(ary: *mut i32, n: usize) {
+    unsafe {
+        let mut s = n - 1;
+        for i in 0..s {
+            for j in i + 1..n {
+                if *ary.add(i) > *ary.add(j) {
+                    let mut temp: i32 = 0;
+
+                    std::ptr::copy(ary.add(i), &mut temp, 1);
+                    std::ptr::copy(ary.add(j), ary.add(i), 1);
+                    std::ptr::copy(&temp, ary.add(j), 1);
+                }
+            }
+        }
+    }
 }
 pub fn example() {
-    let mut p: fn() -> () = test;
-    p = test1;
-
-    p();
-
-    p = test;
-
-    p();
+    let mut ary = [4, 2, 5, 1, 3];
+    sort(ary.as_mut_ptr(), ary.len());
+    print!("{:?}", ary);
 }
 
 fn file() {

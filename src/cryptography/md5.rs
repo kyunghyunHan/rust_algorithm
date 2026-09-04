@@ -22,7 +22,7 @@ fn h(x: u32, y: u32, z: u32) -> u32 {
 #[inline]
 fn i_func(x: u32, y: u32, z: u32) -> u32 {
     y ^ (x | !z)
-} 
+}
 
 /// S: per-round left-rotation amounts
 const S: [u32; 64] = [
@@ -82,7 +82,7 @@ impl Md5 {
             if self.buffer.len() == 64 {
                 let mut block = [0u8; 64];
                 block.copy_from_slice(&self.buffer);
-                self.process_block(&block); 
+                self.process_block(&block);
                 self.buffer.clear();
             }
         }
@@ -90,7 +90,7 @@ impl Md5 {
         while input.len() >= 64 {
             let mut block = [0u8; 64];
             block.copy_from_slice(&input[..64]);
-            self.process_block(&block); 
+            self.process_block(&block);
             input = &input[64..];
         }
 

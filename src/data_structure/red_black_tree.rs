@@ -1,1 +1,1 @@
-fn example(){}
+fn example() {}

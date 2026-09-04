@@ -20,5 +20,5 @@ impl<T> Vector<T> {
     pub fn remove() {}
     pub fn find() {}
     pub fn resize() {}
-    pub fn free_memory(){}
+    pub fn free_memory() {}
 }

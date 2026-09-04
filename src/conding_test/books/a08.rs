@@ -35,7 +35,6 @@ fn main() {
         }
     }
 
-   
     line.clear();
     reader.read_line(&mut line).unwrap();
     let q: i32 = line.trim().parse().unwrap();

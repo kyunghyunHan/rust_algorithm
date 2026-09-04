@@ -28,8 +28,8 @@ fn pv_continuous(r: f64, t_now: f64, cashflows: &[(f64, f64)]) -> f64 {
 }
 
 pub fn example() {
-    let r = 0.05;       // 5% annual rate
-    let tau = 2.0;      // 2 years
+    let r = 0.05; // 5% annual rate
+    let tau = 2.0; // 2 years
     let ms = [1.0, 2.0, 12.0, 365.0];
 
     println!("=== Discount Factors for r = 5%, tau = 2y ===");
@@ -41,7 +41,11 @@ pub fn example() {
     println!("\n=== Recover Zero Rates from a given Z ===");
     let z = df_continuous(r, tau);
     let r_from_z_cont = zero_rate_cont_from_df(z, tau);
-    println!("From Z (continuous): Z = {:.6} -> r = {:.6}%", z, r_from_z_cont * 100.0);
+    println!(
+        "From Z (continuous): Z = {:.6} -> r = {:.6}%",
+        z,
+        r_from_z_cont * 100.0
+    );
     for &m in &ms {
         let r_from_z_disc = zero_rate_disc_from_df(z, m, tau);
         println!("From Z (m={:>3.0}): r = {:.6}%", m, r_from_z_disc * 100.0);

@@ -1,5 +1,3 @@
-pub fn example(){
+pub fn example() {}
 
-}
-
-fn find_eulerian_path(){}
+fn find_eulerian_path() {}
