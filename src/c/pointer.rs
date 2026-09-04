@@ -1,4 +1,4 @@
-use crate::c::utils::{exchange, sum_1d};
+use crate::c::utils::{exchange, print_var_array, sum_1d};
 
 use super::utils::sum_2d;
 use std::{
@@ -12,23 +12,21 @@ const MATRIX_ROWS: usize = 3;
 const MATRIX_COLS: usize = 4;
 const ANIMAL_COUNT: usize = 5;
 const ANIMAL_NAME_SIZE: usize = 10;
-
+fn test() {
+    println!("q");
+}
+fn test1() {
+    println!("w");
+}
 pub fn example() {
-    let mut a = 10;
-    let mut b = 20;
+    let mut p: fn() -> () = test;
+    p = test1;
 
-    let mut ap: *mut i32 = &mut a;
-    let mut bp: *mut i32 = &mut b;
-    let mut app: *mut *mut i32 = &mut ap;
-    let mut bpp: *mut *mut i32 = &mut bp;
-    exchange(&mut ap, &mut bp);
-    println!("{} {} {:?} {:?} ", a, b, ap, bp);
-    exchange(&mut ap, &mut bp);
-    unsafe{
-        println!("{} {} {:?} {:?} ", a, b, *ap, *bp);
-    }
+    p();
 
+    p = test;
 
+    p();
 }
 
 fn file() {

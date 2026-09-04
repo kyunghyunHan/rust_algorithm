@@ -29,3 +29,22 @@ pub fn exchange(a: *mut *mut i32, b: *mut *mut i32) {
         **b = temp;
     }
 }
+
+pub fn print_1d_array(ary: *const i32, n: i32) {
+    for i in 1..=n {
+        unsafe {
+            print!("{:?} ", *ary.add(i as usize));
+        }
+    }
+    print!("\n");
+}
+
+pub fn print_var_array(pary: *const *const i32, n: i32) {
+    for i in 0..n {
+        unsafe {
+            print_1d_array(*pary.add(i as usize), **(pary.add(i as usize)));
+
+        }
+    }
+
+}
