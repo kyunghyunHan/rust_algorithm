@@ -50,5 +50,6 @@ fn main() {
     // println!("{}",!1);
     // c::pointer::example();
     // c::project::rpg::example();
-    c::project::op::example();
+    // c::project::op::example();
+    c::project::qsort::example();
 }
