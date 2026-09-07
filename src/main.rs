@@ -54,5 +54,6 @@ fn main() {
     // c::project::qsort::example();
 
     /*c struct */
-    c::r#struct::linked_list::example();
+    c::pointer::example();
+    // c::r#struct::linked_list::example();
 }

@@ -1,13 +1,15 @@
-use crate::c::utils::{exchange, print_var_array, sum_1d};
-
 use super::utils::sum_2d;
+use crate::c::utils::{exchange, print_var_array, sum_1d};
+use std::alloc::dealloc;
+use std::alloc::{alloc, handle_alloc_error, realloc, Layout};
+use std::io;
+use std::io::Write;
 use std::{
     cmp::Ordering,
     fs::File,
     io::{BufRead, BufReader},
     ptr,
 };
-
 const MATRIX_ROWS: usize = 3;
 const MATRIX_COLS: usize = 4;
 const ANIMAL_COUNT: usize = 5;
@@ -45,11 +47,100 @@ fn sort(ary: *mut i32, n: usize) {
     }
 }
 pub fn example() {
-    let mut ary = [4, 2, 5, 1, 3];
-    sort(ary.as_mut_ptr(), ary.len());
-    print!("{:?}", ary);
+    unsafe {
+        const COUNT: usize = 5;
+        const SIZE: usize = 80;
+
+        let mut arr: [*mut u8; COUNT] = [ptr::null_mut(); COUNT];
+        let mut offset: [usize; COUNT] = [0; COUNT];
+
+        // C: malloc(5 * 80)
+        let old_layout = Layout::array::<u8>(COUNT * SIZE).unwrap();
+
+        arr[0] = alloc(old_layout);
+
+        if arr[0].is_null() {
+            handle_alloc_error(old_layout);
+        }
+
+        for i in 0..COUNT {
+            if i > 0 {
+                // 이전 문자열 길이 + '\0'
+                let prev_len = c_strlen(arr[i - 1]);
+
+                arr[i] = arr[i - 1].add(prev_len + 1);
+            }
+
+            // 문자열 입력
+            print!("입력: ");
+            io::stdout().flush().unwrap();
+
+            let mut input = String::new();
+            io::stdin().read_line(&mut input).unwrap();
+
+            let input = input.trim_end();
+            let bytes = input.as_bytes();
+
+            // arr[i] 위치에 문자열 복사
+            ptr::copy_nonoverlapping(bytes.as_ptr(), arr[i], bytes.len());
+
+            // C 문자열처럼 마지막에 '\0'
+            *arr[i].add(bytes.len()) = 0;
+
+            // arr[i] - arr[0]
+            offset[i] = arr[i].offset_from(arr[0]) as usize;
+        }
+
+        // 마지막 문자열의 끝까지 실제 사용한 크기
+        let last_len = c_strlen(arr[4]);
+
+        let used = offset[4] + last_len + 1;
+
+        // C:
+        // char *p = realloc(arr[0], used);
+        let p = realloc(arr[0], old_layout, used);
+
+        if p.is_null() {
+            dealloc(arr[0], old_layout);
+            handle_alloc_error(Layout::array::<u8>(used).unwrap());
+        }
+
+        // C: arr[0] = p;
+        arr[0] = p;
+
+        // realloc으로 주소가 바뀌었을 수 있으므로
+        // 각 문자열의 시작 주소 다시 설정
+        for i in 1..COUNT {
+            arr[i] = arr[0].add(offset[i]);
+        }
+
+        // 출력
+        for i in 0..COUNT {
+            let len = c_strlen(arr[i]);
+
+            let slice = std::slice::from_raw_parts(arr[i], len);
+
+            println!("{}", std::str::from_utf8(slice).unwrap());
+        }
+
+        // realloc 후 크기가 used가 되었으므로
+        // dealloc도 새로운 Layout 사용
+        let new_layout = Layout::array::<u8>(used).unwrap();
+
+        dealloc(arr[0], new_layout);
+    }
 }
 
+// C의 strlen 같은 함수
+unsafe fn c_strlen(p: *const u8) -> usize {
+    let mut len = 0;
+
+    while unsafe { *p.add(len) } != 0 {
+        len += 1;
+    }
+
+    len
+}
 fn file() {
     let mut matrix = [[0; MATRIX_COLS]; MATRIX_ROWS];
     let matrix_ptr: *mut [[i32; MATRIX_COLS]; MATRIX_ROWS] = &mut matrix;
