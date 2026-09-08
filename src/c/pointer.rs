@@ -2,8 +2,8 @@ use super::utils::sum_2d;
 use crate::c::utils::{exchange, print_var_array, sum_1d};
 use std::alloc::dealloc;
 use std::alloc::{alloc, handle_alloc_error, realloc, Layout};
-use std::io;
 use std::io::Write;
+use std::io::{self, stdin};
 use std::{
     cmp::Ordering,
     fs::File,
@@ -47,6 +47,55 @@ fn sort(ary: *mut i32, n: usize) {
     }
 }
 pub fn example() {
+    malloc();
+}
+fn malloc() {
+    unsafe {
+        let layout = Layout::array::<*mut u8>(5).unwrap();
+        let arr = alloc(layout) as *mut *mut u8;
+
+        let s_layout = Layout::array::<u8>(80 * 5).unwrap();
+        let mut s = alloc(s_layout) as *mut u8;
+
+        for i in 0..5 {
+            *arr.add(i) = s;
+            let mut input = String::new();
+            let mut reader = BufReader::new(stdin().lock());
+            reader.read_line(&mut input).unwrap();
+            // arr[i] = s;
+            *arr.add(i) = s;
+
+            // '\n' 제거
+            let input = input.trim_end_matches(&['\n', '\r'][..]);
+
+            let bytes = input.as_bytes();
+
+            // 문자열 복사
+            ptr::copy_nonoverlapping(bytes.as_ptr(), s, bytes.len());
+
+            // C 문자열처럼 마지막에 '\0'
+            *s.add(bytes.len()) = 0;
+
+            // s += strlen(s) + 1;
+            s = s.add(bytes.len() + 1);
+        }
+        for i in 0..5 {
+            let p = *arr.add(i);
+
+            let mut len = 0;
+
+            while *p.add(len) != 0 {
+                len += 1;
+            }
+
+            let slice = std::slice::from_raw_parts(p, len);
+            let text = std::str::from_utf8(slice).unwrap();
+
+            println!("{}", text);
+        }
+    }
+}
+fn alloc_test() {
     unsafe {
         const COUNT: usize = 5;
         const SIZE: usize = 80;
@@ -71,22 +120,17 @@ pub fn example() {
                 arr[i] = arr[i - 1].add(prev_len + 1);
             }
 
-            // 문자열 입력
+            /*문자열 입력후 복사 */
             print!("입력: ");
             io::stdout().flush().unwrap();
-
             let mut input = String::new();
             io::stdin().read_line(&mut input).unwrap();
-
             let input = input.trim_end();
             let bytes = input.as_bytes();
-
             // arr[i] 위치에 문자열 복사
             ptr::copy_nonoverlapping(bytes.as_ptr(), arr[i], bytes.len());
-
             // C 문자열처럼 마지막에 '\0'
             *arr[i].add(bytes.len()) = 0;
-
             // arr[i] - arr[0]
             offset[i] = arr[i].offset_from(arr[0]) as usize;
         }
@@ -126,11 +170,9 @@ pub fn example() {
         // realloc 후 크기가 used가 되었으므로
         // dealloc도 새로운 Layout 사용
         let new_layout = Layout::array::<u8>(used).unwrap();
-
         dealloc(arr[0], new_layout);
     }
 }
-
 // C의 strlen 같은 함수
 unsafe fn c_strlen(p: *const u8) -> usize {
     let mut len = 0;

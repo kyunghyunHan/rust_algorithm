@@ -1,23 +1,29 @@
 use std::ptr::{self, null_mut};
-
-type ElementType = i32;
+/*
+링크드 리스트
+Head - 첫번쨰 노드
+Tail - 마지막 노드
+단일 연결 리스트는 노드가 자기 이전 노드를 몰라
+*/
 //Node
-struct Node {
-    data: ElementType,
-    next_node: *mut Node,
+struct Node<T> {
+    data: T,
+    next_node: *mut Node<T>,
 }
 //새로운 노드
-fn create_node(new_data: ElementType) -> *mut Node {
+fn create_node<T>(new_data: T) -> *mut Node<T> {
     let new_node = Box::new(Node {
         data: new_data,
         next_node: ptr::null_mut(),
     });
+    //Box 가 힙메모리를 넘기고 주소의 raw포인터 얻음
     Box::into_raw(new_node)
 }
 //node 제거
-fn destory_node(node: *mut Node) {
+fn destory_node<T>(node: *mut Node<T>) {
     unsafe {
         if !node.is_null() {
+            //node 메모리 해제
             drop(Box::from_raw(node));
         }
     }
@@ -35,11 +41,12 @@ tail을 다음 노드로 이동한다.
 마지막 노드를 찾으면
 tail의 next_node가 new_node를 가리키게 한다.
 */
-fn append_node(head: *mut *mut Node, new_node: *mut Node) {
+fn append_node<T>(head: *mut *mut Node<T>, new_node: *mut Node<T>) {
     unsafe {
         if *head == ptr::null_mut() {
             *head = new_node;
         } else {
+            //기존 노드가 있다면
             let mut tail = *head;
             while (*tail).next_node != ptr::null_mut() {
                 tail = (*tail).next_node;
@@ -53,7 +60,7 @@ fn append_node(head: *mut *mut Node, new_node: *mut Node) {
 몇 번째 노드를 가져올지 나타내는 index를 받아
 해당 위치의 노드 주소를 반환
 */
-fn get_node_at(head: *mut Node, mut location: i32) -> *mut Node {
+fn get_node_at<T>(head: *mut Node<T>, mut location: i32) -> *mut Node<T> {
     //첫번째 노드부터 탐색
     let mut current = head;
     unsafe {
@@ -87,7 +94,7 @@ remove 노드를 연결 리스트에서 제거한다.
    → 찾으면 remove를 건너뛰고
       remove의 다음 노드를 직접 연결한다.
 */
-fn remove_node(head: *mut *mut Node, remove: *mut Node) {
+fn remove_node<T>(head: *mut *mut Node<T>, remove: *mut Node<T>) {
     unsafe {
         // 삭제할 노드가 현재 head라면
         if *head == remove {
@@ -113,14 +120,14 @@ fn remove_node(head: *mut *mut Node, remove: *mut Node) {
 /*
 current뒤에 new_node를 끼워넣는 함수
 */
-fn insert_after(current: *mut Node, new_node: *mut Node) {
+fn insert_after<T>(current: *mut Node<T>, new_node: *mut Node<T>) {
     unsafe {
         (*new_node).next_node = (*current).next_node;
         (*current).next_node = new_node;
     }
 }
 /*새로운 노드를 새로운 head로 만드는 */
-fn insert_new_head(head: *mut *mut Node, new_head: *mut Node) {
+fn insert_new_head<T>(head: *mut *mut Node<T>, new_head: *mut Node<T>) {
     unsafe {
         if (*head) == null_mut() {
             (*head) = new_head;
@@ -131,7 +138,7 @@ fn insert_new_head(head: *mut *mut Node, new_head: *mut Node) {
     }
 }
 /*노드 카운터 */
-fn get_node_count(head: *mut Node) -> i32 {
+fn get_node_count<T>(head: *mut Node<T>) -> i32 {
     unsafe {
         let mut cnt = 0;
         let mut current = head;
@@ -145,14 +152,17 @@ fn get_node_count(head: *mut Node) -> i32 {
 }
 pub fn example() {
     unsafe {
-        let mut list: *mut Node = null_mut();
-        let mut current: *mut Node;
-        let mut new_node: *mut Node;
+        //list가 첫번쨰 node의 주소르 계속 가지고있음
+        let mut list: *mut Node<i32> = null_mut();
+        let mut current: *mut Node<i32>;
+        let mut new_node: *mut Node<i32>;
 
         // 0 ~ 4 노드 추가
         for i in 0..5 {
             //새로운 노드를 만들어서 계속 추가
             new_node = create_node(i);
+            //노드가 없다면 첫번쨰 노드가 댐
+
             append_node(&mut list, new_node);
         }
 
