@@ -1,7 +1,6 @@
 use super::utils::sum_2d;
 use crate::c::utils::{exchange, print_var_array, sum_1d};
-use std::alloc::dealloc;
-use std::alloc::{alloc, handle_alloc_error, realloc, Layout};
+use std::alloc::{alloc, dealloc, handle_alloc_error, realloc, Layout};
 use std::io::Write;
 use std::io::{self, stdin};
 use std::{
@@ -48,6 +47,23 @@ fn sort(ary: *mut i32, n: usize) {
 }
 pub fn example() {
     malloc();
+}
+fn add(a: i32, b: i32) -> i32 {
+    a + b
+}
+fn array_pointer() {
+    unsafe {
+        let fp: [fn(i32, i32) -> i32; 5] = [add, add, add, add, add];
+        let mut fpp = fp.as_ptr();
+
+        let layout = Layout::array::<fn(i32, i32) -> i32>(5).unwrap();
+
+        let fpp = alloc(layout) as *mut fn(i32, i32) -> i32;
+
+        // 사용...
+
+        dealloc(fpp as *mut u8, layout);
+    }
 }
 fn malloc() {
     unsafe {
