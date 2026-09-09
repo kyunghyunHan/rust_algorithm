@@ -7,16 +7,70 @@ impl BitFiled {
         self.data & 0b0000_0111
     }
     fn b(&self) -> u8 {
-        //3 4 5사용
+        //3 4 5비티들을 꺼내서 어떤값인지 확인
+        //원본 0 1 1 0 1 1 0 1
+        //>>3 0 0 0 0 1 1 0 1
+        //    0 0 0 0 0 1 1 1
+        //101
         (self.data >> 3) & 0b0000_0111
     }
 }
+/*
+Little endian
+Big enian
 
+u
+*/
+union data {
+    i: i32,
+    bytes: [u8; 4],
+}
+pub fn example() {
+    let a = 0x33CC33CC;
+    /*
+    1로 만들기 : a |  (1 << n)
+    0으로 만들기: a & !(1 << n)
+    반전하기    : a ^  (1 << n)
+    확인하기    : a &  (1 << n)
+
+         */
+    //비트를 읽을떄
+    //<< 비트를 설정할떄
+    //1번을 5번까지 이동시키고 그다음에 OR을 해서
+    //둘중 하나라도 1이면 1
+    println!("{:032b}", (1 << 0) | a);
+    println!("{:X}", (1 << 5) | a);
+    println!("{:X}", (1 << 21) | a);
+    println!("{:X}", (1 << 22) | a);
+    //0이 하나라도 있으면 0
+    println!("{:X}", a & !(1 << 0));
+    println!("{:X}", a & !(1 << 5));
+    println!("{:X}", a & !(1 << 21));
+    println!("{:X}", a & !(1 << 22));
+    //두비트가 서로 다르면 1 같으면 0
+    println!("{:X}", a ^ (1 << 0));
+    println!("{:X}", a ^ (1 << 5));
+    println!("{:X}", a ^ (1 << 21));
+    println!("{:X}", a ^ (1 << 22));
+}
+fn union_test() {
+    let data = data { i: 0x1234_5678 };
+
+    unsafe {
+        println!("{:X}", data.bytes[0]);
+    }
+}
 fn bit_field() {
     let t = BitFiled { data: 0b0000_0111 };
     println!("{}", t.b());
 }
-pub fn example() {
+fn byte() {
+    /*
+    10진수 는 최대 4바이트 필요
+    2진수 한자리는 1비트
+    8진수 한자리는 3비트
+    16진수 한자리는 4비트
+     */
     /*
     char      = 1 Byte =  8 bit = 16진수  2자리
 
