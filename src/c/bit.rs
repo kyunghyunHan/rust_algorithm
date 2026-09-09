@@ -25,7 +25,16 @@ union data {
     i: i32,
     bytes: [u8; 4],
 }
-pub fn example() {
+
+fn bitwise_not() {
+    let a: i8 = -45;
+    //32+8+4+1
+    //    00101101
+    //음수 11010011
+    println!("{:8b}", -a);
+}
+
+fn bitt() {
     let a = 0x33CC33CC;
     /*
     1로 만들기 : a |  (1 << n)
@@ -52,6 +61,9 @@ pub fn example() {
     println!("{:X}", a ^ (1 << 5));
     println!("{:X}", a ^ (1 << 21));
     println!("{:X}", a ^ (1 << 22));
+}
+pub fn example() {
+    bitwise_not();
 }
 fn union_test() {
     let data = data { i: 0x1234_5678 };
