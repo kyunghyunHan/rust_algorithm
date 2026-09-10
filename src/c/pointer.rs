@@ -46,7 +46,7 @@ fn sort(ary: *mut i32, n: usize) {
     }
 }
 pub fn example() {
-    malloc();
+    type a = fn() -> *const [*const char; 10];
 }
 fn add(a: i32, b: i32) -> i32 {
     a + b
