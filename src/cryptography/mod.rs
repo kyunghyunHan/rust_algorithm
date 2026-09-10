@@ -3,7 +3,7 @@ pub mod caesar_cipher;
 pub mod md5;
 pub mod merkle_tree;
 pub mod modular;
-pub mod roter;
+pub mod rotor;
 pub mod sha2;
 pub mod transposition_cipher;
 pub mod vigenere_cipher;

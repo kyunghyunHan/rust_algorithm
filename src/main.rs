@@ -1,8 +1,8 @@
 use algorithm::{
     algorithms::{graph, math, np_complete, sort},
-    assembly, c, conding_test,
+    assembly, c, coding_test,
     cryptography::{
-        aes, caesar_cipher, md5, merkle_tree, modular, roter, sha2, transposition_cipher,
+        aes, caesar_cipher, md5, merkle_tree, modular, rotor, sha2, transposition_cipher,
         vigenere_cipher,
     },
     data_structure::{self, queue},
@@ -33,11 +33,11 @@ fn main() {
     // caesar_cipher::example();
     // vigenere_cipher::example();
     // transposition_cipher::example()
-    // roter::example();
+    // rotor::example();
     // Aes::example();
     // aes::example();
 
-    // roter::example();
+    // rotor::example();
     // sha2::example();
     // sha2::cross_validation_test();
     // merkle_tree::example();
@@ -56,5 +56,6 @@ fn main() {
     /*c struct */
     // c::pointer::example();
     // c::r#struct::linked_list::example();
-    c::bit::example()
+    // c::bit::example()
+    c::recursion::example();
 }

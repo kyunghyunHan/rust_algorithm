@@ -1,4 +1,4 @@
 mod ahrab;
-mod backjun;
+mod baekjoon;
 pub mod books;
 pub mod coders_cup;

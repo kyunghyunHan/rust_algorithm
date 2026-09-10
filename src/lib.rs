@@ -1,10 +1,11 @@
 pub mod algorithms;
 pub mod assembly;
 pub mod c;
-pub mod conding_test;
+pub mod coding_test;
 pub mod cryptography;
 pub mod data_structure;
 pub mod finance;
 pub mod gpu;
+pub mod space;
 pub mod system_programming;
 pub mod utils;

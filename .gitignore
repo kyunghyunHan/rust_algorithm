@@ -1,2 +1,10 @@
-/target
-/src/linear_algebra/.ipynb_checkpoints
+# Rust build output
+/target/
+
+# Operating-system metadata
+.DS_Store
+
+# Editor and notebook metadata
+.idea/
+.vscode/
+**/.ipynb_checkpoints/

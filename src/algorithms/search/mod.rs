@@ -1,4 +1,10 @@
+pub mod b_tree;
 pub mod binary_search;
 pub mod binary_search_tree;
+pub mod breadth_first_search;
+pub mod depth_first_search;
+pub mod hash_table;
 pub mod linear_search;
+pub mod red_black_tree;
 pub mod sequential_search;
+pub mod two_three_four_tree;
