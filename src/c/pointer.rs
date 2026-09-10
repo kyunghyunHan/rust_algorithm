@@ -208,7 +208,7 @@ fn file() {
 
     let mut animals = [[0_u8; ANIMAL_NAME_SIZE]; ANIMAL_COUNT];
 
-    let file = File::open("animal.txt").unwrap();
+    let file = File::open("assets/data/animals.txt").unwrap();
     let mut reader = BufReader::new(file);
 
     input_strings(animals.as_mut_ptr(), animals.len(), &mut reader);
