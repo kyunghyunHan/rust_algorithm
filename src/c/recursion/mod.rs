@@ -58,6 +58,42 @@ fn test05(l: i32) {
         }
     }
 }
+/*
+이제는 중복댄거없이
+*/
+fn test06(l: i32) {
+    unsafe {
+        if l == 3 {
+            println!("{} {} {}", arr[0], arr[1], arr[2]);
+            return;
+        }
+        for i in 1..=6 {
+            if l > 0 && arr[l as usize - 1] >= i {
+                continue;
+            }
+            arr[l as usize] = i;
+            test06(l + 1);
+        }
+    }
+}
+
+fn test07(l: i32, mut sum: i32) {
+    unsafe {
+        if l == 3 {
+            if sum == 10 {
+                println!("{} {} {}", arr[0], arr[1], arr[2]);
+            }
+            return;
+        }
+        for i in 1..=6 {
+            if l > 0 && arr[l as usize - 1] >= i {
+                continue;
+            }
+            arr[l as usize] = i;
+            test07(l + 1, sum + i);
+        }
+    }
+}
 pub fn example() {
-    test05(0);
+    test07(0, 0);
 }
