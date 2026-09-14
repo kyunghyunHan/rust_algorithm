@@ -55,7 +55,7 @@ fn main() {
 
     /*c struct */
     // c::pointer::example();
-    // c::r#struct::linked_list::example();
+    c::r#struct::linked_list::example();
     // c::bit::example()
-    c::recursion::example();
+    // c::recursion::example();
 }
