@@ -1,3 +1,4 @@
+pub mod acadamy;
 pub mod bit;
 pub mod mutex;
 pub mod pointer;

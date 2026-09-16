@@ -56,7 +56,9 @@ fn get_node_at<T>(head: *mut Node<T>, mut location: usize) -> *mut Node<T> {
         current
     }
 }
-fn insert_after<T>(current: *mut Node<T>, new_node: *mut Node<T>) {}
+fn insert_after<T>(current: *mut Node<T>, new_node: *mut Node<T>) {
+
+}
 pub fn example() {
     unsafe {
         let mut i = 0;

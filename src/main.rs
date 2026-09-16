@@ -62,5 +62,7 @@ fn main() {
     /*rust struct */
     // data_structure::queue::vecdeque::example();
 
-    c::r#struct::circular_linked_list::example();
+    // c::r#struct::circular_linked_list::example();
+
+    algorithm::testcase::test01::example();
 }
