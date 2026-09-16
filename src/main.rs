@@ -60,5 +60,7 @@ fn main() {
     // c::recursion::example();
 
     /*rust struct */
-    data_structure::queue::vecdeque::example();
+    // data_structure::queue::vecdeque::example();
+
+    c::r#struct::circular_linked_list::example();
 }

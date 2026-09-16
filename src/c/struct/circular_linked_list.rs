@@ -1,8 +1,16 @@
-use std::alloc::{alloc, alloc_zeroed};
+use std::alloc::{alloc, alloc_zeroed, dealloc};
+use std::fs::File;
+use std::io::{self, BufRead, BufReader};
 use std::mem::size_of;
+use std::process::exit;
 use std::ptr::null_mut;
 use std::{alloc, alloc::Layout};
-type data_t = i32;
+struct Data {
+    id: i32,
+    score: i32,
+}
+type data_t = Data;
+
 struct Node {
     data: data_t,
     prev: *mut Node,
@@ -35,11 +43,80 @@ fn create_node(new_data: data_t) -> *mut Node {
 }
 fn append_node(head: *mut *mut Node, new_node: *mut Node) {
     unsafe {
-        if head == null_mut() {
+        if head.is_null() || (*head).is_null() || new_node.is_null() {
             return;
         }
-        (*new_node).prev = *head;
-        (*new_node).next = (*(*head)).next;
+        let current = (**head).prev;
+
+        (*new_node).prev = current;
+        (*new_node).next = (*current).next;
+
+        (*(*current).next).prev = new_node;
+        (*current).next = new_node;
     }
 }
-pub fn example() {}
+
+fn insert_afte(current: *mut Node, new_node: *mut Node) {
+    unsafe {
+        (*new_node).prev = current;
+        (*new_node).next = (*current).next;
+        (*(*current).next).prev = new_node;
+        (*current).next = new_node;
+    }
+}
+
+fn print_node(head: *mut Node) {
+    unsafe {
+        let mut current = (*head).next;
+        while (current != head) {
+            println!("{} {}", (*current).data.id, (*current).data.score);
+            current = (*current).next;
+        }
+        println!();
+    }
+}
+
+fn remove_node(target: *mut Node) {
+    unsafe {
+        (*(*target).prev).next = (*target).next;
+        (*(*target).next).prev = (*target).prev;
+        (*target).prev = null_mut();
+        (*target).next = null_mut();
+        let layout = Layout::new::<Node>();
+        dealloc(target as *mut u8, layout);
+    }
+}
+pub fn example() {
+    let mut head = null_mut();
+    init(&mut head);
+
+    let reader: Box<dyn BufRead> = match File::open("data.txt") {
+        Ok(file) => Box::new(BufReader::new(file)),
+        Err(_) => Box::new(BufReader::new(io::stdin())),
+    };
+
+    for line in reader.lines() {
+        let line = line.unwrap();
+        let mut iter = line.split_whitespace();
+
+        let Some(id) = iter.next() else {
+            continue;
+        };
+
+        let Some(score) = iter.next() else {
+            continue;
+        };
+
+        let id: i32 = id.parse().unwrap();
+        let score: i32 = score.parse().unwrap();
+        let data = data_t { id, score };
+        let mut new_node = null_mut();
+        new_node = create_node(data);
+        if (new_node.is_null()) {
+            exit(0);
+        }
+        append_node(&mut head, new_node);
+        // println!("id: {}, score: {}", id, score);
+    }
+    print_node(head);
+}
