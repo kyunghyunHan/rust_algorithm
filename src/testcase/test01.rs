@@ -55,12 +55,13 @@ fn push(stack: *mut Stack, new_node: *mut Node) {
 
 fn pop(stack: *mut Stack) -> *mut Node {
     unsafe {
-        if stack.is_null() {
+        if stack.is_null() || (*stack).top.is_null() {
             return null_mut();
         } else {
             let mut target = (*stack).top;
             (*stack).top = (*(*stack).top).next_node;
             (*target).next_node = null_mut();
+            (*stack).count -= 1;
             target
         }
     }
@@ -102,18 +103,44 @@ fn print_stack(stack: *mut Stack) {
     }
 }
 pub fn example() {
-    // let (s, n, r, c);
     let mut count = 0;
 
     let file = File::open("data.txt").unwrap();
     let reader = BufReader::new(file);
-    for line in reader.lines() {
+
+    let mut lines = reader.lines();
+    let first_line = lines.next().unwrap().unwrap();
+    let mut first = first_line.split_whitespace();
+
+    let s = first.next().unwrap().parse::<usize>().unwrap();
+    let n = first.next().unwrap().parse::<i32>().unwrap();
+
+    // 2. Stack은 딱 한 번 생성
+    let stack = init(s);
+
+    let mut count = 0;
+    while count < n {
+        let Some(line) = lines.next() else {
+            break;
+        };
         let line = line.unwrap();
+
         let mut line = line.split_whitespace();
-        let cmd = line.next().unwrap();
+        let Some(cmd) = line.next() else {
+            continue;
+        };
 
         if cmd == "P" {
+            let r = line.next().unwrap().parse::<i32>().unwrap();
+            let c = line.next().unwrap().parse::<i32>().unwrap();
+            let data = Data { id: r, score: c };
+            let new_node = create_node(data);
+            push(stack, new_node);
         } else if cmd == "D" {
+            let removed = pop(stack);
+            destroy_node(removed);
         }
     }
+    print_stack(stack);
+    destroy_stack(stack);
 }
