@@ -64,5 +64,7 @@ fn main() {
 
     // c::r#struct::circular_linked_list::example();
 
-    algorithm::testcase::test01::example();
+    // algorithm::testcase::test01::example();
+
+    c::r#struct::array_stack::example();
 }
