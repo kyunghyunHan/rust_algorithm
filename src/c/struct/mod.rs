@@ -1,4 +1,5 @@
 pub mod array_stack;
 pub mod circular_linked_list;
+pub mod graph;
 pub mod linked_list;
 pub mod list_stack;

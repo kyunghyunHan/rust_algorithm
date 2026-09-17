@@ -1,5 +1,6 @@
 pub mod acadamy;
 pub mod bit;
+pub mod homework;
 pub mod mutex;
 pub mod pointer;
 pub mod project;

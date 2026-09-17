@@ -66,5 +66,6 @@ fn main() {
 
     // algorithm::testcase::test01::example();
 
-    c::r#struct::array_stack::example();
+    // c::r#struct::array_stack::example();
+    c::homework::hw2::example();
 }
