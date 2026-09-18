@@ -47,6 +47,7 @@ fn dequeue(queue: *mut Queue) {
             return;
         }
         (*queue).front += 1;
+        
     }
 }
 

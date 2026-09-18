@@ -7,3 +7,4 @@ pub mod project;
 pub mod recursion;
 pub mod r#struct;
 pub mod utils;
+pub mod jungol;

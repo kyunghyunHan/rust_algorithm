@@ -25,4 +25,6 @@ struct Graph {
     vertex_count: i32,
 }
 
-pub fn example() {}
+pub fn example() {
+    
+}
