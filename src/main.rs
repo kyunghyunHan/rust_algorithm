@@ -69,5 +69,5 @@ fn main() {
     // c::r#struct::array_stack::example();
     // c::homework::hw2::example();
 
-    c::jungol::p7096::example();
+    c::jungol::p1515::example();
 }
