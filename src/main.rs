@@ -1,3 +1,5 @@
+use std::collections::{HashMap, HashSet};
+
 use algorithm::{
     algorithms::{graph, math, np_complete, sort},
     assembly, c, coding_test,
@@ -7,6 +9,7 @@ use algorithm::{
     },
     data_structure::{self, queue},
     finance::{derivative, finance1_1, zero},
+    py,
 };
 
 fn main() {
@@ -69,5 +72,8 @@ fn main() {
     // c::r#struct::array_stack::example();
     // c::homework::hw2::example();
 
-    c::jungol::p26089::example();
+    // c::jungol::p26089::example();
+
+    /*py */
+    py::exam1::example();
 }
