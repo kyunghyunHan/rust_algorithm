@@ -2,6 +2,7 @@ pub mod cow;
 pub mod p1513;
 pub mod p1515;
 pub mod p1818;
+pub mod p2606;
 pub mod p26089;
 pub mod p2613;
 pub mod p4177;
