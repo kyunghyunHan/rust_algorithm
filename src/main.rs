@@ -72,7 +72,7 @@ fn main() {
     // c::r#struct::array_stack::example();
     // c::homework::hw2::example();
 
-    c::jungol::p2606::example();
+    // c::jungol::p2606::example();
 
     /*py */
     // py::exam1::example();

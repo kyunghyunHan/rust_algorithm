@@ -4,6 +4,7 @@ pub mod c;
 pub mod coding_test;
 pub mod cryptography;
 pub mod data_structure;
+pub mod design_pattern;
 pub mod finance;
 pub mod gpu;
 pub mod py;
