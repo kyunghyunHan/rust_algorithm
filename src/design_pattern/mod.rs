@@ -1,6 +1,6 @@
 pub mod adapter_pattern;
 pub mod decorator_pattern;
-pub mod dip;
+pub mod solid;
 pub mod factory_pattern;
 pub mod raii_pattern;
 pub mod singleton_pattern;
