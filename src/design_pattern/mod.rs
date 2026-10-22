@@ -1,9 +1,14 @@
 pub mod adapter_pattern;
+pub mod class;
 pub mod decorator_pattern;
-pub mod solid;
+pub mod dip;
+pub mod isp;
+pub mod lsp;
+pub mod ocp;
+pub mod srp;
 pub mod factory_pattern;
 pub mod raii_pattern;
 pub mod singleton_pattern;
+pub mod solid;
 pub mod state_pattern;
 pub mod strategy_pattern;
-pub mod class;

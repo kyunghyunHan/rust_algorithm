@@ -1,7 +1,9 @@
 /*
 strategy_pattern
-같은 작업을 수행하는 여러 방법을 만들고 필요한 방법을 선택해 설계하는방법
 
+
+같은 작업을 수행하는 여러 방법을 만들고 필요한 방법을 선택해 설계하는방법
+자주 바뀌는 것이 Method이라면 메서드를 클래스로 바꾸고 interface타입의 상속 구조를 만들어라
 */
 trait CoolingStrategy {
     fn fan_power(&self, temperature: f32) -> u8;
