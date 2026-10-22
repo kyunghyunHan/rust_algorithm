@@ -1,0 +1,3 @@
+/*State Pattern */
+
+fn main() {}

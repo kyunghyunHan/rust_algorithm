@@ -1,5 +1,32 @@
 # 소프트웨어 설계 요약
 
+
+## Design Pattern
+
+### 행위패턴
+#### 1.Strategy Pattern
+#### 2.State Pattern
+
+### Structrual Pattern(구조패턴)
+
+#### 1,Decorator Pattern
+
+#### 2.Adater Pattern
+
+### 생성패턴
+
+#### 1.Factory Method Pattern
+#### 2.Single Pattern
+
+
+
+
+
+
+
+
+
+
 ## 기본 개념
 - **품질 속성**: 성능, 신뢰성, 보안성, 유지보수성 등.
 - **워크플로우**: 요구사항 분석 → 설계 → 구현 → 테스트 → 유지보수.
