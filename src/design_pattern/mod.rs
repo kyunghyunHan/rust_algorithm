@@ -6,3 +6,4 @@ pub mod raii_pattern;
 pub mod singleton_pattern;
 pub mod state_pattern;
 pub mod strategy_pattern;
+pub mod class;
