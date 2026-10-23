@@ -12,3 +12,4 @@ pub mod space;
 pub mod system_programming;
 pub mod testcase;
 pub mod utils;
+pub mod uml;
