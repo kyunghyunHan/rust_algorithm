@@ -74,6 +74,12 @@ impl Passive for Speedability {
         println!("패시브 - 스피드");
     }
 }
+struct Avoidability;
+impl Passive for Avoidability {
+    fn detail(&self) {
+        println!("패시브 - 스피드");
+    }
+}
 struct Pokemon {
     name: String,
     element: String,
@@ -98,4 +104,34 @@ impl Pokemon {
         self.attack.motion();
         self.passive.detail();
     }
+    fn set_attack(&mut self, attack: Box<dyn Attack>) {
+        self.attack = attack;
+    }
+
+    fn set_passive(&mut self, passive: Box<dyn Passive>) {
+        self.passive = passive;
+    }
+    fn pairi() -> Self {
+        Self::new("파이리", "불", Box::new(Flame), Box::new(Defensibiliy))
+    }
+
+    // 코드 7-8: 푸린 생성
+    fn purin() -> Self {
+        Self::new("푸린", "노멀", Box::new(Sing), Box::new(Avoidability))
+    }
+
+    // 코드 7-9: 피카츄 생성
+    fn pikachu() -> Self {
+        Self::new(
+            "피카츄",
+            "번개",
+            Box::new(MillionVolt),
+            Box::new(Speedability),
+        )
+    }
+}
+
+fn example() {
+    let pikache = Pokemon::pikachu();
+    pikache.introduce();
 }
