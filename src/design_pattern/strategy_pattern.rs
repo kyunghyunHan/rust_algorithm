@@ -36,3 +36,66 @@ fn main() {
     run(&OnOff, 43.0); // 팬 출력: 100%
     run(&Proportional, 43.0); // 팬 출력: 30%
 }
+
+trait Attack {
+    fn motion(&self);
+}
+struct Sing;
+impl Attack for Sing {
+    fn motion(&self) {
+        println!("공격 -노래하기");
+    }
+}
+struct Flame;
+impl Attack for Flame {
+    fn motion(&self) {
+        println!("공격 - 불꽃");
+    }
+}
+
+struct MillionVolt;
+impl Attack for MillionVolt {
+    fn motion(&self) {
+        println!("공격 - 백만");
+    }
+}
+trait Passive {
+    fn detail(&self);
+}
+struct Defensibiliy;
+impl Passive for Defensibiliy {
+    fn detail(&self) {
+        println!("패시브 - 방어");
+    }
+}
+struct Speedability;
+impl Passive for Speedability {
+    fn detail(&self) {
+        println!("패시브 - 스피드");
+    }
+}
+struct Pokemon {
+    name: String,
+    element: String,
+    attack: Box<dyn Attack>,
+    passive: Box<dyn Passive>,
+}
+impl Pokemon {
+    fn new(name: &str, element: &str, attack: Box<dyn Attack>, passive: Box<dyn Passive>) -> Self {
+        Self {
+            name: name.to_string(),
+            element: element.to_string(),
+            attack,
+            passive,
+        }
+    }
+    fn name(&self) {
+        println!("이름: {}, 속성: {}", self.name, self.element);
+    }
+
+    fn introduce(&self) {
+        self.name();
+        self.attack.motion();
+        self.passive.detail();
+    }
+}
