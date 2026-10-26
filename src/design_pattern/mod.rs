@@ -7,6 +7,7 @@ pub mod factory_pattern;
 pub mod inheriance;
 pub mod isp;
 pub mod lsp;
+pub mod observer_pattern;
 pub mod ocp;
 pub mod raii_pattern;
 pub mod singleton_pattern;
